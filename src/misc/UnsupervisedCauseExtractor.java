@@ -9,7 +9,7 @@ import haus.io.FileReader;
 
 public class UnsupervisedCauseExtractor {
 	public static String file_path = "UnsupExt/";
-	public static String file_name = "moon_tide_complete.txt";
+	public static String file_name = "wordPairs.txt";
 	public static String basic_out_file = "basic_features.txt";
 	public static String out_file = "synFeatures.ascii";
 	public static String mafia_file = "mfi.txt";
@@ -189,9 +189,10 @@ public class UnsupervisedCauseExtractor {
 	
 	public static void main (String[] args) {
 		UnsupervisedCauseExtractor ext = new UnsupervisedCauseExtractor();
-		//ext.getInitialMaterial();
-		//ext.processMaterial();
-		//ext.writeFeatures();
-		ext.decodeMafiaFeatures();
+		ext.getInitialMaterial();
+		ext.processMaterial();
+		ext.writeFeatures();
+		ext.writeMAFIAFeatures();
+		//ext.decodeMafiaFeatures();
 	}
 }

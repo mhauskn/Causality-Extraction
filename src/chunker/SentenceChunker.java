@@ -7,6 +7,8 @@ import com.aliasi.tokenizer.IndoEuropeanTokenizerFactory;
 import com.aliasi.tokenizer.TokenizerFactory;
 import com.aliasi.tokenizer.Tokenizer;
 
+import haus.io.Input;
+
 import java.util.ArrayList;
 
 import parser.AbstractParser;
@@ -16,7 +18,7 @@ import parser.AbstractParser;
  * @author epn
  *
  */
-public class SentenceChunker {
+public class SentenceChunker implements Input<String> {
 	
 	/**
 	 * Parser will give us text to chunk into sentences
@@ -52,6 +54,10 @@ public class SentenceChunker {
 			return null;
 				
 		return sentenceList.remove(0);
+	}
+	
+	public String get () {
+		return getNextSentence();
 	}
 	
 	public long getSentenceCount ()
