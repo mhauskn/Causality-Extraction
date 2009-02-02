@@ -116,6 +116,50 @@ public class CRFFormatter {
 		wri.close();
 	}
 	
+	/**
+	 * Reads a CRF formatted file scanning for the tokens, features,
+	 * and labels.
+	 * 
+	 * Format should be like 
+	 * token feat1....featn label
+	 * 
+	 * The data is returned inside of the arraylists passed.
+	 */
+	public static void readCRFFile (String file_name, 
+			ArrayList<String> toks, ArrayList<String> features,
+			ArrayList<String> labels) {
+		FileReader reader = new FileReader(file_name);
+		String line;
+		while ((line = reader.getNextLine()) != null) {
+			String[] segs = line.split(" ");
+			toks.add(segs[0]);
+			String feat = "";
+			for (int i = 1; i < segs.length-1; i++)
+				feat += segs[i];
+			features.add(feat);
+			labels.add(segs[segs.length-1]);
+		}
+	}
+	
+	/**
+	 * Writes a CRF readable file given the tokens, features and labels
+	 * which are needed. Spaces are added between these three classes
+	 * so don't add them on your own!
+	 * 
+	 * @param file_name The name of the file to be written
+	 * @param toks The tokens given to the CRF
+	 * @param features the features
+	 * @param labels and the class labels used by CRF
+	 */
+	public static void writeCRFFile (String file_name,
+			ArrayList<String> toks, ArrayList<String> features,
+			ArrayList<String> labels) {
+		DataWriter writer = new DataWriter(file_name);
+		for (int i = 0; i < toks.size(); i++)
+			writer.writeln(toks.get(i) + " " + features.get(i) + " " + labels.get(i));
+		writer.close();
+	}
+	
 	public static void main (String[] args) {
 		CRFFormatter formatter = new CRFFormatter();
 		FileReader reader = new FileReader(file_in);

@@ -33,4 +33,10 @@ public class BasicStemmer {
 			out[i] = stem(words[i]);
 		return out;
 	}
+	
+	public static void main (String[] args) {
+		String toStem = "smoking";
+		BasicStemmer bs = new BasicStemmer();
+		System.out.println(bs.stem(toStem));
+	}
 }

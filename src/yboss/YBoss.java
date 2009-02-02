@@ -14,7 +14,7 @@ public class YBoss {
 	public static final String IN_TITLE = "intitle%3A";
 	public static final String DIVIDER = "cause";
 	
-	boolean use_title = true;
+	boolean use_title = false;
 	boolean elim_pairs = false;
 	
 	Dictionary<String,Long> data = null;

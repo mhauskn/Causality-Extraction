@@ -1,4 +1,4 @@
-package misc;
+package turk;
 
 import haus.io.DataWriter;
 import haus.io.FileReader;
@@ -6,12 +6,17 @@ import haus.io.FileReader;
 /**
  * Converts a file meant for input into a CRF into a human readable
  * version.
- * @author epn
+ * 
+ * File format for CRF:
+ * <tok> <feats> <label>
+ * 
+ * File format for human readable:
+ * The [storm]C caused the [flood.]E
  *
  */
 public class turkCrfToHuman {
 	public static final String in_file = "turk/crfOut.txt";
-	public static final String out_file = "turk/readablePosCRF.txt";
+	public static final String out_file = "turk/readableCRF.txt";
 	
 	public static final String CRF_INPUT_FORMAT = "CRFINPUTFORM";
 	public static final String CRF_OUTPUT_FORMAT = "CRFOUTPUTFORM";
@@ -24,8 +29,14 @@ public class turkCrfToHuman {
 	String[] tokens;
 	
 	/**
-	 * Changes the format we work with
-	 * @param format
+	 * Changes the format we work with.
+	 * 
+	 * This is because when we test CRF it returns files of the form:
+	 * <label> <features>
+	 * 
+	 * Rather than the input format:
+	 * <token> <features> <label>
+	 * 
 	 */
 	public void setFormat (String format) {
 		if (!format.equals(CRF_INPUT_FORMAT) && !format.equals(CRF_OUTPUT_FORMAT)) {
@@ -54,11 +65,12 @@ public class turkCrfToHuman {
 		while ((line = reader.getNextLine()) != null) {
 			if (line.indexOf(mallet.Include.SENT_DELIM_REDUX) != -1) {
 				writer.write(out + "\n");
+				out = "";
 				continue;
 			}
 			String[] segs = line.split(" ");
-			String label = getLabel(line);
-			String token = segs[segs.length-1];
+			String label = getLabel(segs);
+			String token = getToken(segs);
 			if (formatType.equals(CRF_OUTPUT_FORMAT))
 				token = tokens[linenum++];
 			if (label.equals(mallet.Include.CAUSE_BEGIN_TAG) || label.equals(mallet.Include.EFFECT_BEGIN_TAG)) {
@@ -78,12 +90,20 @@ public class turkCrfToHuman {
 		writer.close();
 	}
 	
-	String getLabel (String line) {
-		String[] segs = line.split(" ");
+	String getLabel (String[] segs) {
 		if (formatType.equals(CRF_INPUT_FORMAT)) {
 			return segs[segs.length-1];
 		} else if (formatType.equals(CRF_OUTPUT_FORMAT)) {
 			return segs[0];
+		}
+		return null;
+	}
+	
+	String getToken (String[] segs) {
+		if (formatType.equals(CRF_INPUT_FORMAT)) {
+			return segs[0];
+		} else if (formatType.equals(CRF_OUTPUT_FORMAT)) {
+			return segs[segs.length-1];
 		}
 		return null;
 	}

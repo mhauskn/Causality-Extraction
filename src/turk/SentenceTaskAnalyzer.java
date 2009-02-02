@@ -97,6 +97,11 @@ public class SentenceTaskAnalyzer {
 		return hitid + "_" + workerid;
 	}
 	
+	/**
+	 * Parses our file of known causal sentences. This will allow us to determine a 
+	 * user rating for each user based on how well they selected causal/non-causal
+	 * on the known pos sentences.
+	 */
 	void parseKnownPos() {
 		FileReader cr = new FileReader("turk/pos.txt");
 		String line;

@@ -3,6 +3,7 @@ package misc;
 import java.util.ArrayList;
 
 import stemmer.BasicStemmer;
+import turk.turkCrfToHuman;
 
 import analysis.NpVpAggregator;
 import analysis.StemFeature;

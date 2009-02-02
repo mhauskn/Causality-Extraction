@@ -39,7 +39,7 @@ public class SyntaticSentencePreproc {
 	StanfordParser parser = new StanfordParser();
 	BasicStemmer stemmer = new BasicStemmer();
 	
-	public ArrayList<ArrayList<String>> findSynDeps 
+	public ArrayList<String[]> findSynDeps 
 		(String cause, String effect, ArrayList<String> _sentences) {
 		String[] cause_parts = cause.split(" ");
 		String[] effect_parts = effect.split(" ");
@@ -53,7 +53,7 @@ public class SyntaticSentencePreproc {
 		known_effect = known_effect.substring(0, known_effect.length()-1);
 		sentences = _sentences;
 		
-		ArrayList<ArrayList<String>> doubleArr = new ArrayList<ArrayList<String>>();
+		ArrayList<String[]> doubleArr = new ArrayList<String[]>();
 		
 		for (int i = 0; i < sentences.size(); i++) {
 			curr_sentence = sentences.get(i);
@@ -61,8 +61,10 @@ public class SyntaticSentencePreproc {
 				continue;
 			processed_sentences.put(curr_sentence, true);
 			ArrayList<String> tags = processSentence();
+			String[] tagsArr = new String[tags.size()];
+			tags.toArray(tagsArr);
 			if (tags != null)
-				doubleArr.add(tags);
+				doubleArr.add(tagsArr);
 		}
 		
 		return doubleArr;

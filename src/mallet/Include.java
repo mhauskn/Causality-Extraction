@@ -17,6 +17,11 @@ public class Include {
 	
 	public static final String NEITHER_TAG = "N";
 	
+	public static final String CAUSE_REGEXP = "(" + CAUSE_TAG + "|" + CAUSE_BEGIN_TAG +
+		"|" + CAUSE_INTERMEDIATE_TAG + "|" + CAUSE_END_TAG + ")";
+	
+	public static final String EFFECT_REGEXP = "(" + EFFECT_TAG + "|" + EFFECT_BEGIN_TAG + 
+		"|" + EFFECT_INTERMEDIATE_TAG + "|" + EFFECT_END_TAG + ")";
 	
 	/**
 	 * Removes the class labels from tuples of the form

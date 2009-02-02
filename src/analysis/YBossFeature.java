@@ -1,7 +1,7 @@
 package analysis;
 
 import include.Include;
-import io.Serializer;
+import haus.io.Serializer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -172,7 +172,7 @@ public class YBossFeature {
 	
 	/**
 	 * Queries boss.. Importantly when we get error code 503: sever 
-	 * unavailiable then we will re-try up until a limit. If we fail
+	 * Unavailable then we will re-try up until a limit. If we fail
 	 * we will save HT to keep our work.
 	 */
 	Long queryBoss (String np, String np2) {

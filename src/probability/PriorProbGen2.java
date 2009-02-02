@@ -8,9 +8,12 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-import util.sort.QuickSort;
 import haus.io.DataWriter;
 
+/**
+ * Attempts to find prior probabilities between nouns in a corpus.
+ *
+ */
 public class PriorProbGen2 {
 	public static String TAG_SPLIT = "_";
 	
@@ -215,7 +218,7 @@ public class PriorProbGen2 {
 		while (e2.hasMoreElements()) {
 			cnts[i++] = e2.nextElement();
 		}
-		QuickSort.quicksort(cnts);
+		haus.util.sort.QuickSort.quicksort(cnts);
 		for (i = cnts.length-1; i >= 0; i--) {
 			int intersect = cnts[i];
 			dw.write(results.get(intersect).toString() + "\n");
@@ -279,7 +282,7 @@ public class PriorProbGen2 {
 	while (e2.hasMoreElements()) {
 		cnts[i++] = e2.nextElement();
 	}
-	QuickSort.quicksort(cnts);
+	haus.util.sort.QuickSort.quicksort(cnts);
 	
 	System.out.println("Finished Enumeration and Quicksort: " + (System.currentTimeMillis() - t1));
 	t1 = System.currentTimeMillis();

@@ -13,7 +13,9 @@ import java.util.Hashtable;
 /**
  * Designed to preform all sorts of analysis on the the Turk data from the task of 
  * labeling causes and effects in a sentence.
- * @author epn
+ * 
+ * It also is used to output our CRF format in either Human Readable or 
+ * CRF Readable form.
  *
  */
 public class TokenTaskAnalyzer {
@@ -262,21 +264,19 @@ public class TokenTaskAnalyzer {
 		crfFileWriter writer = new crfFileWriter();
 		
 		class crfFileWriter {
-			int sentencesWritten = 0;
 			DataWriter writer = new DataWriter(crfOutFile);
 			String ancientResponse = "";
-			String lastResponse = "";
+			String lastResponse = " ";
 			String lastWord = "";
-			boolean newNext = false;
 			
 			public void write (String word, String response) {
-				if (corresponds(response, lastResponse)) {
-					if (corresponds(lastResponse,ancientResponse))
+				if (response.equals(lastResponse)) {
+					if (lastResponse.equals(ancientResponse))
 						writeFullCorres();
 					else
 						writeNewCorres();
 				} else {
-					if (corresponds(lastResponse,ancientResponse))
+					if (lastResponse.equals(ancientResponse))
 						writeOldCorres();
 					else
 						writeNoCorres();
@@ -284,17 +284,8 @@ public class TokenTaskAnalyzer {
 				ancientResponse = lastResponse;
 				lastResponse = response;
 				lastWord = word;
-				if (newNext) {
-					newNext = false;
-					writer.write(mallet.Include.SENT_DELIM + "\n");
-				}
 			}
-			boolean corresponds (String s1, String s2) {
-				if (s1.equals(s2))
-					return true;
-				return false;
-			}
-			
+
 			void writeFullCorres () {
 				if (lastResponse.equals(CAUSE_ANS))
 					writeln(mallet.Include.CAUSE_INTERMEDIATE_TAG);
@@ -335,15 +326,9 @@ public class TokenTaskAnalyzer {
 				writer.write(lastWord + " " + answer + "\n");
 			}
 			
-			void writeNewline () {
-				sentencesWritten++;
-				newNext = true;
-			}
-			
 			void flush () {
 				write("","");
 				writer.close();
-				System.out.println("Wrote " + sentencesWritten + " sentences.");
 			}
 		}
 		
@@ -395,7 +380,7 @@ public class TokenTaskAnalyzer {
 					for (int i = 0; i < words.length; i++) {
 						writer.write(words[i],NEITHER_ANS);
 					}
-					writer.writeNewline();
+					writer.write(mallet.Include.SENT_DELIM_REDUX, NEITHER_ANS);
 					continue;
 				}
 				
@@ -432,7 +417,7 @@ public class TokenTaskAnalyzer {
 							effectWorkers, neitherWorkers);
 					writer.write(words[wordNum],majorityAnswer);
 				}
-				writer.writeNewline();
+				writer.write(mallet.Include.SENT_DELIM_REDUX, NEITHER_ANS);
 			}
 		}
 		
@@ -549,7 +534,7 @@ public class TokenTaskAnalyzer {
 				for (int i = 0; i < words.length; i++) { 
 					writer.write(words[i], NEITHER_ANS);
 				}
-				writer.writeNewline();
+				writer.write(mallet.Include.SENT_DELIM_REDUX, NEITHER_ANS);
 			}
 		}
 	}

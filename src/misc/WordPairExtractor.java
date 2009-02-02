@@ -50,10 +50,17 @@ public class WordPairExtractor extends IO<String,String> {
 	public void extractWordPairs (ArrayList<String[]> pairs) {
 		ArrayList<DataWriter> writers = new ArrayList<DataWriter>();
 		for (String[] pair : pairs)
-			writers.add(new DataWriter(pair[0] + "_" + pair[1] + "_pair.txt"));
+			writers.add(new DataWriter(genFileName(pair[0],pair[1])));
 		extractWordPairs(pairs, writers);
 		for (DataWriter writer : writers)
 			writer.close();
+	}
+	
+	/**
+	 * Generates a word pair file name
+	 */
+	public static String genFileName (String cause, String effect) {
+		return cause + "_" + effect + "_pair.txt";
 	}
 	
 	/**
