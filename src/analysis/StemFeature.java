@@ -14,7 +14,7 @@ public class StemFeature {
 			if (stem == null)
 				feature[i] = "";
 			else
-				feature[i] = stem + " ";
+				feature[i] = "stm_" + stem;
 		}
 		
 		return feature;

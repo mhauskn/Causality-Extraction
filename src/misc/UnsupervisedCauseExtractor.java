@@ -29,7 +29,7 @@ public class UnsupervisedCauseExtractor {
 	}
 	
 	public static void main (String[] args) {
-		UnsupervisedCauseExtractor ext = new UnsupervisedCauseExtractor();
+		//UnsupervisedCauseExtractor ext = new UnsupervisedCauseExtractor();
 		ArrayList<String[]> pairs = new ArrayList<String[]>();
 		pairs.add(new String[] {"earthquake","tsunami"});
 		pairs.add(new String[] {"moon","tide"});

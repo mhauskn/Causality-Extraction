@@ -1,16 +1,10 @@
 package mallet;
 
-
-/**
- * Preforms token matching for Cause Tokens
- * @author epn
- *
- */
-public class CauseTokenClassificationEvaluationAgent extends TokenClassificationEvaluationAgent {
+public class CuePhraseTokenClassificationEvaluationAgent extends TokenClassificationEvaluationAgent {
 	@Override
 	public boolean isRelevant(String[] unit) {
 		String accepted_answer = unit[1];
-		if (CRFRunner.isCause(CRFRunner.getAnswer(accepted_answer)))
+		if (CRFRunner.isCuePhrase(CRFRunner.getAnswer(accepted_answer)))
 			return true;	
 		return false;
 	}
@@ -18,7 +12,7 @@ public class CauseTokenClassificationEvaluationAgent extends TokenClassification
 	@Override
 	public boolean isRetrieved(String[] unit) {
 		String given_answer = unit[0];
-		if (CRFRunner.isCause(given_answer))
+		if (CRFRunner.isCuePhrase(given_answer))
 			return true;
 		return false;
 	}

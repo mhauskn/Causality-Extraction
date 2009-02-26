@@ -8,8 +8,9 @@ package evaluation;
  * @author epn
  *
  */
-public abstract class EvaluationAgent <baseUnit> {
+public abstract class EvaluationAgent <baseUnit,dataSource> {
 	EvalTracker tracker = null;
+	dataSource data = null;
 	
 	/**
 	 * Sets the tracker this agent reports to
@@ -21,13 +22,19 @@ public abstract class EvaluationAgent <baseUnit> {
 	
 	/**
 	 * Evaluates the performance of the system
+	 * 
+	 * 1. Get data from our data source
+	 * 2. Evaluate our data
 	 */
 	void doEvaluation () {
+		tracker.dataSource.provideData(this);
+		processData(data);
 		while (!exhausted()) {
 			baseUnit unit = getNextUnit();
 			boolean relevant = isRelevant(unit);
 			boolean retrieved = isRetrieved(unit);
 			
+			tracker.addVisited();
 			if (relevant)
 				tracker.addRelevant();
 			if (retrieved)
@@ -54,7 +61,18 @@ public abstract class EvaluationAgent <baseUnit> {
 	
 	/**
 	 * Returns the next base unit in our data
-	 * @return
 	 */
 	public abstract baseUnit getNextUnit ();
+	
+	/**
+	 * Sets up our data source for the acquisition of new data
+	 */
+	public void addData (dataSource d) {
+		data = d;
+	}
+	
+	/**
+	 * Processes the data provided by our data source.
+	 */
+	public abstract void processData (dataSource data);
 }

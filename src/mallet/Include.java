@@ -1,5 +1,9 @@
 package mallet;
 
+import haus.io.FileReader;
+
+import java.util.ArrayList;
+
 public class Include {
 	public static final String MALLET_DIR = "mallet_out";
 	
@@ -14,6 +18,11 @@ public class Include {
 	public static final String EFFECT_BEGIN_TAG = "EB";
 	public static final String EFFECT_INTERMEDIATE_TAG = "EI";
 	public static final String EFFECT_END_TAG = "EE";
+	
+	public static final String RELN_TAG = "R";
+	public static final String RELN_BEGIN_TAG = "RB";
+	public static final String RELN_INTERMEDIATE_TAG = "RI";
+	public static final String RELN_END_TAG = "RE";
 	
 	public static final String NEITHER_TAG = "N";
 	
@@ -33,6 +42,39 @@ public class Include {
 			out[i] = tuples[i].substring(0, tuples[i].lastIndexOf(' '));
 		}
 		return out;
+	}
+	
+	/**
+	 * Reads a file deliminated by SENT_DELIM tags into an 
+	 * arraylist where each entry is a sentence.
+	 * @param file
+	 * @return
+	 */
+	public static ArrayList<String> readSentDelimFile (String file) {
+		ArrayList<String> sentences = new ArrayList<String>();
+		FileReader reader = new FileReader(file);
+		String sent = "";
+		String line;
+		while ((line = reader.getNextLine()) != null) {
+			sent += line + "\n";
+			if (line.contains(SENT_DELIM_REDUX)) {
+				sentences.add(sent);
+				sent = "";
+			}
+		}
+		return sentences;
+	}
+	
+	/**
+	 * Checks if a given string contains the sentence 
+	 * delim token
+	 */
+	public static boolean hasSentDelim (String str) {
+		return str.contains(SENT_DELIM_REDUX);
+	}
+	
+	public static void main (String[] args) {
+		Include.readSentDelimFile("crf/crfTest.txt");
 	}
 }
  

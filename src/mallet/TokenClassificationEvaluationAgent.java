@@ -1,5 +1,8 @@
 package mallet;
 
+import haus.io.FileReader;
+
+
 /**
  * The TokenClassificationEvaluationAgent gets its data from test
  * and answer files and evaluates the system's score on a token by
@@ -10,23 +13,17 @@ package mallet;
  *
  */
 public abstract class TokenClassificationEvaluationAgent extends SentenceClassificationEvaluationAgent {
-	String[] answer_tokens = new String[0];
-	String[] given_tokens = new String[0];
-	int index = 0;
 	
-	@Override
-	public String[] getNextUnit() {
-		if (index == answer_tokens.length) {
-			String nextAnswer = answers.remove(0);
-			String nextGivenAnswer = given.remove(0);
-			answer_tokens = nextAnswer.split("\n");
-			given_tokens = nextGivenAnswer.split("\n");
-			index = 0;
+	/**
+	 * Reads our data from a strings containing the data files
+	 * Answer file is first, Output file is second.
+	 */
+	public void processData  (String[] data) {
+		answers = FileReader.readFile(data[0]);
+		given = FileReader.readFile(data[1]);
+		if (answers.size() != given.size()) {
+			System.err.println("Unequal Answer Sizes! in given data and answer files");
+			System.exit(1);
 		}
-		String[] out = new String[2];
-		out[0] = given_tokens[index];
-		out[1] = answer_tokens[index];
-		index++;
-		return out;
 	}
 }

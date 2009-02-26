@@ -6,10 +6,12 @@ import haus.io.DataWriter;
 import haus.io.FileReader;
 import parser.StanfordParser;
 import pos.PosTagger;
+import analysis.AdjacentFeature;
 import analysis.AdjacentWordFeature;
 import analysis.ChunkFeature;
 import analysis.HypernymFeature;
 import analysis.StanfordPhraseFinder;
+import analysis.StemFeature;
 import analysis.YBossFeature;
 import chunker.AbstractPhraseChunker;
 
@@ -27,14 +29,13 @@ public class CRFFormatter {
 	//ChunkFeature chunkFeat = 		new ChunkFeature(new AbstractPhraseChunker(include.Include.hmmFile));
 	//HypernymFeature hf = 	new HypernymFeature();
 	//StanfordPhraseFinder stanFeat = new StanfordPhraseFinder(new StanfordParser(include.Include.pcfgPath));
-	//YBossFeature bossFeat = new YBossFeature();
+	StemFeature stemFeat = new StemFeature();
 	
 	DataWriter writer = new DataWriter(file_out);
 	
-	public CRFFormatter () {
-		//bossFeat.deSerializeHT();
-	}
-	
+	/**
+	 * Simplified version
+	 */
 	public void writeData (ArrayList<String> tokens, ArrayList<String> labels) {
 		String[] tokensArr = new String[tokens.size()];
 		tokensArr = tokens.toArray(tokensArr);
@@ -53,14 +54,12 @@ public class CRFFormatter {
 		//String[] chunk_tags = chunkFeat.getFeature(tokens);
 		//String[] pos_tags = posFeat.getTags(tokens);
 		//String[] stanford_tags = stanFeat.getFeature(tokens);
-		//String[] boss_tags = bossFeat.getPOSFeature(tokens, pos_tags);
-		String[] adj_tags = AdjacentWordFeature.getFeature(tokens, 3);
+		addFeature(features, stemFeat.getFeature(tokens));
 		
 		//addFeature(features, chunk_tags);
 		//addFeature(features, pos_tags);
 		//addFeature(features, stanford_tags);
 		//addFeature(features, boss_tags);
-		addFeature(features, adj_tags);
 		
 		for (int i = 0; i < tokens.length; i++) {
 			if (features[i] == null)

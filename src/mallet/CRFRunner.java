@@ -1,34 +1,34 @@
 package mallet;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 
 import haus.io.DataWriter;
 
 import evaluation.CrossValidator;
 import evaluation.CrossEvaluable;
 import evaluation.EvalTracker;
+import evaluation.EvaluationAgent;
 
+/**
+ * Runs our CRF implementation in a sequential manner using 
+ * cross validation.
+ *
+ */
 public class CRFRunner extends CrossEvaluable<String> {
-	public static final String SENT_DELIM = "_END_OF_SENTENCE_";
 	public static final int NUM_VALIDATIONS = 10;
 	
-	String data_file = "crf/crf.txt";
+	String data_file = "crf/bogusCRF.txt";
 	String out_file = "mallet_out/";
 	
 	ArrayList<String> data = null;
-	ArrayList<Double> grades = null;
 	ArrayList<Long> train_times = null;
 	
 	CrossValidator<String> validator = null;
 	
-	SentenceClassificationEvaluationAgent CausalSentenceAgent = null;
-	CauseTokenClassificationEvaluationAgent CauseTokenAgent = null;
-	EffectTokenClassificationEvaluationAgent EffectTokenAgent = null;
+	String[] agentDataSource;
 	
 	int numCorrectTokens = 0;
 	int numTokens = 0;
@@ -36,22 +36,20 @@ public class CRFRunner extends CrossEvaluable<String> {
 	int iteration = 0;
 	
 	public CRFRunner () {
-		grades = new ArrayList<Double>();
-		data = readDataFromFile(data_file);
+		data = Include.readSentDelimFile(data_file);
 		train_times = new ArrayList<Long>();
 		Collections.shuffle(data);
 		validator = new CrossValidator<String>(NUM_VALIDATIONS, data, this);
 		
-		CausalSentenceAgent = new SentenceClassificationEvaluationAgent();
-		CauseTokenAgent = new CauseTokenClassificationEvaluationAgent();
-		EffectTokenAgent = new EffectTokenClassificationEvaluationAgent();
-		
-		addTracker(new EvalTracker(CausalSentenceAgent, "Causal Sentence Tracker"));
-		addTracker(new EvalTracker(CauseTokenAgent, "Cause Token Tracker"));
-		addTracker(new EvalTracker(EffectTokenAgent, "Effect Token Tracker"));
+		addTracker(new EvalTracker(new SentenceClassificationEvaluationAgent(), "Causal Sentence Tracker",this));
+		//addTracker(new EvalTracker(new CauseTokenClassificationEvaluationAgent(), "Cause Token Tracker",this));
+		//addTracker(new EvalTracker(new EffectTokenClassificationEvaluationAgent(), "Effect Token Tracker",this));
+		addTracker(new EvalTracker(new CuePhraseTokenClassificationEvaluationAgent(), "Cue Phrase Token Tracker",this));
 	}
 	
 	public static void main (String[] args) {
+		//CRFRunner.help();
+		//System.exit(1);
 		CRFRunner c = new CRFRunner();
 		
 		System.out.println("Data size: " + c.data.size());
@@ -61,7 +59,7 @@ public class CRFRunner extends CrossEvaluable<String> {
 		System.out.println("CRF Training Times:");
 		for (Long l : c.train_times)
 			System.out.print(l + ", ");
-		System.out.println("");
+		System.out.println("\n");
 		
 		System.out.println(c.getEvaluationResults());
 	}
@@ -87,21 +85,14 @@ public class CRFRunner extends CrossEvaluable<String> {
 	 */
 	public void handleData (List<String> trainData, List<String> testData) {
 		String answer_file = out_file + "Answers_" + iteration;
-		//String pos_answer_file = out_file + "Pos_Answers_" + iteration;
 		String train_file = out_file + "Train_" + iteration;
-		//String pos_train_file = out_file + "Pos_Train_" + iteration;
 		String test_file = out_file + "Test_" + iteration;
-		//String pos_test_file = out_file + "Pos_Test_" + iteration;
 		String model_file = out_file + "causeModel_" + iteration;
-		//String pos_model_file = out_file + "Pos_causeModel_" + iteration;
 		String output_file = out_file + "Output_" + iteration;
-		//String pos_output_file = out_file + "Pos_Output_" + iteration;
-		//String grade_file = out_file + "Grade_" + iteration;
 
-		writeFile(answer_file, testData); // Create Norm Answer file
-		writeFile(train_file, trainData); // Create Norm Train file
-		//writeFile(pos_train_file, getPosExamples(trainData)); // Create Postive Example Train file
-		writeFile(test_file, createTestQuestions(testData)); // Create Normal Test File
+		DataWriter.writeFile(answer_file, testData); // Create Norm Answer file
+		DataWriter.writeFile(train_file, trainData); // Create Norm Train file
+		DataWriter.writeFile(test_file, createTestQuestions(testData)); // Create Normal Test File
 		
 		long time_start = System.currentTimeMillis();
 		trainCRF(output_file+"Bad", model_file, train_file); // Train normal CRF
@@ -109,80 +100,19 @@ public class CRFRunner extends CrossEvaluable<String> {
 		
 		evaluateCRF(output_file, model_file, test_file); // Evaluate Normal CRF
 		
-		// Write a test/answer file for CRF 2 from the positive data CRF 1 labeled
-		//writeSymFile(pos_test_file, pos_answer_file, output_file, answer_file); 
-		//trainCRF(output_file+"Bad", pos_model_file, pos_train_file); // Train POS CRF
-		//evaluateCRF(pos_output_file, pos_model_file, pos_test_file); // Evaluate POS CRF
+		agentDataSource = new String[] {answer_file, output_file};
 		
-		//gradeCRF(grade_file, answer_file, output_file);
-		try {
-			CausalSentenceAgent.getData(answer_file, output_file);
-			CauseTokenAgent.getData(answer_file, output_file);
-			EffectTokenAgent.getData(answer_file, output_file);
-			//CauseTokenAgent.getData(pos_answer_file, pos_output_file);
-			//EffectTokenAgent.getData(pos_answer_file, pos_output_file);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
 		iteration++;
 	}
 	
-	
 	/**
-	 * Determine how well CRF2 has preformed on the cause/effect token labeling task.
-	 * @param answer_file
-	 * @param test_file
-	 * @return
-	 * @throws Exception
-	 
-	void gradeTokenCausality (String pos_answer_file, String pos_test_file) {
-		ArrayList<String> answers = readDataFromFile(pos_answer_file);
-		ArrayList<String> given = readDataFromFile(pos_test_file);
-		
-		for (int q = 0; q < answers.size(); q++) {
-			String ans = answers.get(q);
-			String giv = given.get(q);
-			checkTokenCausality(ans, giv);
-		}
-	}*/
-	
-	/**
-	 * Checks each token in the answer to see how well the classification agrees
-	 * with the given answer
-	 * @param answer
-	 * @param given_answer
-	 
-	void checkTokenCausality (String answer, String given_answer) {
-		String[] answer_segs = getQuestionTokens(answer);
-		String[] given_segs = getQuestionTokens(given_answer);
-		
-		for (int t = 0; t < answer_segs.length; t++) {
-			String ansTok = answer_segs[t];
-			String givTok = given_segs[t];
-			
-			boolean relevant = false;
-			boolean retrieved = false;
-			
-			if (isEffect(ansTok)) {
-				EffectTokenTracker.addRelevant();
-				relevant = true;
-			}
-			if (isEffect(givTok)) {
-				EffectTokenTracker.addRetrieved();
-				retrieved = true;
-			}
-			if (relevant && retrieved) {
-				
-			}
-			if ()
-				
-			
-			if (tokenClassAgree(ansTok, givTok)) {
-				if (isEffect || is)
-			}
-		}
-	}*/
+	 * Give the Evaluation Trackers the Answer and output
+	 * files so that they can analyze the data
+	 */
+	@SuppressWarnings("unchecked")
+	public void provideData (EvaluationAgent a) {
+		a.addData(agentDataSource);
+	}
 	
 	/**
 	 * Breaks a given question down into its constituant tuples
@@ -201,8 +131,8 @@ public class CRFRunner extends CrossEvaluable<String> {
 	 * @param fullAnsFile - CRF's test's answer file
 	 */
 	void writeSymFile (String testFile, String ansFile, String fullOutFile, String fullAnsFile) {
-		ArrayList<String> answers = readDataFromFile(fullAnsFile);
-		ArrayList<String> output = readDataFromFile(fullOutFile);
+		ArrayList<String> answers = Include.readSentDelimFile(fullAnsFile);
+		ArrayList<String> output = Include.readSentDelimFile(fullOutFile);
 		
 		ArrayList<String> pos_ans = new ArrayList<String>();
 		ArrayList<String> pos_test = new ArrayList<String>();
@@ -210,14 +140,15 @@ public class CRFRunner extends CrossEvaluable<String> {
 		for (int i = 0; i < answers.size(); i++) {
 			String ans = answers.get(i);
 			String given = output.get(i);
-			if (hasCauseQuestion(given, false) || hasEffectQuestion(given, false)) {
+			if (sentenceContains(given, false, Include.CAUSE_TAG) || 
+					sentenceContains(given, false,Include.EFFECT_TAG)) {
 				pos_ans.add(ans);
 				pos_test.add(getTest(ans));
 			}
 		}
 		
-		writeFile(testFile, pos_test);
-		writeFile(ansFile, pos_ans);
+		DataWriter.writeFile(testFile, pos_test);
+		DataWriter.writeFile(ansFile, pos_ans);
 	}
 	
 	/**
@@ -242,27 +173,15 @@ public class CRFRunner extends CrossEvaluable<String> {
 	}
 	
 	/**
-	 * Returns true if the string Question has a token with a Cause Label
-	 * @param isAnswerBased: If so look at end of sentence for class.
-	 * Otherwise look at beginning of sentence for class.
+	 * Returns true if our sentence contains a word with the given key.
+	 * This is used to check if sentence contains cause/effect/cue phrase.
 	 */
-	static boolean hasCauseQuestion (String question, boolean isAnswerBased) {
-		String[] segs = question.split("\n");
+	static boolean sentenceContains (String sent, boolean isAnswerBased, String key) {
+		String[] segs = sent.split("\n");
 		for (String token : segs) {
 			if (isAnswerBased)
 				token = getAnswer(token);
-			if (isCause(token))
-				return true;
-		}
-		return false;
-	}
-	
-	static boolean hasEffectQuestion (String question, boolean isAnswerBased) {
-		String[] segs = question.split("\n");
-		for (String token : segs) {
-			if (isAnswerBased)
-				token = getAnswer(token);
-			if (isEffect(token))
+			if (token.startsWith(key))
 				return true;
 		}
 		return false;
@@ -285,10 +204,8 @@ public class CRFRunner extends CrossEvaluable<String> {
 	 * @param causeKey
 	 * @return
 	 */
-	static boolean isEffect (String causeKey) {
-		if (causeKey.startsWith("E"))
-			return true;
-		return false;
+	static boolean isEffect (String key) {
+		return key.startsWith(Include.EFFECT_TAG);
 	}
 	
 	/**
@@ -296,10 +213,17 @@ public class CRFRunner extends CrossEvaluable<String> {
 	 * @param causeKey
 	 * @return
 	 */
-	static boolean isCause (String causeKey) {
-		if (causeKey.startsWith("C"))
-			return true;
-		return false;
+	static boolean isCause (String key) {
+		return key.startsWith(Include.CAUSE_TAG);
+	}
+	
+	/**
+	 * Given Tuple -- Does this tuple have a Cue Phrase Classification
+	 * @param key
+	 * @return
+	 */
+	static boolean isCuePhrase (String key) {
+		return key.startsWith(Include.RELN_TAG);
 	}
 	
 	/**
@@ -345,7 +269,7 @@ public class CRFRunner extends CrossEvaluable<String> {
 	 */
 	public static void evaluateCRF (String output_file, String model_file, String test_file) {
 		try {
-			String[] args2 = {"--train","false","--out-file",output_file,
+			String[] args2 = {"--include-input","false","--train","false","--out-file",output_file,
 					"--model-file",model_file, test_file};
 			SimpleTagger.main(args2);
 		} catch (Exception e) {
@@ -353,58 +277,21 @@ public class CRFRunner extends CrossEvaluable<String> {
 		}
 	}
 	
-	ArrayList<String> createTestQuestions (List<String> testData) {
+	public static void help () {
+		try {
+			String[] args2 = {"--help"};
+			SimpleTagger.main(args2);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	static ArrayList<String> createTestQuestions (List<String> testData) {
 		ArrayList<String> testQuestions = new ArrayList<String>();
 		for (String problem: testData) {
 			testQuestions.add(getTest(problem));
 		}
 		return testQuestions;
-	}
-	
-	void writeFile (String fileName, List<String> data) {
-		DataWriter writer = new DataWriter(fileName);
-		for (String answer: data)
-			writer.write(answer);
-		writer.close();
-	}
-	
-	/**
-	 * Checks for a new sentence
-	 */
-	private static boolean isNewSent (String line)  {
-		if (line.contains(SENT_DELIM))
-			return true;
-		return false;
-	}
-	
-	/**
-	 * Reads the DataFile and return an arraylist in which each string 
-	 * is a sentences with features
-	 */
-	public static ArrayList<String> readDataFromFile (String dataFile) {
-		ArrayList<String> out = new ArrayList<String>();
-		try {
-			BufferedReader input =  new BufferedReader(new FileReader(dataFile));
-			try {
-				String line = null;
-				String block = "";
-				while ((line = input.readLine()) != null){
-					line = line.trim();
-					block += line + "\n";
-					if (isNewSent(line)) {
-						out.add(block);
-						block = "";
-					}
-				}
-			}
-			finally {
-				input.close();
-			}
-		}
-		catch (IOException ex){
-			ex.printStackTrace();
-		}
-		return out;
 	}
 	
 	/**
@@ -424,6 +311,4 @@ public class CRFRunner extends CrossEvaluable<String> {
 		}
 		return out;
 	}
-
-	
 }

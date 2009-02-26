@@ -16,10 +16,11 @@ public class BasicStemmer {
 	 * or the original word if no stem exists.
 	 */
 	public String stem (String word) {
-		List<String> stems = ss.findStems(word);
+		String stem = harshRemovePunc(word);
+		List<String> stems = ss.findStems(stem);
 		if (!stems.isEmpty())
 			return stems.get(stems.size()-1);
-		return word;
+		return stem;
 	}
 	
 	/**
@@ -34,8 +35,18 @@ public class BasicStemmer {
 		return out;
 	}
 	
+	/**
+	 * Harshly removes punctuation and upper case letters from our 
+	 * string.
+	 */
+	public static String harshRemovePunc (String s) {
+		s = s.trim().toLowerCase();
+		s = s.replaceAll("`", "");
+		return s.replaceAll("[^a-zA-z]", "");
+	}
+	
 	public static void main (String[] args) {
-		String toStem = "smoking";
+		String toStem = "``because";
 		BasicStemmer bs = new BasicStemmer();
 		System.out.println(bs.stem(toStem));
 	}

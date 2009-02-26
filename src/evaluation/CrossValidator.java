@@ -1,6 +1,7 @@
 package evaluation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -22,6 +23,7 @@ public class CrossValidator<T> {
 		numValidations = _numValidations;
 		data = _data;
 		caller = _caller;
+		shuffle();
 	}
 	
 	/**
@@ -49,5 +51,12 @@ public class CrossValidator<T> {
 			caller.evaluate(); // Run his evaluation to see how he did
 			index += increment;
 		}
+	}
+	
+	/**
+	 * Shuffles our data
+	 */
+	public void shuffle () {
+		Collections.shuffle(data);
 	}
 }
