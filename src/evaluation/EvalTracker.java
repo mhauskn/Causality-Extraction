@@ -8,11 +8,11 @@ import java.util.List;
  */
 @SuppressWarnings("unchecked")
 public class EvalTracker {
-	String trackerName;
-	int retrieved_relevant;
-	int relevant;
-	int retrieved;
-	int total_visited;
+	public String trackerName;
+	public int retrieved_relevant;
+	public int relevant;
+	public int retrieved;
+	public int total_visited;
 	
 	List<EvaluationAgent> agents;
 	Evaluable dataSource;
@@ -32,7 +32,8 @@ public class EvalTracker {
 	 * Adds Another Agent to our list of evaluation agents
 	 */
 	public void addAgent (EvaluationAgent agent) {
-		agent.setTracker(this);
+		if (agent != null) 
+			agent.setTracker(this);
 		agents.add(agent);
 	}
 	

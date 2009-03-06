@@ -3,10 +3,10 @@ Yet the best the far-left could do was not enough to deter the biggest voting bl
 A company spokesman said the [decision to eliminate the dividend]E [resulted from]R a [quarterly appraisal]C and that circumstances had changed since the December announcement. 
 Predictably, some Navy guys said: ``Do we still need to keep all 18 Army divisions on active duty and all those extra land-based aircraft without bases and all those Army guys playing admiral in Tampa? 
 [When]R a large group of [pilots once signed petitions opposing work-rule and compensation changes,]C [he called a meeting in a company hangar and dressed them down for challenging his authority.]E 
-If spreads available from index arbitrage are so enormous, surely any sizable mutual-fund company could profit from offering it to small investors. 
+[If]R [spreads available from index arbitrage are so enormous,]C [surely any sizable mutual-fund company could profit from offering it to small investors.]E 
 At the end of the exercise, [the cash injection from Petronas]C will [increase]R [the bank's paid-up capital]E to M$ 1.15 billion virtually being wiped out by the new provisions. 
 The Murray Hill, N.J., company said [full-year earnings may be off 33 cents a share]E [because]R [the company removed a catheter from the market.]C 
-If they were to insist on a low bid of, say $200 share, [the board mightn't be able to obtain a higher offer from other bidders]E [because]R [banks might hesitate to finance a transaction the pilots oppose.]C 
+(If)R (they were to insist on a low bid of, say $200 share,)C ([the board mightn't be able to obtain a higher offer from other bidders]E [because]R [banks might hesitate to finance a transaction the pilots oppose.]C)E
 I'm not saying advertising revenue isn't important,'' she says, [``but I couldn't sleep at night'']E [if]R [(the magazine bowed to a company)E (because)R (they once took out an ad.)C]C 
 The unexpectedly wide U.S. August trade deficit of $10.77 billion an already jittery U.K. market in midafternoon. 
 William Greaney, an attorney for the Chemical Manufacturers Association, said that while other appeals courts have ruled differently on whether cleanup costs are damages, [the influence of the appeals court in New York]C [``will make]R [insurers sit up and listen.'']E 
@@ -207,7 +207,7 @@ But the [recovery in the stock market]C [[provided]R little help for copper]E [a
 Mr. Lichtblau said [Canada's declining crude output, combined with the fast-shrinking output of U.S. crude,]C will help [[intensify]R U.S. reliance on oil from overseas,]E particularly the Middle East. 
 [The junk market, which mushroomed to $200 billion less than $2 billion the start of the decade, has been declining for months]E [as]R [issuers have stumbled under the weight of hefty interest payments.]C 
 The FTC said it ``had reason to believe that [the proposed acquisition]C could substantially [[reduce]R competition'' in the production of certain image intensifier tubes,]E which are important components of night-vision devices sold primarily to the defense industry. 
--- [If]R [the price of the stock declines,]C [the put will increase in value.]E 
+[If]R [the price of the stock declines,]C [the put will increase in value.]E 
 In a filing with the Securities and Exchange Commission, Mr. Gintel said Xtra ``has pursued business strategies that aren't in the best interest of stockholders. 
 [Automatic Data is redeeming the bonds]E [because]R [the after-tax cost of the interest on the bonds is higher than the dividend yield on the common,]C a spokesman said. 
 The move followed [a round of similar increases by other lenders against Arizona real estate loans,]E [reflecting]R [a continuing decline in that market.]C 
@@ -318,7 +318,7 @@ However, the company's petroleum services segment, while profitable, [was hurt]E
 It also estimated that [losses]E [from]R [the Oct. 17 earthquake in California]C would be no more than $6 million and would be included in fourth-quarter results. 
 Mario Mandina, president of Kansas City Lawyers for Life, says that [if]R [abortion foes succeed in using the preamble to escape prosecution for trespass,]C [``This will shut down abortion in Missouri.]E 
 Mr. Peters, a LaSalle Street legend among the post-World War II generation of commodity traders, was rumored to have amassed a [multimillion-dollar fortune]E [from]R [commodity trading and other activities]C by the time he died in May. 
-And in Paris, Mahmoud Vaezi, Iran's vice minister of foreign affairs, began a five-day visit to discuss such matters as [compensation to French enterprises]E [for]R [contracts broken by the Khomeini regime.]C 
+And in Paris, Mahmoud Vaezi, Iran's vice minister of foreign affairs, began a five-day visit to discuss such matters as [compensation to French enterprises]E [for]R [(contracts (broken by)R)E (the Khomeini regime.)C]C 
 William Seidman, chairman of the Federal Deposit Insurance Corp., said Lincoln Savings & Loan Association should have been seized by the government in 1986 to contain [losses that]C he estimated [[will cost]R taxpayers as much as $2 billion.]E 
 Company officials say [the flotations of the paper and British retailing businesses]E are likely only [after]R [the disposals of the U.S. retailing assets.]C 
 The discovery of the ozone ``hole'' over Antarctica and the results of ground-based and high-altitude aircraft experiments conducted over the past several years serve as evidence that [ozone depletion]E is [related to]R [CFC concentrations.]C 
@@ -473,7 +473,7 @@ The changes were proposed in [an effort]C to [[streamline]R federal bureaucracy]
 At present, analysts project a budget gap on the order of $500 million to $600 million the fiscal year ending June 30, 1990, although the city's own budget analysts project a narrower deficit. 
 The exchange said [it decided a new circuit breaker was needed]E [following]R [a review of the tumultuous trading in stocks and stock-index futures on Friday Oct. 13,]C when the Dow Jones industrials plunged 190 points and stock-index futures prices skidded as well. 
 [Guber/Peters has been locked in litigation with Warner Communications Inc.]E [in]R [an attempt to get out of an exclusive production contract with Warner.]C 
-If [the IRS seeks late-payment interest]E [because of]R [the lost check,]C you should request interest abatement, publisher Prentice Hall notes. 
+(If)R ([the IRS seeks late-payment interest]E [because of]R [the lost check,]C)C (you should request interest abatement,)E publisher Prentice Hall notes. 
 [The company also pleased analysts]E {by [announcing}R four new store openings]C planned for fiscal 1990, ending next August. 
 Georgia Gulf stock rose $1.75 share yesterday to close at $51.25 share, while NL shares closed unchanged at $22.75 Valhi rose 62.5 cents to $15 all in New York Stock Exchange composite trading. 
 So far, all the studies have concluded that RU-486 is ``safe.'' 
@@ -521,7 +521,7 @@ Jerry Shrieves, UAW local president, said the facility was asked to draw up plan
 [It]C also [[empowers]R the president to make recess appointments, without Senate approval:]E ``The President shall have Power to fill up all Vacancies that may happen during the Recess of the Senate, by granting Commissions which shall expire at the End of their next Session.'' 
 Why do [local real-estate markets {overreact]E to}R [regional economic cycles?]C 
 If Mr. Gorbachev's goal is the creation of a free market, he and these Western observers have good reason to fear for his future, as [economic liberalization within communist societies]C [leads inexorably to]R [demands for fundamental political reform accompanied by civil unrest.]E 
-If gold stocks and utilities continue to lead, it may signal that the market is in for rough times. 
+[If]R [gold stocks and utilities continue to lead,]C [it may signal that the market is in for rough times.]E 
 [Feeling]R [the naggings of a culture imperative,]C [I promptly signed up.]E 
 Traders and analysts alike said {[the market's surge]E also [reflected]R [an easing of concerns about volatility]E}E {because of}R {(moves by a number of brokerage firms)C to ((curtail)R or cease stock-index arbitrage.)C}C 
 Losses at El Dorado Investment Co., the venture-capital operation, widened to $6.8 million $425,000 year earlier. 
@@ -876,7 +876,7 @@ Buy order imbalances on several big stocks were posted by the New York Stock Exc
 Does Mr. Steinhardt regret his incursion into the takeover-threat game? 
 This is the way government is supposed to work, with politicians taking responsibility for votes that their constituents can identify, instead of concealing them in the great reconciliation garbage truck. 
 He is also accused of lying under oath and of leaking information obtained from a wiretap he supervised. 
-If all goes well, it will parachute a probe into the dense Jovian atmosphere in July 1995 to pick up detailed data about gases that may be similar to the material from which the solar system was formed 4.6 billion years ago. 
+[If]R [all goes well,]C [it will parachute a probe into the dense Jovian atmosphere in July 1995 to pick up detailed data about gases that may be similar to the material from which the solar system was formed 4.6 billion years ago.]E 
 The symptoms all point to one thing: Japan does not have a modern government. 
 The appeals court disagreed on both counts. 
 ``In my freshman year, my roommate was known as a party animal. 
@@ -922,7 +922,7 @@ Some plan to pursue foreign development ventures, mostly in Europe.
 Moreover, they note that LTV may be trying to send a signal to major customers, such as Chrysler Corp. and Whirlpool Corp., that steelmakers need more money. 
 Public preference is important, So product names should match up, And firms that find they're lagging behind Should now take steps to ketchup! 
 Analysts have estimated that Pinnacle West may have to inject between $300 million and $400 million the MeraBank unit before turning the thrift over to federal regulators. 
-If the market surges, holders can make that much more profit; the leverage effectively acts as an interest-free margin account for investors. 
+[If]R [the market surges,]C [holders can make that much more profit;]E the leverage effectively acts as an interest-free margin account for investors. 
 The No. 2 auto maker's new Thunderbird and Mercury Cougar models haven't met sales expectations in the year since they were introduced, and Ford's trucks are losing ground to their GM rivals. 
 ``You have to count everything.'' 
 But on Oct. 6, he had reason to celebrate. 
@@ -1011,7 +1011,7 @@ Profit per ton of steel shipped dropped to about $33 ton from $42 ton last year 
 While recognizing that professional environmentalists may feel threatened, I intend to urge that UV-B be monitored whenever I can. 
 He started Arrow Roustabouts Inc. a year ago with a loan from a friend, since repaid, and now employs 15. 
 The White House called on Congress to attach the proposed capital-gains tax cut to its final deficit-reduction bill, but lawmakers seem likely to balk at the idea. 
-If you assign your income to another, you still have controlled its disposition and enjoyed the fruits of your labor, even if indirectly. 
+[If]R [you assign your income to another,]C [you still have controlled its disposition and enjoyed the fruits of your labor, even if indirectly.]E 
 ``What a bunch of nonsense,'' says Jessica Crosby, president of the New York chapter of the National Association of Women Business Owners. 
 For eight hours a day for the past two weeks, in aggregates of as much as 27,000 poundsequaling $20,000 pennies -RRB-, Coin Wrap has been pouring money into a cement-mixing truck. 
 USX, he noted, was formed 88 years ago, ``by in effect buying out a bunch of other companies.... 
@@ -1039,7 +1039,7 @@ Lawmakers representing some of the cleaner utilities have been quietly working w
 The Fed has assumed a similar responsibility in the market for government securities. 
 The company denied the rumors and noted that it doesn't own the building. 
 He noted, however, that the company's order entry has increased from the low levels of the early summer, following the end of labor negotiations. 
-One trial balloon Mr. Spiegel is said to have floated to investors: Columbia might be broken up, as Mellon Bank was split into a good bank and a bad bank. 
+One trial balloon Mr. Spiegel is said to have floated to investors: [Columbia might be broken up,]E [as]R [Mellon Bank was split into a good bank and a bad bank.]C 
 SHV also owns 40% of Calor. 
 But analysts say the company is also trying to prevent further price drops. 
 Pfizer posted its largest gains in healthcare sales, up 3%, and consumer products, up 23%. 
@@ -1271,7 +1271,7 @@ Serial bonds, which all carry 7% coupons, are priced to yield from 6.30% in 1992
 Mr. Kageyama suggests that Kotobuki Electronics Industries workers were having difficulty understanding their foreign bosses' perspective. 
 At least once an episode we see protestors marching around screaming slogans. 
 Still, Sen. Bob PackwoodR., Ore. -RRB-, the lead sponsor of the Republican capital-gains amendment, predicted that the tax cut would be enacted this year. 
-If directors or producers phone me and say they know ` Liz,' I know they've never met her. 
+[If]R [directors or producers phone me and say they know ` Liz,']C [I know they've never met her.]E 
 Some may have forgottenand some younger ones may never have experiencedwhat it's like to invest during a recession. 
 But the board said it wasn't interested for now. 
 Industry analysts predict that by 1995, South Korea will be building three million cars a yearabout half of that for export. 
@@ -1314,7 +1314,7 @@ There is nothing wrong with the market that can't be cured by a little coherence
 Jaguar seems to be losing interest in giving GM a minority stake, said one individual close to the talks, adding, ``It wouldn't surprise me ifJaguar executiveswant to wait and see what the color of thatFord bidis'' first. 
 Japanese air-conditioner maker Daikin Industries Ltd. was fined two million yen$14,000 for exporting to the Soviet Union a chemical solution that could be used in missile-guidance systems. 
 Although Mr. Krenz is dedicated to East Germany's conservative vein of communism, there is much about his style that sets him apart from his party comrades. 
-If that option is favored by gas buyers and regulators, Foothills said it would build another smaller pipeline connecting Mackenzie Delta reserves to the Alaska mainline. 
+[If]R [that option is favored by gas buyers and regulators,]C [Foothills said it would build another smaller pipeline connecting Mackenzie Delta reserves to the Alaska mainline.]E 
 U.S. Memories is seeking major investors to back its attempt to crack the $10 billion for dynamic random access memory chips, a market dominated by the Japanese. 
 ``I don't know of any living ballplayer that's ever done it,'' says Jack Smalling, a dealer in Ames, Iowa, and a recognized expert in the field of baseball autographs. 
 No one in his right mind actually believes that we all have an equal academic potential. 
@@ -1389,7 +1389,7 @@ The Rockford, Ill., maker of fasteners also said it expects to post sales in the
 Mr. Breeden also is trying to use a far more catastrophic eventthe California earthquaketo move another rule change past Congress. 
 A crowd estimated at 100,000 held a torch-lit march through Budapest as Acting President Szuros delivered a nationally televised address rejecting communist dominance. 
 Shoney's said the latest restructuring affected bank indebtedness that was incurred to finance $585 million the company's $728 million that took place in 
-The old saying advises: ``If it ain't broke, don't fix it.'' 
+The old saying advises: [``If]R [it ain't broke,]C [don't fix it.'']E 
 Mr. Whitford drew on voluminous news media coverage of the SMU scandal, and on a university internal investigation. 
 It marked the first time a U.S. official was impeached on charges of which a jury had acquitted him. 
 Little money has been returned to upgrade Pemex's aging facilities. 
@@ -1614,7 +1614,7 @@ Neither Equus nor Tony Lama gave a reason for the changed offer and Tony Lama co
 ``M&A is getting all the headlines right now, but these other things have been building up more gradually,'' she says. 
 ``I guess I thought, ` This is the World Series and I'm not gon na wimp out!''' 
 ``Whatever you tried to change, whether it was cutting costs or attracting new partners, the big obstacle was the old union leadership,'' says oil consultant George Baker. 
-Mr. Baker's assistant for inter-American affairs, Bernard Aronson, while maintaining that the Sandinistas had also broken the cease-fire, acknowledged: ``It's never very clear who starts what.'' 
+Mr. Baker's assistant for inter-American affairs, Bernard Aronson, while maintaining that [the Sandinistas]C had also [[broken]R the cease-fire,]E acknowledged: ``It's never very clear who starts what.'' 
 On Wall Street, takeover stock traders bid Nekoosa's stock well above the Georgia-Pacific bid, assuming that Nekoosa's will either be sold to a rival bidder or to Georgia-Pacific at a higher priceas much as $75 share, according to some estimates. 
 Chevron added 1 to 65. 
 Dow Jones shares also fell 50 cents to close at $36.125 Big Board composite trading. 
@@ -1687,8 +1687,8 @@ The jury also convicted them of extortion in obtaining a $20,000 interest-free l
 He says he thinks his company is just a few years from doing that. 
 But Mr. Rose is still looking seriously at the 9000. 
 Armstrong's shares, also listed on the Big Board, closed at $39.125 up 12.5 cents. 
-``If I tookthese preparation bookletsinto my classroom, I'd have a hard time justifying to my students and parents that it wasn't cheating,'' says John Kaminski, a Traverse City, Mich., teacher who has studied test coaching. 
-``If you invested $10,000 the initial public offering in 1962, it would be worth well over $5 million,'' says Fredric E. Russell, a Tulsa, Okla., money manager. 
+[``If]R [I tookthese preparation bookletsinto my classroom,]C [I'd have a hard time justifying to my students and parents that it wasn't cheating,'']E says John Kaminski, a Traverse City, Mich., teacher who has studied test coaching. 
+[``If]R [you invested $10,000 the initial public offering in 1962,]C [it would be worth well over $5 million,'']E says Fredric E. Russell, a Tulsa, Okla., money manager. 
 IBM said the 16 new J and JH models will generally be available immediately, though three won't ship until the third quarter of next year. 
 SOUTH AFRICA FREED the ANC's Sisulu and seven other political prisoners. 
 Fed Chairman Greenspan was surprised by both stories, according to knowledgeable sources, and insisted he hadn't authorized any public comment. 
@@ -1747,7 +1747,7 @@ Promises Feng-hsiung Hsu: ``In three years we'll mount a better challenge.''
 Affiliated Bankshares of Colorado Inc. said it agreed to sell its 10% interest in Rocky Mountain Bankcard Systems for $18.5 million Colorado National Bank of Denver and Central Bank of Denver. 
 Manila is offering several major assets for the first time and is trying to conclude sales already arranged. 
 U.S. Trust, a 136-year-old institution that is one of the earliest high-net worth banks in the U.S., has faced intensifying competition from other firms that have established, and heavily promoted, private-banking businesses of their own. 
-The fact sheet, dated April 1986, says on page three: ``If the price paid for a CD purchased in the secondary market... is higher than the accreted value in the case of zero-coupon CDs, the difference... is not insured.... 
+The fact sheet, dated April 1986, says on page three: [``If]R [the price paid for a CD purchased in the secondary market... is higher than the accreted value in the case of zero-coupon CDs,]C [the difference... is not insured....]E 
 People close to Blue Arrow suggested the write-down would represent a sizable chunk, with executives claiming prior management overstated the extent of Manpower's good will. 
 ``I'm surprised we didn't see more volatility'' in stocks, said Raymond F. DeVoe Jr., market strategist at Legg Mason Wood Walker. 
 IMA Acquisition, an investor group that includes First Boston and the Pritzker family of Chicago, said Chemical Bank had made arrangements for 23 other banks to provide $509 million bank financing for the buy-out offer. 
@@ -1989,7 +1989,7 @@ Mid-sized companies were most affected by talk of layoffs or plant closings.
 Remember that it took Mr. Mengistu many months, in what became known as the ``creeping coup,'' to topple Emperor Haile Selassie in 1974 and 1975. 
 ``I personally don't enjoy seeing players who I remember vividly from their playing days running about and being gallant about their deficiencies,'' says Roger Angell, New Yorker magazine's resident baseball sage. 
 One advantage the buy-out group intends to press with the board is that pilots have agreed to make $200 million annual cost concessions to help finance a bid. 
-If we wish to be serious about American education, we know exactly what to doand, just as important, what not to do. 
+If we wish to be serious about American education, we know exactly what to do and, just as important, what not to do. 
 Such animosity could prove pivotal in the union vote. 
 But Charlie Howley, vice president in charge of OTC trading at SoundView Financial in Stamford, Conn., said the selling was orderly. 
 Valley Federal said Friday that it is considering whether to seek another buyer for the branches or to pursue the transaction with Imperial Corp., which said it is attempting to meet Community Reinvestment Act requirements. 

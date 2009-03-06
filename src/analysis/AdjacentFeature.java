@@ -105,7 +105,7 @@ public class AdjacentFeature {
 		String line;
 		while ((line = reader.getNextLine()) != null) {
 			if (Include.hasSentDelim(line)) {
-				String[] strs = getSmallFeature(feats, 10);
+				String[] strs = getSmallFeature(feats, 4);
 				for (int i = 0; i < strs.length; i++)
 					writer.writeln(feats.get(i) + strs[i] + labels.get(i));
 				writer.writeln(line);
@@ -124,7 +124,8 @@ public class AdjacentFeature {
 	}
 	
 	public static void main (String[] args) {
-		AdjacentFeature.postProcessFile("crf/crf.txt", "crf/crf2.txt");
+		AdjacentFeature.postProcessFile("crf/bogusCRF.txt", "crf/bogusCRF2.txt");
+		//AdjacentFeature.postProcessFile("crf/crf.txt", "crf/crf2.txt");
 		System.exit(1);
 		
 		String[] test = new String[] { "w0 f1","w1 f1","w1 f1","w0 f0","w0 f1" };

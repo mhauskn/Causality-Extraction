@@ -12,8 +12,10 @@ import haus.io.DataWriter;
  *
  */
 public class BogusCRFFileGen {
-	public static final String out_file = "crf/Sparse2bogusCRF.txt";
-	public int numSentences = 100;
+	public static final String out_file = "crf/bogusCRF.txt";
+	public int numSentences = 500;
+	public int wordsPerSent = 20;
+	public int featsPerLine = 5;
 	
 	String[] words;
 	String[] feat0;
@@ -39,21 +41,28 @@ public class BogusCRFFileGen {
 	}
 		
 	public void genfile () {
+		int pos = 0; int neg = 0;
 		DataWriter writer = new DataWriter(out_file);
-		genWords(2);
-		String prevWord = "";
+		genWords(20);
+		genFeats(10);
 		for (int i = 0; i < numSentences; i++) {
-			for (int j = 0; j < ((int)(Math.random() * 20)) + 1; j++) {
+			for (int j = 0; j < ((int)(Math.random() * wordsPerSent)) + 1; j++) {
 				String word = words[((int) (Math.random() * words.length))];
-				String label = labels[(((int) (Math.random() * 100)) < 98 ? 0:1)];
-				//String label = labels[((int) (Math.random() * labels.length))];
+				//String label = labels[(((int) (Math.random() * 100)) < 98 ? 0:1)];
+				String label = "N";
+				if (word.equals("word0")) {
+					if (((int)(Math.random() * 4)) >= 1) {
+						label = "R";
+						pos++;
+					} else 
+						neg++;
+				}
 				writer.writeln(word + " " + label);
-				prevWord = word;
 			}
 			writer.writeln(Include.SENT_DELIM);
-			prevWord = "";
 		}
 		writer.close();
+		System.out.println("pos " + pos + " neg " + neg + " totl " + (neg + pos));
 	}
 	
 	public void genfile2 () {

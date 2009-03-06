@@ -20,7 +20,7 @@ import evaluation.EvaluationAgent;
 public class CRFRunner extends CrossEvaluable<String> {
 	public static final int NUM_VALIDATIONS = 10;
 	
-	String data_file = "crf/bogusCRF.txt";
+	String data_file = "crf/bogusCRF2.txt";
 	String out_file = "mallet_out/";
 	
 	ArrayList<String> data = null;
