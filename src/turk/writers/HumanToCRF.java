@@ -226,7 +226,7 @@ public class HumanToCRF extends IO<String,String> implements Map<String> {
 		translator.setInput(new FileReader(in_file));
 		translator.setOutput(writer);
 		
-		translator.mapInput(translator);
+		translator.mapInput();
 		writer.close();
 	}
 }

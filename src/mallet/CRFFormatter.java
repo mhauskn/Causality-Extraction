@@ -7,7 +7,6 @@ import haus.io.FileReader;
 import parser.StanfordParser;
 import pos.PosTagger;
 import analysis.AdjacentFeature;
-import analysis.AdjacentWordFeature;
 import analysis.ChunkFeature;
 import analysis.HypernymFeature;
 import analysis.StanfordPhraseFinder;
@@ -65,9 +64,7 @@ public class CRFFormatter {
 			if (features[i] == null)
 				features[i] = "";
 			writer.write(tokens[i] + " " + features[i] + labels[i] + "\n");
-			//System.out.println(tokens[i] + " " + features[i] + " " + labels[i]);
 		}
-		writer.write(mallet.Include.SENT_DELIM + "\n");
 	}
 	
 	/**
@@ -166,15 +163,14 @@ public class CRFFormatter {
 		ArrayList<String> labels = new ArrayList<String>();
 		String line;
 		while ((line = reader.getNextLine()) != null) {
+			String[] segs = line.split(" ");
+			words.add(segs[0]);
+			labels.add(segs[1]);
 			if (line.equals(Include.SENT_DELIM)) {
 				formatter.writeData(words,labels);
 				words.clear();
 				labels.clear();
-				continue;
 			}
-			String[] segs = line.split(" ");
-			words.add(segs[0]);
-			labels.add(segs[1]);
 		}
 		formatter.close();
 	}

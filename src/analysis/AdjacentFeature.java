@@ -18,7 +18,10 @@ import mallet.Include;
  * We shall call them residual features.
  */
 public class AdjacentFeature {
+	static int numAdjacent = 4;
 	public static final String tok_iden = "res(";
+	public static boolean include_adj_feats = true;
+	static int featsPerLine = -1;
 	
 	/**
 	 * Gets additional features from the tokens and features of the 
@@ -37,7 +40,7 @@ public class AdjacentFeature {
 			for (int j = i-num_adj; j <= i+num_adj; j++) {
 				if (i == j) continue;
 				if (j < 0 || j >= out.length)
-					out[i] += genFeature(j-i,"Null");
+					out[i] += genNullFeatures(j-i, featsPerLine);
 				else
 					out[i] += genFeatures(j-i,sent[j].split(" "));
 			}
@@ -81,9 +84,22 @@ public class AdjacentFeature {
 	// Helper functions
 	static String genFeatures (int major, String[] segs) {
 		String out = "";
-		for (String s : segs)
-			out += genFeature(major, s);
+		if (include_adj_feats)
+			for (String s : segs)
+				out += genFeature(major, s);
+		else
+			out += genFeature(major, segs[0]);
 		return out;
+	}
+	
+	/**
+	 * Generates a number of null features.
+	 */
+	static String genNullFeatures (int major, int numFeats) {
+		String[] feats = new String[numFeats];
+		for (int i = 0; i < feats.length; i++)
+			feats[i] = "Null";
+		return genFeatures(major,feats);
 	}
 	
 	/**
@@ -96,6 +112,9 @@ public class AdjacentFeature {
 		return tok_iden + major + "):" + token + " ";
 	}
 	
+	/**
+	 * Post Processes a file already containing features.
+	 */
 	public static void postProcessFile (String in_file, String out_file) {
 		ArrayList<String> feats = new ArrayList<String>();
 		ArrayList<String> labels = new ArrayList<String>();
@@ -104,14 +123,21 @@ public class AdjacentFeature {
 
 		String line;
 		while ((line = reader.getNextLine()) != null) {
+			if (featsPerLine == -1)
+				featsPerLine = line.split(" ").length-1;
 			if (Include.hasSentDelim(line)) {
 				String[] strs = getSmallFeature(feats, 4);
 				for (int i = 0; i < strs.length; i++)
 					writer.writeln(feats.get(i) + strs[i] + labels.get(i));
-				writer.writeln(line);
+				String toWrite = line.substring(0, line.lastIndexOf(' ')) + " ";
+				for (int i = -numAdjacent; i <= numAdjacent; i++) {
+					if (i == 0) continue;
+					toWrite += genNullFeatures(i,featsPerLine);
+				}
+				writer.writeln(toWrite + Include.NEITHER_TAG);
 				feats.clear();
 				labels.clear();
-			} else {	
+			} else {
 				String[] segs = line.split(" ");
 				String tuple = "";
 				for (int i = 0; i < segs.length-1; i++)
@@ -124,8 +150,8 @@ public class AdjacentFeature {
 	}
 	
 	public static void main (String[] args) {
-		AdjacentFeature.postProcessFile("crf/bogusCRF.txt", "crf/bogusCRF2.txt");
-		//AdjacentFeature.postProcessFile("crf/crf.txt", "crf/crf2.txt");
+		//AdjacentFeature.postProcessFile("crf/bogusCRF.txt", "crf/bogusCRF2.txt");
+		AdjacentFeature.postProcessFile("crf/crf.txt", "crf/crf_final.txt");
 		System.exit(1);
 		
 		String[] test = new String[] { "w0 f1","w1 f1","w1 f1","w0 f0","w0 f1" };
