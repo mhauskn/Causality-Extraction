@@ -31,57 +31,25 @@ public class AdjacentFeature {
 	 * 
 	 * Do not include class label!
 	 */
-	static String[] getSmallFeature (String[] sent, int num_adj) {
-		int len = sent.length -1;
-		String[] out = new String[sent.length];
+	public String[] getFeature (String[] tokens) {
+		int len = tokens.length -1;
+		String[] out = new String[tokens.length];
 		for (int i = 0; i < out.length; i++)
 			out[i] = "";
 		for (int i = 0; i <= len; i++) {
-			for (int j = i-num_adj; j <= i+num_adj; j++) {
+			for (int j = i-numAdjacent; j <= i+numAdjacent; j++) {
 				if (i == j) continue;
 				if (j < 0 || j >= out.length)
 					out[i] += genNullFeatures(j-i, featsPerLine);
 				else
-					out[i] += genFeatures(j-i,sent[j].split(" "));
+					out[i] += genFeatures(j-i,tokens[j].split(" "));
 			}
 		}
 		return out;
 	}
 	
-	static String[] getSmallFeature (ArrayList<String> sent, int num_adj) {
-		return getSmallFeature(toStrArray(sent), num_adj);
-	}
+	//------------------------Helper functions-----------------------
 	
-	/**
-	 * Wrapper function which takes a string array with our 
-	 * sent delim tokens included.
-	 */
-	public static String[] getFeature (String[] sent, int num_adj) {
-		ArrayList<String> features = new ArrayList<String>();
-		ArrayList<String> tmp = new ArrayList<String>();
-		for (int i = 0; i < sent.length; i++) {
-			if (Include.hasSentDelim(sent[i])) {
-				for (String res : getSmallFeature(toStrArray(tmp), num_adj))
-					features.add(res);
-				tmp.clear();
-				features.add(sent[i]);
-			} else 
-				tmp.add(sent[i]);
-		}
-		return toStrArray(features);
-	}
-	
-	public static String[] getFeature (ArrayList<String> sent, int num_adj) {
-		return getFeature(toStrArray(sent), num_adj);
-	}
-	
-	public static String[] toStrArray (ArrayList<String> ar) {
-		String[] out = new String[ar.size()];
-		out = ar.toArray(out);
-		return out;
-	}
-	
-	// Helper functions
 	static String genFeatures (int major, String[] segs) {
 		String out = "";
 		if (include_adj_feats)
@@ -112,10 +80,14 @@ public class AdjacentFeature {
 		return tok_iden + major + "):" + token + " ";
 	}
 	
+	//------------------------End Help Functions--------------------
+	
 	/**
-	 * Post Processes a file already containing features.
+	 * Post Processes a file already containing features. This is probably the 
+	 * safest and easiest way to gain access to this feature.
 	 */
 	public static void postProcessFile (String in_file, String out_file) {
+		AdjacentFeature adj = new AdjacentFeature();
 		ArrayList<String> feats = new ArrayList<String>();
 		ArrayList<String> labels = new ArrayList<String>();
 		FileReader reader = new FileReader(in_file);
@@ -126,7 +98,7 @@ public class AdjacentFeature {
 			if (featsPerLine == -1)
 				featsPerLine = line.split(" ").length-1;
 			if (Include.hasSentDelim(line)) {
-				String[] strs = getSmallFeature(feats, 4);
+				String[] strs = adj.getFeature(haus.misc.Conversions.toStrArray(feats));
 				for (int i = 0; i < strs.length; i++)
 					writer.writeln(feats.get(i) + strs[i] + labels.get(i));
 				String toWrite = line.substring(0, line.lastIndexOf(' ')) + " ";
@@ -152,10 +124,5 @@ public class AdjacentFeature {
 	public static void main (String[] args) {
 		//AdjacentFeature.postProcessFile("crf/bogusCRF.txt", "crf/bogusCRF2.txt");
 		AdjacentFeature.postProcessFile("crf/crf.txt", "crf/crf_final.txt");
-		System.exit(1);
-		
-		String[] test = new String[] { "w0 f1","w1 f1","w1 f1","w0 f0","w0 f1" };
-		for (String s : AdjacentFeature.getFeature(test,1))
-			System.out.println(s);
 	}
 }

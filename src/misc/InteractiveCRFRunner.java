@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import stemmer.BasicStemmer;
 import turk.turkCrfToHuman;
 
-import analysis.NpVpAggregator;
-import analysis.StemFeature;
+import analysis.features.NpVpAggFeature;
+import analysis.features.StemFeature;
 
 import haus.io.DataWriter;
 import haus.io.FileReader;
@@ -34,7 +34,7 @@ public class InteractiveCRFRunner {
 	
 	InteractiveReader iReader = new InteractiveReader();
 	deAnnotator deann = new deAnnotator();
-	NpVpAggregator agg = new NpVpAggregator();
+	NpVpAggFeature agg = new NpVpAggFeature();
 	BasicStemmer stem = new BasicStemmer();
 	StemFeature stemFeat = new StemFeature();
 	

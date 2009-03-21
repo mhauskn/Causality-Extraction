@@ -116,7 +116,7 @@ Esselte AB of Sweden offered $43.50 share for the 22% of the company it doesn't 
 But [seesaw gyrations in the Dow Jones Industrial Average yesterday]C [[put]R Wall Street back in the spotlight]E and [[inspired]R market participants to bid the U.S. unit lower.]E 
 [Slowing sales of its profitable Jeep Cherokee and Wagoneer sport utility vehicles]C are [forcing]R [Chrysler Corp. to temporarily idle its Toledo, Ohio, assembly plant]E for the first time since April 1986. 
 Digital, based in Maynard, Mass., hopes to stage a repeat performance in mainframes, and it has spent almost $1 billion developing the new technology. 
-True, [Ford was declared the winner Sunday,]E but only [after]R [the Honda driver who crossed the finish line first was disqualified]CE [because]R [it hit another car and skid momentarily out of bounds.]C 
+True, [Ford was declared the winner Sunday,]E but only [after]R ([the Honda driver who crossed the finish line first was disqualified]C)E (because)R (it hit another car and skid momentarily out of bounds.)C 
 Harken, which owns about 800 retail gas stations, has said [it is particularly interested in Tesoro's refinery]E [because]R [it would fill a gap in its business.]C 
 [The industry had shown signs of recovery this summer,]E [after]R [the central bank began to relax its clamp on credit, allowing interest rates to drop a bit]C after pushing them up for a year. 
 [``It]C just [[makes]R healthy businesses subsidize unhealthy ones]E and [[gives]R each employer less incentive to keep his workers healthy.'']E 
@@ -243,7 +243,7 @@ Mr. Lodge, 48 years old, a former finance executive at Singer Sewing Machine Co.
 [Demand for the new version]C was [enabling]R [Lotus to raise prices with distributors]E and [to hold market share against Microsoft and other competitors that tried to exploit the earlier delays in Release 3's launch,]E Mr. Sherlund added. 
 The $35.7 million loss equals 86 cents a share. 
 [A series of recent acquisitions]C [[made]R it the dominant magazine publisher in Quebec.]E 
-[It]C also could [[put]R the government into the RU-486 business,]EC which would [[please]R feminists dismayed at what they view as pusillanimity in the private-sector drug industry.]E 
+[It]C also could ([[put]R the government into the RU-486 business,]E)C which would ((please)R feminists dismayed at what they view as pusillanimity in the private-sector drug industry.)E 
 It requires financial planners to register with states, pass competency tests and reveal to customers any conflicts of interest. 
 The Federal Trade Commission ruled that five major title-insurance companies illegally fixed prices for title search-and-examination services by participating in joint ``rating bureaus'' in six states. 
 Traders said [municipals were [[underpinned]E by]R [influences including the climb in Treasury issue prices.]C 
@@ -264,7 +264,7 @@ After gaining strength during a brief run-up when trading began, the Nasdaq Comp
 [Another reason for]R [the weakness,]E he said, may be that [mortgage rates have hit a plateau]C since they began edging down after a peak in March. 
 Japan-U.S. trade relations are bumpy these days, and [some Japanese favor decreasing their reliance on U.S. technology]E [in light of]R [the FSX fighter-plane flap,]C when U.S. officials reversed an earlier decision and refused to share certain crucial fighter-plane technology. 
 [Since]R [the troop withdrawal,]C [Moscow has poured in an additional $200 to $300 million per month]E nearly $2 billion February, equivalent to the total U.S. aid to the resistance in nine years. 
-[The ad]C [prompted]R [Mr. Coleman, the former Virginia attorney general, to launch a series of advertisements]EC created by Bob Goodman and designed to [[shake]R Mr. Wilder's support among the very women who were attracted by the abortion ad.]E 
+[The ad]C [prompted]R [Mr. Coleman, the former Virginia attorney general, to launch a series of advertisements]E created by Bob Goodman and designed to shake Mr. Wilder's support among the very women who were attracted by the abortion ad. 
 Emerson Electric Co. and Robert Bosch G.m.b.H. said [the Federal Trade Commission has requested additional information from the two companies]E [about]R [their announced intention to acquire Vermont American Corp. for $40 share,]C or about $440 million. 
 Gunmen in Lebanon assassinated a Saudi Arabian Embassy employee, and [the pro-Iranian Islamic Jihad took responsibility for the slaying]E [to avenge]R [the beheading of 16 terrorists by Riyadh's government in September.]C 
 [A state judge postponed a decision on a move by holders of Telerate Inc.]C {to [block}R the tender offer of Dow Jones & Co. for the 33% of Telerate it doesn't already own.]E 
@@ -314,7 +314,7 @@ Dealers said [the market gained some late steam]E [on]R [a flurry of buying by m
 American Home Products said [net income {benefited]E from}R [a ``lower effective tax rate,'']C [reflecting]R [a reduction of foreign tax rates, and additional operations in Puerto Rico.]C 
 The humanitarian assistance, which pays for supplies such as food and clothing for the rebels amassed along the Nicaraguan border with Honduras, replaced the military aid cut off by Congress in February 1988. 
 Mr. Barnicle reminded readers that he still hasn't forgiven Globe management for questioning a [$20 chit he submitted]E [for]R [parking his car while chasing a story.]C 
-However, the company's petroleum services segment, while profitable, [was hurt]E [by]R [high financing costs]CE [associated with]R [the company's buy-out of a 50% stake in Eastman Christensen Co. from Texas Eastern Corp. last June.]C 
+However, the company's petroleum services segment, while profitable, ([was hurt]E [by]R [high financing costs]C)E (associated with)R (the company's buy-out of a 50% stake in Eastman Christensen Co. from Texas Eastern Corp. last June.)C 
 It also estimated that [losses]E [from]R [the Oct. 17 earthquake in California]C would be no more than $6 million and would be included in fourth-quarter results. 
 Mario Mandina, president of Kansas City Lawyers for Life, says that [if]R [abortion foes succeed in using the preamble to escape prosecution for trespass,]C [``This will shut down abortion in Missouri.]E 
 Mr. Peters, a LaSalle Street legend among the post-World War II generation of commodity traders, was rumored to have amassed a [multimillion-dollar fortune]E [from]R [commodity trading and other activities]C by the time he died in May. 
@@ -326,12 +326,12 @@ The discovery of the ozone ``hole'' over Antarctica and the results of ground-ba
 [Payment by Allianz for the insurance interests it has just bought]C will help [[swell]R the French concern's treasury to an estimated 11 billion francs.]E 
 [This confusion]C effectively [[halted]C one form of program trading,]E stock index arbitrage, that closely links the futures and stock markets, and has been blamed by some for [the market's big swings.]E 
 [The bank was [hamstrung]ER in its efforts to face the challenges of a changing market by [its links to the government,]C analysts say. 
-Quotron Systems Inc., a Citicorp unit, blamed [the 30-minute foul-up]E [on]R [``a timing problem in our software'']CE [caused by]R [the enormous early volume about 145 million shares in the first hour of New York Stock Exchange trading.]C 
+Quotron Systems Inc., a Citicorp unit, [blamed]R [the 30-minute foul-up]E [on]R ([``a timing problem in our software'']C)E (caused by)R (the enormous early volume about 145 million shares in the first hour of New York Stock Exchange trading.)C 
 But it all evens out, It's so easy to see: Not till the last moment Am I paid what's due me. 
-[Spurred by waves of large-scale buying in blue-chip stocks,]C [the Dow Jones Industrial Average rallied yesterday]CE [and]R [erased about a half of Friday's 190.58-point plunge, gaining 88.12 to 2657.38.]E 
+[Spurred by waves of large-scale buying in blue-chip stocks,]C ([the Dow Jones Industrial Average rallied yesterday]E)C and ((erased)R about a half of Friday's 190.58-point plunge, gaining 88.12 to 2657.38.)E 
 Despite the modest gains, traders said the market remains dull, with investors remaining cautiously on the sidelines. 
 [The prime minister's insistence on keeping a private coterie of advisers including an economic guru who openly criticized former Chancellor of the Exchequer Nigel Lawson]C [[confused]R the financial community.]E 
-But [anti-abortionists oppose such research]E [because]R [they worry that [the development of therapies using fetal-tissue transplants]C could [lead to]R [an increase in abortions.]]CE 
+But [anti-abortionists oppose such research]E [because]R [they worry that (the development of therapies using fetal-tissue transplants)C could (lead to)R (an increase in abortions.)E]C 
 The ministers, concluding a two-day meeting in southern Portugal, welcomed Moscow's pledges to cut its military forces, but urged the Soviets to do more to slash short-range nuclear weapons. 
 The cancellation bodes poorly for a company already beset with an [identity crisis [exacerbated by]]ER [the retirement of general director Beverly Sills]C and [the amazing appointment of Christopher Keene as her successor after his years of feckless toiling in the pit.]C 
 [Japan, the world's third-largest liquor market after the U.S. and Britain, helped American companies in April]E [when]R [it lowered its tax on imported spirits and levied a tax on many domestic products.]C 
@@ -451,7 +451,7 @@ Even before the full extent of the devastation was known, Defense Secretary Dick
 While advertisers have long appealed to Texans' state pride and prejudices, [the latest trend has been [sparked,]ER in part, [by]R [the state's recent hard economic times.]C 
 ``We're coming closer to achieving the stated objective of [slowing the economy]C to a point where hopefully [some downward trend in prices will [occur,'']]RE said Mr. Guffey. 
 In the the latest quarter, [thanks in part to]R [``Batman,'']C [Guber Peters earned $5.8 million or 50 cents a share,]E compared to a loss of $6.8 million or 62 cents a share, in last year's quarter. 
-[Two ironies]C [intrude.]RE 
+[Two ironies]C [[intrude.]]RE 
 Mr. Guber and Mr. Peters maintain that executives at Warner have always known of their ambitions to run a major entertainment powerhouse, but that [Warner never felt threatened]E [until]R [they linked up with Sony.]C 
 As a result, financial advisers say they take several steps when evaluating the riskiness of clients' portfolios. 
 Paul Fireman, Reebok chairman and chief executive officer, said, (``Our gains in earnings)C ((provide)R further evidence that the [controls we have put in place and our sales mix]C are continuing to [[improve]R the company's overall profit performance.'']E)E 
@@ -1206,7 +1206,7 @@ However, in interviews later, both ministers stressed that they expect future OP
 Rally's, a fast-food chain based in Louisville, Ky., is contending that Mr. Sugarman and two other company directors failed to disclose to the Securities and Exchange Commission that they intended to acquire a big Rally stake. 
 Under terms of the stock, the Yukon ESOP can demand that the stock be redeemed for $4,090,000 Nov. 30, but NBI said it is legally prohibited from making the redemption. 
 When she met the local press for the first time on Friday, Mrs. Hills firmly reiterated the need for progress in removing barriers to trade in forest products, satellites and supercomputers, three areas targeted under the Super 301 provision of the 1988 trade bill. 
-``The impression I've got is they'd love to do away with itprogram trading -RCB-, but theythe exchangecan't do it,'' he said. 
+``The impression I've got is they'd love to do away with itprogram trading, but theythe exchangecan't do it,'' he said. 
 But Home Depot Inc., an Atlanta-based home center chain, objected when Mr. Vila started doing commercial endorsements for Rickel Home Centers, a New Jersey building supply company that competes with Home Depot in some markets. 
 The company also adopted an anti-takeover plan. 
 Speculation had it that the company was asking $100 million an operation said to be losing about $20 million year, but others said Hearst might have virtually given the paper away. 

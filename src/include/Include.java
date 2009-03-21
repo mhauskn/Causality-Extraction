@@ -8,11 +8,7 @@ public class Include
 	public static final String CAUSE_PHRASE = "CP";
 	
 	public static final String EFFECT_PHRASE = "EP";
-	
-	public static final String[] CAUSE_WORDS = {"cause","causes","caused"};
-	
-	public static final String STANFORD_GRAM_CAUSE_REGEXP = "(cause|causes|caused)-.*";
-	
+			
 	public static final String END_SENT_PUNC = ".!?;";
 	
 	public static final String MISC_PUNC = ".?!:;-()[]'\"/,";
@@ -32,6 +28,8 @@ public class Include
 	public static final String hmmFile = "Hmm/pos-en-general-brown.HiddenMarkovModel";
 	
 	public static final String pcfgPath = "stanford/englishPCFG.ser.gz";
+	
+	public static final String lookupPath = "stanford/sentence_lookup";
 	
 	//---------------Methods-------------------//
 	

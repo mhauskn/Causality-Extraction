@@ -1,11 +1,16 @@
-package analysis;
+package analysis.features;
 
 import java.util.ArrayList;
+
+import analysis.Feature;
 
 import stemmer.BasicStemmer;
 import wordnet.JWI;
 
-public class HypernymFeature {
+/**
+ * Looks up the hypernyms of a given word via wordnet.
+ */
+public class HypernymFeature implements Feature {
 	BasicStemmer stemmer = null;
 	JWI jwi	= null;
 	
@@ -34,5 +39,11 @@ public class HypernymFeature {
 						features[i] += " " + s;
 			}
 		}
+	}
+
+	@Override
+	public String[] getFeature(String[] tokens) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

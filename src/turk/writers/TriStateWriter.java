@@ -10,21 +10,34 @@ import java.util.ArrayList;
  */
 public class TriStateWriter {
 	String non = "";
+	String toMatch;
 	String standalone;
 	String start;
 	String mid;
 	String end;
 	ArrayList<String> labels;
+	boolean asFeature = false;
 	boolean active = false;
 	boolean gotStart = false;
 	boolean gotEnd = false;
 	
-	public TriStateWriter (String _standalone, String _start, String _mid, String _end) {
+	public TriStateWriter (String key, String _standalone, String _start, String _mid, String _end) {
+		toMatch = key;
 		standalone = _standalone;
 		start = _start;
 		mid = _mid;
 		end = _end;
 		labels = new ArrayList<String>();
+	}
+	
+	/**
+	 * Changes this Writer's output to look like a feature rather
+	 * than a label. Specifically we will add in a negative case
+	 * to act fill in the places where our feature is inactive.
+	 */
+	public void outputAsFeature (String neg_case) {
+		non = neg_case;
+		asFeature = true;
 	}
 	
 	/**
@@ -71,9 +84,10 @@ public class TriStateWriter {
 	}
 	
 	/**
-	 * Signifies the end of a given sentence.
+	 * Signifies the end of a given sentence. Returns our array of 
+	 * valid labels.
 	 */
-	public String[] addSentEnd () {
+	public String[] getResult () {
 		String[] out = new String[labels.size()];
 		out = labels.toArray(out);
 		labels.clear();
@@ -85,6 +99,6 @@ public class TriStateWriter {
 	 * the wild.
 	 */
 	public boolean matchesTag (String tag) {
-		return standalone.equals(tag);
+		return toMatch.equals(tag);
 	}
 }

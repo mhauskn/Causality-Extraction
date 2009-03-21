@@ -1,13 +1,14 @@
-package analysis;
+package analysis.features;
 
 import include.Include;
+import analysis.Feature;
 import chunker.AbstractPhraseChunker;
 
 import com.aliasi.chunk.Chunk;
 import com.aliasi.chunk.Chunking;
 import com.aliasi.tokenizer.Tokenizer;
 
-public class ChunkFeature {
+public class ChunkFeature implements Feature {
 	AbstractPhraseChunker ac = null;
 	
 	public ChunkFeature (AbstractPhraseChunker _ac) {

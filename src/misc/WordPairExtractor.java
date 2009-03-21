@@ -115,4 +115,6 @@ public class WordPairExtractor extends IO<String,String> {
 		WordPairExtractor extractor = new WordPairExtractor();
 		extractor.extractWordPairs(pairs);
 	}
+
+	public void map(String e) {}
 }

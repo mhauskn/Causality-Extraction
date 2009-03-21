@@ -6,10 +6,9 @@ import io.InteractiveReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Vector;
 
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
 import edu.stanford.nlp.trees.GrammaticalStructure;
@@ -21,8 +20,11 @@ import edu.stanford.nlp.trees.TreePrint;
 import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.trees.TypedDependency;
 
+/**
+ * The Stanford parser is a wrapper around stanford's great parser. It's useful 
+ * for getting syntatic dependencies, parses and POS.
+ */
 public class StanfordParser {
-	
 	public static final String NP_REGEXP = "(NN|NNS|NP|NNP|NNPS)";
 	public static final String VP_REGEXP = "(VP|VB|VBN|VBG|VBD)";
 	public static final String V_REGEXP = "(VB|VBN|VBG|VBD)";
@@ -30,122 +32,49 @@ public class StanfordParser {
 	
 	public static final String NounPhrase = "NP";
 	public static final String VerbPhrase = "VP";
+		
+	public static final int MAX_SENT_LEN = 80;
 	
-	public static final int MAX_SENT_LEN = 50;
+	Hashtable<String[],Tree> lookup = null;
+	LexicalizedParser lp = null;
 	
-	private String pcfgPath;
-	private LexicalizedParser lp;
-	
-	private String sentence;
-	
-	private Tree parse;
-	
-	private Collection<TypedDependency> tdl;
-	
-	private TypedDependency[] tdArr;
-	
-	private ArrayList<String> causeDeps;
-	private ArrayList<TypedDependency> deps;
-    
-    private boolean acSingle = false; 
-    private boolean acDouble = false; 
-    private boolean passSingle = false;
-    
-    private String[] out = new String[5];
-    
-    private Tree affTree;
-    private Tree effTree;
-    private Tree verbTree;
-    
-    private Tree affPhraseTree;
-    private Tree effPhraseTree;
-    private Tree verbPhraseTree;
-    
-    private boolean foundAffTree = false;
-    private boolean foundEffTree = false;
-    private boolean foundVerbTree = false;
-    
-    
-	/**
-	 * Constructor
-	 * @param _pcfgPath
-	 */
-	public StanfordParser (String _pcfgPath)
-	{
-		pcfgPath = _pcfgPath;
-	    lp = new LexicalizedParser(pcfgPath);
-	    lp.setOptionFlags(new String[]{"-maxLength", "80", "-retainTmpSubcategories"});
-	}
-	
+	@SuppressWarnings("unchecked")
 	public StanfordParser () {
-		pcfgPath = include.Include.pcfgPath;
-	    lp = new LexicalizedParser(pcfgPath);
-	    lp.setOptionFlags(new String[]{"-maxLength", "80", "-retainTmpSubcategories"});
+	    lookup = (Hashtable<String[], Tree>) haus.io.Serializer.deserialize(include.Include.lookupPath);
 	}
 	
 	/**
-	 * Parses the affector cause and effect from a causal sentence.
+	 * Initializes the parser with the PCFG file. We don't want to do this 
+	 * if possible -- best to rely on our previously hashed sentences.
 	 */
-	public String[] parseSentence (String _sentence)
-	{
-		sentence = _sentence;
-		out[0] = out[1] = out[2] = out[3] = out[4] = "";
-		System.out.println(sentence);
-		sentence = removeTrailingPunc();
-		
-		String[] sent = sentence.split(" ");
-		
-		if (sent.length > MAX_SENT_LEN)
-			return null;
-		
-		parse = (Tree) lp.apply(Arrays.asList(sent));
-
-	    TreebankLanguagePack tlp = new PennTreebankLanguagePack();
-	    GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
-	    GrammaticalStructure gs = gsf.newGrammaticalStructure(parse);
-	    tdl = gs.typedDependenciesCollapsed();
-	    
-	    tdArr = new TypedDependency[tdl.size()];
-	    
-	    if (!findCauseDeps())
-	    	return out;
-	    
-	    if(!findSentType())
-	    	return out;
-	    
-	    //System.out.println(out[0] + " ---> " + out[1] + " ---> " + out[2]);
-	    
-	    findKeywords();
-	    
-	    findPhrases();
-	    
-	    if (affPhraseTree != null) 
-	    	out[3] = affPhraseTree.toString();
-	    else
-	    	out[3] = "";
-	    if (effPhraseTree != null)
-	    	out[4] = effPhraseTree.toString();
-	    else
-	    	out[4] = "";
-	    
-	    //System.out.println(affPhraseTree.toString());
-	    //System.out.println(effPhraseTree.toString());
-	    
-	    System.out.println(out[0] + "\t" + out[3] + "\t" + out[1] + "\t" + out[4] + "\t" + out[2]);
-		
-		return out;
+	void initLexParser () {
+		lp = new LexicalizedParser(include.Include.pcfgPath);
+	    lp.setOptionFlags(new String[]{"-maxLength", Integer.toString(MAX_SENT_LEN), "-retainTmpSubcategories"});
 	}
 	
-	public Tree getParseTree (String[] words) {
-		Tree parse = (Tree) lp.apply(Arrays.asList(words));
-		return parse;
+	/**
+	 * Returns a parse Tree for the given sentence. Ideally we want to
+	 * do quick lookup in our HT, but if not possible then we will 
+	 * actually do the parse.
+	 */
+	public Tree getParseTree (String[] tokens) {
+		if (lookup.containsKey(tokens))
+			return lookup.get(tokens);
+		else {
+			if (lp == null)
+				initLexParser();
+			return (Tree) lp.apply(Arrays.asList(tokens));
+		}
 	}
 	
-	public void parseSentenceTest (String sentence)
-	{
+	/**
+	 * Gives an informative parse of a sentence displaying the 
+	 * different types of available information.
+	 */
+	public void parseSentenceTest (String sentence) {
 		System.out.println("Original Sentence: " + sentence);
 		String[] sent = sentence.split(" ");
-		Tree parse = (Tree) lp.apply(Arrays.asList(sent));
+		Tree parse = getParseTree(sent);
 		
 		System.out.println("---------PENN PRINT-----------");
 	    parse.pennPrint();
@@ -166,18 +95,26 @@ public class StanfordParser {
 	    TreePrint tp = new TreePrint("penn,typedDependenciesCollapsed");
 	    tp.printTree(parse);
 	    System.out.println("---------END TREE PRINT-----------");
-		
-		//System.out.println(tdl.toString());
+	}
+	
+	//------------------- Tree Operations -----------------------
+	
+	/**
+	 * Returns a list of POS tags corresponding to the words of the sentence
+	 */
+	public String[] getPOSTags (Tree t) {
+		ArrayList<String> tags = new ArrayList<String>();
+		for (Tree leaf : t.getLeaves()) {
+			Tree parent = leaf.parent(t);
+			String pos  = parent.label().toString();
+			tags.add(pos);
+		}
+		return haus.misc.Conversions.toStrArray(tags);
 	}
 	
 	/**
-	 * Returns the dependencies between the words. Very Useful! -- Includes word numbers
+	 * Returns a collection of dependencies between words of the sentence
 	 */
-	public Collection<TypedDependency> getDependencies (String[] tokens) {
-		Tree parse = getParseTree(tokens);
-		return getDependencies(parse);
-	}
-	
 	public Collection<TypedDependency> getDependencies (Tree parse) {
 		TreebankLanguagePack tlp = new PennTreebankLanguagePack();
 		GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
@@ -185,43 +122,7 @@ public class StanfordParser {
 	    return gs.typedDependenciesCollapsed();
 	}
 	
-	public String[] getTokenTags (String[] tokens) {
-		Tree parse = getParseTree(tokens);
-		return getTokenTags(parse);
-	}
-	
-	/**
-	 * Traverses the tree getting the tokens for each of the labels.
-	 * @param parse
-	 * @return
-	 */
-	public String[] getTokenTags (Tree parse) {
-		ArrayList<String> tags = new ArrayList<String>();
-		LinkedList<Tree> queue = new LinkedList<Tree>();
-		queue.add(parse);
-		
-		while (!queue.isEmpty()) {
-			Tree t = queue.removeLast();
-			if (t.isLeaf())
-				tags.add(t.parent(parse).label().toString());
-			for (Tree child : t.children())
-				queue.addFirst(child);
-		}
-		String[] out = new String[tags.size()];
-		out = tags.toArray(out);
-		return out;
-	}
-	
-	/**
-	 * Returns an array of trees. Each array element is the tree
-	 * for the word located at that index in the sentence.
-	 */
-	public Tree[] getWordIndexedTree (Tree root) {
-		List<Tree> trees = root.getLeaves();
-		Tree[] out = new Tree[trees.size()];
-		out = trees.toArray(out);
-		return out;
-	}
+	//------------------- End Tree Operations ------------------
 	
 	public String getFeatures (String sentence)
 	{
@@ -367,313 +268,9 @@ public class StanfordParser {
 		return out;
 	}
 	
-	/**
-	 * Finds All Dependencies containing the word Cause
-	 */
-	private boolean findCauseDeps ()
-	{
-		int i = 0;
-		causeDeps = new ArrayList<String>();
-		deps = new ArrayList<TypedDependency>();
-	    // Find all TDs containing cause words
-	    for (Iterator<TypedDependency> it = tdl.iterator(); it.hasNext();)	
-	    {
-	    	TypedDependency td = it.next();
-	    	String gov = td.gov().toString();
-	    	if (gov.matches(Include.STANFORD_GRAM_CAUSE_REGEXP))
-	    	{
-	    		causeDeps.add(td.reln().toString());
-	    		deps.add(td);
-	    	}
-	    	tdArr[i++] = td;
-	    }
-	    System.out.println("Cause Dependencies:" + causeDeps.toString());
-	    return true;
-	}
-	
-	
-	/**
-	 * Guesses if we have an active or passive sentence based on deps
-	 */
-	private boolean findSentType ()
-	{
-		acSingle = false;
-		acDouble = false;
-		passSingle = false;
-		
-		if (causeDeps.contains("nsubj"))
-	    {
-	    	if (causeDeps.contains("dobj")) // Active 1-Clause
-	    	{
-	    		System.out.println("Active 1-Clause");
-	    		acSingle = true;
-	    	}
-	    	
-	    	if (causeDeps.contains("xcomp")) // Active 2-Clause
-	    	{
-	    		System.out.println("Active 2-Clause");
-	    		acDouble = true;
-	    	}
-	    }
-	    
-	    if (causeDeps.contains("agent"))
-	    {
-	    	if (causeDeps.contains("nsubjpass")) // Passive 1-Clause
-	    	{
-	    		System.out.println("Passive 1-Clause");
-	    		passSingle = true;
-	    	}
-	    }
-
-	    if (acSingle && acDouble || acSingle && passSingle || acDouble && passSingle)
-	    {
-	    	System.out.println("Multiple rules satisfied! We have a messed up sentence!");
-	    	return false;
-	    }
-	    
-	    if (!acSingle && !acDouble && !passSingle)
-	    {
-	    	System.out.println("No Rules Satisfied! We have a bad sentence!");
-	    	return false;
-	    }
-	    
-	    if (acSingle)
-	    {
-	    	out = getRelns(deps, out, "nsubj", "dobj");
-	    }
-	    
-	    if (acDouble)
-	    {
-	    	out = getRelns(deps, out, "nsubj", "xcomp");
-	    }
-	    
-	    if (passSingle)
-	    {
-	    	out = getRelns(deps, out, "agent", "nsubjpass");
-	    }
-	    
-	    return true;
-	}
-	
-	/**
-	 * Extracts the relations from the given sentence
-	 */
-	private String[] getRelns (ArrayList<TypedDependency> deps, String[] out, 
-			String id1, String id2)
-	{
-		String affector = "";
-	    String verb = "";
-	    String effect = "";
-	    String verbConf = "";
-	    
-		for (TypedDependency d : deps)
-    	{
-    		if (d.reln().toString().equals(id1))
-    		{
-    			affector = cleanString(d.dep().toString());
-    			verb = cleanString(d.gov().toString());
-    			out[0] = cleanPunc(affector);
-    			out[1] = cleanPunc(verb);
-    		}
-    		
-    		if (d.reln().toString().equals(id2))
-    		{
-    			effect = cleanString(d.dep().toString());
-    			out[2] = cleanPunc(effect);
-    			verbConf = cleanString(d.gov().toString());
-    		}
-    	}
-		
-    	if (!verbConf.equals(verb))
-		{
-			System.out.println("Verbs " + verb + " and " + verbConf + " dont match!!");
-		}
-    	
-    	if (affector.length() == 0 || verb.length() == 0 || effect.length() == 0)
-	    {
-	    	System.out.println("Something went wrong... We have string of zero Length!");
-	    }
-    	
-    	return out;
-	}
-	
-	private static String cleanPunc (String messy)
-	{
-		String clean = messy.toLowerCase().trim();
-		
-		if (clean.indexOf(",") != -1)
-		{
-			clean = clean.replaceAll(",", "");
-		}
-		if (clean.indexOf("\"") != -1)
-		{
-			clean = clean.replaceAll("\"", "");
-		}
-		if (clean.indexOf(";") != -1)
-		{
-			clean = clean.replaceAll(";", "");
-		}
-		if (clean.indexOf(":") != -1)
-		{
-			clean = clean.replaceAll(":", "");
-		}
-		
-		return clean;
-	}
-	
-	private String cleanString (String messy)
-	{
-		int splitIndex = messy.lastIndexOf('-');
-		return messy.substring(0,splitIndex);
-	}
-	
-	private String removeTrailingPunc ()
-	{
-		String out = sentence.trim();
-		
-		while (Include.END_SENT_PUNC.indexOf(out.charAt(out.length()-1)) != -1)
-		{
-			out = out.substring(0, out.length()-1);
-		}
-		
-		return out;
-	}
-	
-	private void findKeywords ()
-	{
-		foundAffTree = foundEffTree = foundVerbTree = false;
-		
-		String affector = out[0];
-		String verb = out[1];
-		String effect = out[2];
-		
-		searchTree(affector, verb, effect, parse);
-		
-		if (!foundAffTree || !foundEffTree || !foundVerbTree)
-		{
-			System.out.println("Problem finding root affector, verb, or effect trees!!");
-			return;
-		}
-	}
-	
-	private void searchTree (String affector, String verb, String effect, Tree t)
-	{
-		if (t.label().toString().equals(affector))
-		{
-			if (foundAffTree)
-				System.out.println("Found two trees for affector " + affector + " This is bad!");
-			affTree = t;
-			foundAffTree = true;
-		}
-		
-		if (t.label().toString().equals(effect))
-		{
-			if (foundEffTree)
-				System.out.println("Found two trees for effect " + effect + " This is bad!");
-			effTree = t;
-			foundEffTree = true;
-		}
-		
-		if (t.label().toString().equals(verb))
-		{
-			if (foundVerbTree)
-				System.out.println("Found two trees for verb " + verb + " This is bad!");
-			verbTree = t;
-			foundVerbTree = true;
-		}
-		
-		if (!foundAffTree || !foundEffTree || !foundVerbTree)
-		{
-			for (Tree t2 : t.children())
-				searchTree(affector, verb, effect, t2);
-		}
-	}
-	
-	private void findPhrases ()
-	{
-		if (affTree != null) 
-			affPhraseTree = getPhrase(affTree, NP_REGEXP);
-		if (effTree != null)
-			effPhraseTree = getPhrase(effTree, NP_REGEXP);
-		
-		
-		if (acDouble)
-		{
-			verbPhraseTree = getPhrase(verbTree, VP_REGEXP);
-			
-			Tree test;
-			if ((test = bfs(verbPhraseTree, "NP")) != null)
-				effPhraseTree = test;
-		}
-	}
-	
-	/**
-	 * Traverses as far up as is allowed by the regExp and returns that tree
-	 */
-	private Tree getPhrase (Tree t, String regExp)
-	{
-		Tree curr = t;
-		Tree parent = t.parent(parse);
-		while (parent != null && parent.label().toString().matches(regExp))
-		{
-			curr = parent;
-			parent = parent.parent(parse);
-		}
-		
-		return curr;
-	}
-	
-	/**
-	 * BreathFirstSearch on tree t for string matching regExp
-	 */
-	private Tree bfs (Tree root, String regExp)
-	{
-		if (root.label().toString().matches(regExp))
-			return root;
-		
-		Vector<Tree> queue = new Vector<Tree>();
-		queue.add(root);
-		
-		while (!queue.isEmpty())
-		{
-			Tree t = queue.remove(0);
-			for (Tree child : t.children())
-			{
-				if (child.label().toString().matches(regExp))
-					return child;
-				queue.add(child);
-			}
-		}
-		
-		return null;
-	}
-	
-	
-	public String testParse (String sentence)
-	{
-		String[] sent = sentence.split(" ");
-		Tree parse = (Tree) lp.apply(Arrays.asList(sent));
-		
-	    //parse.pennPrint();
-	    //System.out.println();
-
-	    TreebankLanguagePack tlp = new PennTreebankLanguagePack();
-	    GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
-	    GrammaticalStructure gs = gsf.newGrammaticalStructure(parse);
-	    Collection<TypedDependency> tdl = gs.typedDependenciesCollapsed(); // This is the good one
-	    
-	    //System.out.println(tdl);
-	    //System.out.println();
-
-	    //TreePrint tp = new TreePrint("penn,typedDependenciesCollapsed");
-	    //tp.printTree(parse);
-		
-		return tdl.toString();
-	}
-	
 	public static void main(String[] args) {
-		StanfordParser sp = new StanfordParser("stanford/englishPCFG.ser.gz");
-		String sent = "The slack absorbs the pulling strain generated by an earthquake.";
+		StanfordParser sp = new StanfordParser();
+		String sent;
 		
 		InteractiveReader iReader = new InteractiveReader();
 		while ((sent = iReader.getInput()) != null) {

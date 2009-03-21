@@ -3,7 +3,6 @@ package mallet;
 import java.util.ArrayList;
 
 import analysis.AdjacentFeature;
-import analysis.AdjacentWordFeature;
 
 import haus.io.DataWriter;
 
@@ -63,26 +62,6 @@ public class BogusCRFFileGen {
 		}
 		writer.close();
 		System.out.println("pos " + pos + " neg " + neg + " totl " + (neg + pos));
-	}
-	
-	public void genfile2 () {
-		DataWriter writer = new DataWriter(out_file);
-		ArrayList<String> words2 = new ArrayList<String>();
-		genWords(2);
-
-		for (int i = 0; i < numSentences; i++) {
-			for (int j = 0; j < ((int)(Math.random() * 20)) + 1; j++) {
-				words2.add(words[((int) (Math.random() * words.length))]);
-			}
-			words2.add(Include.SENT_DELIM_REDUX);
-		}
-		String[] toks = new String[words2.size()];
-		toks = words2.toArray(toks);
-		String[] feats = AdjacentWordFeature.getFeature(toks,2);
-		for (int i = 0; i < toks.length; i++) {
-			writer.writeln(toks[i] + " " + feats[i] + "N");
-		}
-		writer.close();
 	}
 	
 	//feats
@@ -157,7 +136,8 @@ public class BogusCRFFileGen {
 			labels.add("N");
 			lastgood=false;
 		}
-		String[] feats2 = AdjacentFeature.getFeature(AdjacentFeature.toStrArray(feats),2);
+		AdjacentFeature f = new AdjacentFeature();
+		String[] feats2 = f.getFeature(haus.misc.Conversions.toStrArray(feats));
 		for (int i = 0; i < feats2.length; i++) {
 			writer.writeln(feats.get(i) + " " + feats2[i] + " " + labels.get(i));
 		}

@@ -3,6 +3,7 @@ package misc;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Hashtable;
+import java.util.List;
 
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TypedDependency;
@@ -79,7 +80,7 @@ public class SyntaticSentencePreproc {
 		if (!screenSentence())
 			return null;
 		tree = parser.getParseTree(curr_sentence_tokens);
-		pos_tags = parser.getTokenTags(tree);
+		pos_tags = parser.getPOSTags(tree);
 		try {
 			checkDuplicates();
 			findCauseEffect();
@@ -141,12 +142,19 @@ public class SyntaticSentencePreproc {
 		effect_start = getPhraseStart(effect_split);
 		effect_end = effect_start + effect_split.length -1;
 		
-		Tree[] wordIndexedTree = parser.getWordIndexedTree(tree);
+		Tree[] wordIndexedTree = getWordIndexedTree(tree);
 		cause_start = parser.getParentNpVp(tree, wordIndexedTree, cause_start)[0];
 		cause_end = parser.getParentNpVp(tree, wordIndexedTree, cause_end)[1];
 		
 		effect_start = parser.getParentNpVp(tree, wordIndexedTree, effect_start)[0];
 		effect_end = parser.getParentNpVp(tree, wordIndexedTree, effect_end)[1];
+	}
+	
+	public Tree[] getWordIndexedTree (Tree root) {
+	    List<Tree> trees = root.getLeaves();
+	    Tree[] out = new Tree[trees.size()];
+	    out = trees.toArray(out);
+	    return out;
 	}
 	
 	/**

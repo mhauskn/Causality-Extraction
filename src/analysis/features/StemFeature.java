@@ -1,8 +1,9 @@
-package analysis;
+package analysis.features;
 
+import analysis.Feature;
 import stemmer.BasicStemmer;
 
-public class StemFeature {
+public class StemFeature implements Feature {
 	BasicStemmer stemmer = new BasicStemmer();
 	
 	public String[] getFeature (String[] tokens) {

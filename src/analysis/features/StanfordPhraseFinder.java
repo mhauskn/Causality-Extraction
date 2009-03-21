@@ -1,11 +1,16 @@
-package analysis;
+package analysis.features;
 
 import java.util.ArrayList;
+
+import analysis.Feature;
 
 import edu.stanford.nlp.trees.Tree;
 import parser.StanfordParser;
 
-public class StanfordPhraseFinder {
+/**
+ * Finds phrasal boundaries and annotates them.
+ */
+public class StanfordPhraseFinder implements Feature {
 	public static final String NP_START = "NPStart";
 	public static final String NP_MID = "NPMiddle";
 	public static final String NP_END = "NPEnd";
@@ -22,30 +27,6 @@ public class StanfordPhraseFinder {
 	public StanfordPhraseFinder (StanfordParser _sp) {
 		sp = _sp;
 		nps = new ArrayList<Integer[]>();
-	}
-	
-	/**
-	 * @deprecated
-	 */
-	public void addFeature (String[] features, String[] _tokens) {
-		currentWordIndex = 0;
-		nps.clear();
-		tokens = _tokens;
-		npStart = 0;
-		npEnd = Integer.MAX_VALUE;
-		t = sp.getParseTree(tokens);
-		getBestNP(t);
-		for (Integer[] i : nps) {
-			for (int j = i[0]; j <= i[1]; j++) {
-				if (j == i[0]) {
-					features[j] += NP_START;
-				} else if (j == i[1]) {
-					features[j] += NP_END;
-				} else {
-					features[j] += NP_MID;
-				}
-			}
-		}
 	}
 	
 	public String[] getFeature (String[] _tokens) {
@@ -108,12 +89,12 @@ public class StanfordPhraseFinder {
 	}
 	
 	public static void main (String[] args) {
-		StanfordParser sp2 = new StanfordParser("stanford/englishPCFG.ser.gz");
+		StanfordParser sp2 = new StanfordParser();
 		StanfordPhraseFinder spf = new StanfordPhraseFinder(sp2);
 		String sent = "The strongest rain ever recorded in India shut down the financial hub of Mumbai, snapped communication lines, closed airports and forced thousands of people to sleep in their offices or walk home during the night, officials said today.";
 		String[] words = sent.split(" ");
 		String[] features = new String[words.length];
-		spf.addFeature(features, words);
+		spf.getFeature(words);
 		for (int i = 0; i < words.length; i++) {
 			System.out.println(words[i] + " --> " + features[i]);
 		}/*

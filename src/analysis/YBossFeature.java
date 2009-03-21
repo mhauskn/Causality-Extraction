@@ -1,11 +1,12 @@
 package analysis;
 
 import include.Include;
-import haus.io.Serializer;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
+
+import analysis.features.StanfordPhraseFinder;
 
 import yboss.YBoss;
 
@@ -24,7 +25,6 @@ public class YBossFeature {
 	public static final String ht_out = "crf/bossHT";
 	
 	Hashtable<String,Long> storage = new Hashtable<String,Long>();
-	Serializer<Hashtable<String,Long>> ser = new Serializer<Hashtable<String,Long>>();
 	YBoss boss = new YBoss(storage);
 	
 	ArrayList<String> nounPhrases;
@@ -42,13 +42,15 @@ public class YBossFeature {
 	/**
 	 * Loads a Hashtable from a file
 	 */
+	@SuppressWarnings("unchecked")
 	public void deSerializeHT (String fileName) {
-		storage = ser.deserialize(fileName);
+		storage = (Hashtable<String, Long>) haus.io.Serializer.deserialize(fileName);
 		boss.setStorage(storage);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void deSerializeHT () {
-		storage = ser.deserialize(ht_out);
+		storage = (Hashtable<String, Long>) haus.io.Serializer.deserialize(ht_out);
 		boss.setStorage(storage);
 	}
 	
@@ -56,11 +58,11 @@ public class YBossFeature {
 	 * Saves our hashtable
 	 */
 	public void serializeHT (String fileName) {
-		ser.serialize(storage, fileName);
+		haus.io.Serializer.serialize(storage, fileName);
 	}
 	
 	public void serializeHT () {
-		ser.serialize(storage, ht_out);
+		haus.io.Serializer.serialize(storage, ht_out);
 	}
 	
 	/**

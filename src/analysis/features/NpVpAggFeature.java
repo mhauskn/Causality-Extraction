@@ -1,9 +1,13 @@
-package analysis;
+package analysis.features;
 
+import analysis.Feature;
 import parser.StanfordParser;
 import edu.stanford.nlp.trees.Tree;
 
-public class NpVpAggregator {
+/**
+ * Tags Noun Phrases and Verb Phrases
+ */
+public class NpVpAggFeature implements Feature {
 	public static final String NP_TAG = "NounPhrase";
 	public static final String VP_TAG = "VerbPhrase";
 	
@@ -17,12 +21,12 @@ public class NpVpAggregator {
 	boolean innp = false;
 	boolean invp = false;
 	
-	public NpVpAggregator (StanfordParser _sp) {
+	public NpVpAggFeature (StanfordParser _sp) {
 		sp = _sp;
 	}
 	
-	public NpVpAggregator () {
-		sp = new StanfordParser(include.Include.pcfgPath);
+	public NpVpAggFeature () {
+		sp = new StanfordParser();
 	}
 	
 	public String[] getFeature (String[] _tokens) {

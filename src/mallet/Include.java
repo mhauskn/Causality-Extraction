@@ -32,6 +32,9 @@ public class Include {
 	public static final String EFFECT_REGEXP = "(" + EFFECT_TAG + "|" + EFFECT_BEGIN_TAG + 
 		"|" + EFFECT_INTERMEDIATE_TAG + "|" + EFFECT_END_TAG + ")";
 	
+	
+	// ------------------ Methods for Dealing with CRF Files ----------------------
+	
 	/**
 	 * Removes the class labels from tuples of the form
 	 * <token> <feat1> ... <featN> <class>
@@ -42,6 +45,22 @@ public class Include {
 			out[i] = tuples[i].substring(0, tuples[i].lastIndexOf(' '));
 		}
 		return out;
+	}
+	
+	/**
+	 * Gets the token from a tuple of the form
+	 * <token> <feat1> ... <featN> <class>
+	 */
+	public static String getToken (String line) {
+		return line.substring(0, line.indexOf(' '));
+	}
+	
+	/**
+	 * Gets the label from a tuple of the form
+	 * <token> <feat1> ... <featN> <classLabel>
+	 */
+	public static String getLabel (String line) {
+		return line.substring(line.lastIndexOf(' ')+1, line.length());
 	}
 	
 	/**
@@ -74,7 +93,7 @@ public class Include {
 	}
 	
 	public static void main (String[] args) {
-		Include.readSentDelimFile("crf/crfTest.txt");
+		System.out.println(getToken("tok feat label"));
 	}
 }
  
