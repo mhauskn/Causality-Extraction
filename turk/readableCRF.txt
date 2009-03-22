@@ -27,14 +27,14 @@ The panels are like oversized semiconductors surfaced with a million or more pic
 But last June's [annnouncement that Westinghouse would put up all of the $70 million build a new 55-megawatt plant]C could [herald]R [a new age.]E 
 Rather than scaring off white voters, as many predicted he would [Mr. Dinkins attracted many whites]E precisely [because of]R [his reputation for having a cool head.]C 
 They immediately termed the proposal inadequate and said the restructuring would not solve the company's problems. 
-The diversified energy and minerals concern said that [a depressed uranium market]C is [responsible for]R [the temporary mothballing of the plant,]E but that [the plant can be reactivated quickly]E [when]R [the market improves.]C 
+The diversified energy and minerals concern said that [a depressed uranium market]C is [responsible for]R [the temporary mothballing of the plant,]E but that the plant can be reactivated quickly when the market improves. 
 Of immediate concern is whether the Thatcher government will continue Mr. Lawson's policy of tracking the monetary policies of the West German Bundesbank and [responding in kind]E when [the Frankfurt authorities move interest rates.]C 
 But any chance for [prices to surge above fair value]E [lies in]R [the speculation that accompanies a vigorous merger and buy-out business,]C and UAL has obviously put a damper on that. 
 [Commodity prices have been rising in recent years, with the farm price index hitting record peaks earlier this year,]E [as]R [the government curtailed production with land-idling programs to reduce price-depressing surpluses.]C 
 [The Organization of Petroleum Exporting Countries increased its production ceiling for the fourth quarter]E [based on]R [projections of robust demand.]C 
 As previously reported, [under]R [the terms of a confidentiality agreement with Dunkin' Donuts,]C [the partners agreed to keep their offer open until Nov. 1, and not to acquire any additional shares except through a tender offer expiring on that date.]E 
 It also charges that Imperial, the holding company for Imperial Savings & Loan, [experienced major losses and writedowns]E [because of]R [improper assessment of the risks of junk-bond investments and wholesale consumer loan packages.]C 
-According to greenhouse theories, ([increased carbon dioxide emissions,]E largely [caused by]R [burning of fossil fuels,]C)C will (cause)R (the Earth to warm up)E [because]R [carbon dioxide prevents heat from escaping into space.]C 
+According to greenhouse theories, ([increased carbon dioxide emissions,]E largely [caused by]R [burning of fossil fuels,]C)C will (cause)R <(the Earth to warm up)E>E <because>R <carbon dioxide prevents heat from escaping into space.>C 
 They argue that the bigger danger would be that [the West would delay action so long]C [that]R [the Soviets might back away from the current conciliatory attitude.]E 
 [A survey by the Federal Reserve's 12 district banks]C and [the latest report by the National Association of Purchasing Management]C [[blurred]R that picture of the economy.]E 
 Finally, IBM had to delay the introduction of some high-end disk drives, which account for 10% of its $60 billion annual revenue. 
@@ -44,7 +44,7 @@ Los Angeles investor Marvin Davis, whose [$240-a-share offer for UAL in August]C
 By 10 a.m. Tokyo [time, the index was up 435.11 points,]E to 34903.80 [as]R [investors hailed New York's overnight rally.]C 
 [The bugs]C will [cause]R [problems in ``specific and rare circumstances that will not occur in typical applications'' such as word-processing and spreadsheets,]E said Michael Slater, editor of the Microprocessor Report, an industry newsletter. 
 [Article II]C [places]R on the president [the duty to nominate,]E ``and by and with the Advice and Consent of the Senate'' appoint, ambassadors, judges, and other officers of the U.S.. 
-Many investors expected [damage from the hurricane]C [to be the catalyst for]R [higher rates in the industry,]E which [has been depressed]E [because of]R [low rates arising from intense competition.]C 
+Many investors expected [damage from the hurricane]C [to be the catalyst for]R [higher rates in the industry,]E which (has been depressed)E (because of)R (low rates arising from intense competition.)C 
 [Deposits aren't expected to exceed withdrawals in the foreseeable future,]E [as]R [the industry continues to shrink.]C 
 Moreover, [essential relief supplies such as ice must be distributed throughout the population]E [because of]R [potential health problems from spoiled food and possible outbreak of disease.]C 
 [``I hire transportation,]C [and]R [my customers have fresh cold cuts every day.]E 
@@ -72,7 +72,7 @@ Documents filed by prosecutors also indicate that [Mr. Lavelle and his fellow co
 The British defense electronics group has said [it will sell # 100 million assets and may seek a merger]C to [[strengthen]R itself]E in the wake of its troubles. 
 The aim, says Mr. de Galle, is to win market share from imported cigarettes, and to persuade smokers who are switching to blonde cigarettes to keep buying French. 
 In a generation or two some of the New Crowd may attain true respectability, perhaps to be displaced in turn by a later flock of unscrupulous raptors. 
-Moody's said [the proposed recaptilization]C may [[``limit]R the company's ability to realize its profit potential'']E and that [paying dividends from a new series of preferred]C could [[squeeze]R ``basic business operations.'']E 
+Moody's said [the proposed recaptilization]C may [[``limit]R the company's ability to realize its profit potential'']E and that (paying dividends from a new series of preferred)C could ((squeeze)R ``basic business operations.'')E 
 Senior ministry officials huddled with creditors during the week in an attempt to agree on [some form of restructuring that]C would [[keep]R Waertsilae Marine operating.]E 
 ``We hope to [sensitize employers'']C to [[recognize]R the problems]E so they can do something about them, Dr. Warshaw said. 
 [Higher margins]C would [[chase]R away dozens of smaller traders]E who help larger traders buy and sell, they say. 
@@ -92,7 +92,7 @@ Titled ``Comments From Students,'' it focuses on the real shame of college sport
 ``We can not quantify the total adverse effects of Hugo,'' said Edwin Colodny, chairman and president of USAir Group. 
 Mostly, she says, she wanted to [prevent]R [the damage to self-esteem]E [that her low-ability students would suffer from doing badly on the test.]C 
 Mr. Jones has been taking prospective suite owners onto the field during practice to let them rub elbows with players, and promises those who actually buy one of the rooms an insider's look at the team's strategy before game time. 
-[When]R [Mrs. Thatcher cut the top tax rate to 40%,]C [Mr. Lawson flooded the country with money]C to [[prevent]R the pound from rising against the mark.]E 
+[When]R [Mrs. Thatcher cut the top tax rate to 40%,]C ([Mr. Lawson flooded the country with money)C to ((prevent)R the pound from rising against the mark.)E]E 
 Yet, despite the judge's imperial bearing, no one ever had reason to suspect possible wrongdoing, says John Bognato, president of Cambria County's 150-member bar association. 
 The Supreme Court is scheduled to consider the case Nov. 3 and may issue a decision as early as Nov. 6. 
 [The air-waybill number was changed en route, and paper work showing that the crates had cleared customs was misplaced,]C [so]R [it was a week before three of the four crates could be located in a bonded warehouse and the Gauguin discovered missing.]E 
@@ -113,13 +113,13 @@ Questioned in Washington about what would happen [if]R [his much-heralded peace 
 [The bleak automotive results were offset]E [by]R [strong earnings from some non-automotive operations.]C 
 Esselte AB of Sweden offered $43.50 share for the 22% of the company it doesn't already own. 
 [Their cowardly acts of civil disobedience,]C which they tried to hide under the cloak of outrage at a war they characterized as ``immoral,'' [[weakened]R the national fabric and threw additional burdens on those who served honorably in that conflict.]E 
-But [seesaw gyrations in the Dow Jones Industrial Average yesterday]C [[put]R Wall Street back in the spotlight]E and [[inspired]R market participants to bid the U.S. unit lower.]E 
+But ([seesaw gyrations in the Dow Jones Industrial Average yesterday]C)C [[put]R Wall Street back in the spotlight]E and ((inspired)R market participants to bid the U.S. unit lower.)E 
 [Slowing sales of its profitable Jeep Cherokee and Wagoneer sport utility vehicles]C are [forcing]R [Chrysler Corp. to temporarily idle its Toledo, Ohio, assembly plant]E for the first time since April 1986. 
 Digital, based in Maynard, Mass., hopes to stage a repeat performance in mainframes, and it has spent almost $1 billion developing the new technology. 
 True, [Ford was declared the winner Sunday,]E but only [after]R ([the Honda driver who crossed the finish line first was disqualified]C)E (because)R (it hit another car and skid momentarily out of bounds.)C 
 Harken, which owns about 800 retail gas stations, has said [it is particularly interested in Tesoro's refinery]E [because]R [it would fill a gap in its business.]C 
 [The industry had shown signs of recovery this summer,]E [after]R [the central bank began to relax its clamp on credit, allowing interest rates to drop a bit]C after pushing them up for a year. 
-[``It]C just [[makes]R healthy businesses subsidize unhealthy ones]E and [[gives]R each employer less incentive to keep his workers healthy.'']E 
+([``It]C)C just [[makes]R healthy businesses subsidize unhealthy ones]E and ((gives)R each employer less incentive to keep his workers healthy.'')E 
 ``The market acted better, but it wasn't a tremendous comeback,'' Mr. Zipper observed. 
 [The so-called circuit breakers devised by the Big Board and the Chicago Mercantile Exchange to quell free falls in stock and futures prices weren't triggered yesterday]E [because]R [the markets were higher for most of the day.]C 
 IN WHAT MAY [SIGNAL]R [a turnaround for asbestos manufacturers,]E [W.R. Grace & Co. won a 3 1/2-week trial in Pittsburgh over whether it should be required to remove asbestos fireproofing from a local high school.]C 
@@ -128,14 +128,14 @@ The management group owns about 18% of the stock, most purchased at nominal pric
 A spokesman for Scott says that [assuming]R [the price of pulp continues to soften,]C [``We should do well.]E 
 In Washington, the Senate voted to condemn Ortega's threat to cancel the truce, and Bush said he would review U.S. policy toward Managua, including the possibility of renewing military aid to the rebels. 
 [The new tax,]C though a source of general [[resentment]R among Japanese taxpayers,]E replaced a higher commodities tax that applied to automobiles. 
-[Several moves were taken]C following the October 1987 crash to [[coordinate]R and sometimes deliberately [disconnect]R the stock and futures markets in times of heightened volatility.]E 
+[Several moves were taken]C following the October 1987 crash to [[coordinate]R and sometimes deliberately disconnect the stock and futures markets in times of heightened volatility.]E 
 In a letter, prosecutors told Mr. Antar's lawyers that [because of]R [the recent Supreme Court rulings,]C [they could expect that any fees collected from Mr. Antar may be seized.]E 
-The company also said [the transaction]C would [[bolster]R after-tax earnings by $3.25 share when completed]E and [[boost]R its primary capital ratio to 7% from 6.63%.]E 
+The company also said ([the transaction]C)C would [[bolster]R after-tax earnings by $3.25 share when completed]E and ((boost)R its primary capital ratio to 7% from 6.63%.)E 
 The pilots could borrow against the value of their concessions, using the proceeds to buy back stock from the public and give themselves the majority control they have been seeking. 
 At the investment firm of Smith Barney, Harris Upham & Co., [the commodity-chemical segment]C is seen [[pulling]R down overall profit for 20 companies representative of the whole industry by 8% to 10%.]E 
 In 1987, President Reagan sent 73 rescissions back to the Hill, but only 3% of the spending total was approved by Congress. 
 [``Unless]R [it gets more help,]C [the U.S. industry won't have a chance,'']E says Peter Friedman, Photonics's executive vice president. 
-The ministry said [the swap,]C details of which were disclosed last Thursday, will [allow]R [both state-controlled companies to reinforce operations in their main markets]E and argued that [the move]C [[shows]R the dynamism of France's state-sector concerns.]E 
+The ministry said [the swap,]C details of which were disclosed last Thursday, will [allow]R [both state-controlled companies to reinforce operations in their main markets]E and argued that the move shows the dynamism of France's state-sector concerns. 
 The company said [the sale]C would [[produce]R a $1.2 billion in the fourth quarter.]E 
 Previously, he had served in financial planning positions at the company's Eastern Airlines unit. 
 A group of senior Conservative legislators, complaining the House of Commons was like a sauna, demanded that [the experiment be stopped]E [unless]R [the intensity of the lights is reduced.]C 
@@ -145,17 +145,17 @@ The company said the general financial [performance of its U.S. brewing operatio
 Mr. Dillow said the data show the economy ``is still quite strong,'' but [suggestions that much of the spending went on services rather than consumer goods]C should [[reduce]R fears of more import rises.]E 
 ``All life is about change either you adapt or die,'' says one Chicago futures trader. 
 [``Cheerios and Honey Nut Cheerios have eaten away sales normally going to Kellogg's corn-based lines]E simply [because]R [they are made of oats,'']C says Merrill Lynch food analyst William Maguire. 
-[If]R [I die early,]C [I win a hollow victory,]E since I can't enjoy it and [if I live long,]C [the insurer wins.]E 
+[If]R [I die early,]C ([I win a hollow victory,]E)E (since)R (I can't enjoy it)C and <if>R <I live long,>C <the insurer wins.>E 
 Futures trading resumed a half-hour later, but the session ended shortly thereafter, leaving the stock market set up for more sell programs, traders said. 
 McClatchy Newspapers Inc. said [improvements in advertising and subscription revenue]C [led to]R a [21% gain in third-quarter profit to $8.8 million or 31 cents a share, from $7.2 million or 25 cents a share.]E 
 [Net sank to $3.1 million or eight cents a share, including $789,000 or two cents a share,]E [reflecting]R a [tax-loss carry-forward.]C 
 Such is his reputation among the East Bay Bashers that when he hit his first career home run last season, the fan who caught it agreed to turn the ball over to him in return for an autograph. 
-Some of the [surge in the stock's price]E appeared to be [linked to]R [revived takeover speculation,]C which has [contributed to]R [volatility of Campbell shares in recent months.]E 
+Some of the [surge in the stock's price]E appeared to be [linked to]R ([revived takeover speculation,]C)C which has (contributed to)R (volatility of Campbell shares in recent months.)E 
 [USX Corp. posted a 23% drop in third-quarter profit,]E [as]R [improved oil results failed to offset weakness in steel and natural gas operations.]C 
 Subscribing schools get the 12-minute daily Channel One news program, whose [four 30-second TV ads during each show]C have [[drawn]R protests from educators.]E 
 ``We could have sat on it longer, but the impetus is to get the gas to the marketplace,'' says Richard Poole, senior scout for Santa Fe International. 
 Mr. Lloyd said both Qintex Entertainment and Qintex Australia had attempted to secure [a loan that]C would [allow]R [the company to make the $5.9 million]E but the request was turned down by an unidentified lender on Oct. 14. 
-[The provisions, in deficit-reduction bills recently passed by the House and Senate,]C could [[raise]R the price tags]E of such deals by up to 10%]E and [[cool]R the takeover boom.]E 
+([The provisions, in deficit-reduction bills recently passed by the House and Senate,]C)C could [[raise]R the price tags]E of such deals by up to 10%]E and ((cool)R the takeover boom.)E 
 [Because]R [index-fund managers are no longer satisfied with merely being average,]C [they have developed ``enhanced'' indexing strategies that are intended to outperform the market as much as three percentage points.]E 
 OPEC officials worry that [prices could collapse a few months from now]E [if]R [the group doesn't adopt new quotas.]C 
 Yet [the chief reason for the closure,]E he says, was [rooted in]R [a family tradition that wouldn't allow a bank to bear the Rothschild name without a Rothschild in its management.]C 
@@ -168,7 +168,7 @@ Free markets, free minds and free elections have [an appeal that seems to get mu
 In it, [traders buy or sell stocks and offset those positions in stock-index futures contracts]C to [[profit]R from fleeting price discrepancies.]E 
 The Supreme Court let stand a New York court's ruling that the manufacturers of [a drug]C once used to [[prevent]R miscarriages]E must share liability for injuries or deaths when the maker of an individual dose is unknown. 
 Also, James Needham, an SEC commissioner, in April 1972 had warned that [the industry might face a ``federal agency writing accounting rules'']E [if]R [they rejected the FASB idea.]C 
-Congress learned during the Reagan administration that it could [[intimidate]R the executive branch]E [by]R [uttering again and again the same seven words: ``Provided, that no funds shall be spent....'']C 
+Congress learned during the Reagan administration that [it]C could [[intimidate]R the executive branch]E by uttering again and again the same seven words: ``Provided, that no funds shall be spent....'' 
 ``We [didn't trade much today,]E [as]R our [policy now is to wait and see,'']C said a fund manager at Taisho Life Insurance Co. 
 He adds that the company is trying to [keep up with demand]C ``by [overworking'']E its [employees.]E 
 [The most common conflict]E [involves]R [compensation.]C 
@@ -180,28 +180,28 @@ Indeed, [the Soviet miners strike this summer]C clearly [[demonstrated]R that Mr
 [Caltrans abandoned double-decking in the early 1970s,]E [following]R [the 1971 Sylmar earthquake that destroyed freeway sections just north of Los Angeles,]C Mr. O'Connell explained. 
 Firm will not, however, [resume 24-hour service]E [until]R [power in city is restored.]C 
 [Financial Corp. purchased the bonds in at least 70 different transactions in 1984]C and [since]R then has [realized $11 million losses on them,]E the company said. 
-[This exercise] would [[reveal]R the true cost of a particular program]E [by]R [forcing the strategists to make hard decisions.]C 
+[This exercise] would [[reveal]R the true cost of a particular program]E by forcing the strategists to make hard decisions. 
 Within the past two months [a bomb exploded in the offices of the El Espectador in Bogota,]C [[destroying]R a major part of its installations and equipment.]E 
 [Ocean Drilling & Research dropped 1 1/4 to 21 1/2]E [following]R [news of a restructuring plan that calls for the company to reorganize its drilling business into a separate company and offer a 15% to 20% stake to the public.]C 
 We know firsthand the discrimination addressed by the act: to be told there's no place for your child in school; (to spend lonely hours at home)E (because)R (there is no transportation for someone in a wheelchair;)C [to be denied employment]E [because]R [you are disabled.]C 
-Repeal is considered likely now, but [the Treasury Department bill has been used as a vehicle]C to [[raise]R the profile of the issue]E and [[block]R any action in the interim.]E 
+Repeal is considered likely now, but ([the Treasury Department bill has been used as a vehicle]C)C to [[raise]R the profile of the issue]E and ((block)R any action in the interim.)E 
 And despite their share of duds, [they]C [[make]R movies that make money.]E 
 [``Trade is definitely going to be more politically sensitive over the next six or seven months]E [as]R [improvement begins to slow,'']C he said. 
 Japanese government officials, eager to rebut foreign criticism of Japanese investments overseas, hailed the transaction as proof [foreigners]C can [[make]R similar investments in Japan.]E 
 Besides reciting the pardon for program trading contained in the Brady Commission report, they said stock-index arbitrage was actually needed Monday to restore the markets' equilibrium. 
 But I am sure we need to [maximize our ``earthquake'' protection]E [by]R [making certain that our market structures let investors add their mighty shock-damping power to our nation's markets.]C 
 Quotron said that [snafu, which lasted nine minutes,]E [resulted from]R [a failure to adjust for a 4-for-1 stock split at Philip Morris Cos.]C 
-[The strong dollar,]C which [[reduces]R the value of overseas earnings and revenue when they are translated into dollars,]E is [expected to]R [knock 80 to 85 cents off IBM's per-share earnings for the full year.]E 
+([The strong dollar,]C which [[reduces]R the value of overseas earnings and revenue when they are translated into dollars,]E)C is expected to ((knock)R 80 to 85 cents off IBM's per-share earnings for the full year.)E 
 [The buy-out fell through]E [after]R [Citicorp and Chase Manhattan Corp., the lead banks in the transaction, failed to obtain $7.2 billion financing needed for the plan.]C 
 Mr. Bush's veto power puts him a commanding position in the narrowly divided House, but [a vote to override his position could well pick up new support]E [because of]R [the wealth of health and education programs financed in the underlying bill.]C 
-Mr. Marrie said [the problems in Arizona]C have only [[``increased]R our resolve]E to continue to [[make]R our restructuring even more effective.'']E 
+Mr. Marrie said [the problems in Arizona]C have only [[``increased]R our resolve to continue to make our restructuring even more effective.'']E 
 Mrs. Thatcher's remarks were seen as a rebuff to several leading members of her own Conservative Party who have called for a more clear-cut British commitment to the EMS. 
 After reopening for about 15 minutes, the S&P index tumbled to its 30-point limit and the second freeze went into effect. 
 Many companies have set up [machinery]C to [[assure]R workers a fair shake.]E 
-[Cattle futures prices were also [supported]]RE yesterday [by]R signs that [supermarket chains are making [plans]C to [[increase]R their promotions concerning beef.]E 
+Cattle futures prices were also supported yesterday by signs that (supermarket chains are making plans)C to ((increase)R their promotions concerning beef.)E 
 Traders anticipated [a volatile session]E [due to]R [the October expiration of stock-index futures and options, and options on individual stocks.]C 
 What Aeroflot doesn't pour into its own gas-guzzling Ilyushins is bartered to the airport authority, which resells it to 11 Western carriers including Air France, Trans World Airlines and Pakistan International Airlines. 
-But the [recovery in the stock market]C [[provided]R little help for copper]E [as]R [word spread that a three-month strike at the Highland Valley mine in British Columbia was about over,]C according to an analyst. 
+But ([the recovery in the stock market]C [[provided]R little help for copper]E)E (as)R (word spread that a three-month strike at the Highland Valley mine in British Columbia was about over,)C according to an analyst. 
 [A successful low-crime mall in a high-crime area]C [[violates]R the more typical inner-city pattern,]E in which commercial areas are taken over by unruly youth, gangs, and the criminal element, with an erosion of the customer base, development capital, and insurability. 
 [An alternative and more convincing explanation, [confirmed by]]ER [recent events and a close inspection of the Gorbachev program,]C is that the new Soviet economic and social structures are intended to conform to a model other than that of the market. 
 Mr. Lichtblau said [Canada's declining crude output, combined with the fast-shrinking output of U.S. crude,]C will help [[intensify]R U.S. reliance on oil from overseas,]E particularly the Middle East. 
@@ -213,23 +213,23 @@ In a filing with the Securities and Exchange Commission, Mr. Gintel said Xtra ``
 The move followed [a round of similar increases by other lenders against Arizona real estate loans,]E [reflecting]R [a continuing decline in that market.]C 
 Takamori Matsuda, an analyst at Dresdner-ABD Securities, said [fading expectation for lower interest rates]C [made]R [investors step back from real-estate shares,]E which advanced last week. 
 He likes to tell the yarn of how he got lost on the expansive ranch during an early visit, took refuge in an office and called the front desk for help. 
-[The unit stabilized about midday New York time at around 1.85 marks and 141 yen,]C [prompting]R [unconfirmed rumors]E that [the U.S. Federal Reserve had intervened]C to [[blunt]R the unit's tumble.]E 
+[The unit stabilized about midday New York time at around 1.85 marks and 141 yen,]C [prompting]R [unconfirmed rumors]E that (the U.S. Federal Reserve had intervened)C to ((blunt)R the unit's tumble.)E 
 Keep in mind that this is the same movie in which a character is flattened by a steamroller only to pop right back up and peer in the window of a Boeing 747 from the outside as it takes off. 
 The panel urged greater efforts to reduce the complexity, paperwork and cost of utilization review. 
-[The secretary would be required to block an acquisition]E [if]R [he concluded that it would so weaken an airline financially that it would hurt safety or reduce the carrier's ability to compete,]C or [if]R [it gave control to a foreign interest.]C 
+([The secretary would be required to block an acquisition]E)E [if]R [he concluded that it would so weaken an airline financially that it would hurt safety or reduce the carrier's ability to compete,]C or (if)R (it gave control to a foreign interest.)C 
 [He left his job as general manager of Shearson Lehman Hutton Holdings Inc.'s Frankfurt office]E [because,]R he says, [``When the Rothschilds called, I couldn't resist.'']C 
 The company said [the growth]E was [led by]R [its major operations, particularly mailing, shipping, dictating and facsimile businesses.]C 
-Still, [without]R [the assurance of British Airways' financial backing,]C [it will be tougher for the buy-out group to convince already-reluctant banks to make loan commitments for a revised bid,]E especially [since]R [British Air's original investment represented 78% of the cash equity contribution for the bid.]C 
+Still, [without]R [the assurance of British Airways' financial backing,]C ([it will be tougher for the buy-out group to convince already-reluctant banks to make loan commitments for a revised bid,]E)E especially (since)R (British Air's original investment represented 78% of the cash equity contribution for the bid.)C 
 National Semiconductor Corp. said [it settled a four-year-old patent infringement case against Linear Technology Corp.]E [by]R [accepting a $3 million from Linear in exchange for granting Linear irrevocable licenses for all products involved.]C 
 And profit from polymers dropped to $107 million $122 million what Du Pont called lower demand and selling prices in certain packaging and industrial markets. 
 In May 1988, an [ammonium perchlorate plant in Henderson]E owned by an American Pacific Corp. unit was [[leveled]E by]R a [series of explosions.]C 
 2. In seeking approval of a TRO, the prosecutor must articulate any anticipated impact that forfeiture and the TRO would have on innocent third parties, balanced against the government's need to preserve the assets. 
-The Short Term Bond Fund, with an average maturity of 2 1/2 years, would [deliver a total return for one year of about 10.6%]E [if]R [rates drop one percentage point]C and [a one-year return of about 6.6%]E [if]R [rates rise by the same amount.]C 
-[Because of]R [a lack of information and access,]C [many investors including the very ones whose buying power could restore stability and damp volatility are forced to stand on the sidelines when they are most needed,]E [because of]R [their ignorance of important market information.]C 
+The Short Term Bond Fund, with an average maturity of 2 1/2 years, would [deliver a total return for one year of about 10.6%]E [if]R [rates drop one percentage point]C and (a one-year return of about 6.6%)E (if)R (rates rise by the same amount.)C 
+[Because of]R [a lack of information and access,]C ([many investors including the very ones whose buying power could restore stability and damp volatility are forced to stand on the sidelines when they are most needed,]E)E (because of)R (their ignorance of important market information.)C 
 Olivetti has denied that [it]C [[violated]R Cocom rules,]E asserting that the reported shipments were properly licensed by the Italian authorities. 
 While it has predicted that overall growth in unit sales of personal computers is slowing to about a 10% yearly rate, [its own products are selling at a much faster rate]E [because]R [many are geared to the high-performance end of the market.]C 
 Mrs. Stinnett says [she never believed in ghosts before,]E [but lately]R [her vacuum cleaner turned itself on, a telephone flew off its stand, doors slammed inexplicably,]C and [she heard footsteps in her empty kitchen.]C 
-Many of the letters maintain that [investor confidence has been so [shaken]E by]R [the 1987 stock market crash]C and [the markets already so stacked against the little guy]C that [any decrease in information on insider-trading patterns]C might [[prompt]R individuals to get out of stocks altogether.]E 
+Many of the letters maintain that [investor confidence has been so [shaken by]R]E [the 1987 stock market crash]C and the markets already so stacked against the little guy that (any decrease in information on insider-trading patterns)C might ((prompt)R individuals to get out of stocks altogether.)E 
 Michael L. Bandler, vice president for network technology at Pacific Bell Telephone Co., says [nearly all the network's computer switches, which move thousands of calls a minute from one location to another, changed to battery power]E [when]R [the city lost power.]C 
 As banks processed six-foot telexes of sell orders, [the crush]C [led to]R [Manic Monday's worst decline: German stocks ended down 13%.]E 
 Alusuisse of America Inc. plans to [sell its Consolidated Aluminum Corp. subsidiary]E as [part of its strategy to focus more on aluminum packaging in the U.S..]C 
@@ -237,7 +237,7 @@ Mr. Lodge, 48 years old, a former finance executive at Singer Sewing Machine Co.
 [Markets usually get noticed]E [because]R [they soar or plunge.]C 
 [``Unless]R [the questions are answered,]C [I will keep on going.'']E 
 ``Most of us grew up believing in the axioms ` [Haste]C [makes]R [waste']E and ` Don't cut corners,' ideas that seem to run counter to the concept of managing speed,'' says Dean Cassell, vice president for product integrity at Grumman Corp. 
-[B.A.T rose five pence eight cents]E to 756 pence $11.91 in London yesterday [as]R [a late market rally]C [[erased]R a 28-pence fall]E earlier in the day. 
+(B.A.T rose five pence eight cents to 756 pence $11.91 in London yesterday)E (as)R ([a late market rally]C [[erased]R a 28-pence fall earlier in the day.]E)C 
 [World sugar futures prices soared]E [on]R [rumors that Brazil, a major grower and exporter, might not ship sugar this crop year and next.]C 
 [Foreigners complain that they have limited access to government procurement in Japan,]E in part [because]R [Japanese companies unfairly undercut them.]C 
 [Demand for the new version]C was [enabling]R [Lotus to raise prices with distributors]E and [to hold market share against Microsoft and other competitors that tried to exploit the earlier delays in Release 3's launch,]E Mr. Sherlund added. 
@@ -252,10 +252,10 @@ Traders said [municipals were [[underpinned]E by]R [influences including the cli
 [In]R [centering on the disruption of a few proud local customs such as the historic homes tour and the damage to the antiquities,]C [your reporter served to only perpetuate an outdated and stereotypically provincial view of this otherwise thriving port city.]E 
 Four years ago, [he jailed all nine members of the Cambria County School Board for several hours]E [after]R [they defied his order to extend the school year by several weeks to make up for time lost during a teachers' strike.]C 
 The plaintiffs also alleged that prior to the fanfare, the company circulated internal memos indicating problems with Lisa. 
-[The state is calling in a flotilla of navy landing vessels and other boats]C [to [expand]R ferry service across the bay]E and [hopes to add numerous new bus routes and train departures]C [to [help]R alleviate the traffic problem.]E 
+[The state is calling in a flotilla of navy landing vessels and other boats]C [to [expand]R ferry service across the bay]E and (hopes to add numerous new bus routes and train departures)C to ((help)R alleviate the traffic problem.)E 
 According to individuals familiar with the situation, [the Frankfurt loss]E [stemmed from]R [a computer program for calculating prices on forward-rate agreements]C that failed to envision an interest-rate environment where short-term rates were equal to or higher than long-term rates. 
 [When]R [the balloon is cruising along at a steady altitude]C [there is little sense of motion.]E 
-[``The rest will probably not be recoverable]E either [because]R [the statute of limitations expired]C or [because]R [many prefer to spend additional time in jail rather than return the money,'']C the prosecutor said. 
+([``The rest will probably not be recoverable]E)E either [because]R [the statute of limitations expired]C or (because)R (many prefer to spend additional time in jail rather than return the money,'')C the prosecutor said. 
 [If]R [the market won't pay for it,]E they argue, [it can't be worth its cost.]C 
 After gaining strength during a brief run-up when trading began, the Nasdaq Composite Index weakened under selling pressure. 
 [Trading is expected to remain subdued]E [as]R [the market awaits tomorrow's release of the jobs data]C with the hope that it will point toward a decline in interest rates. 
@@ -282,7 +282,7 @@ It is a competence and expertise that some brokers themselves, [overwhelmed by]R
 The indexers' strategy for the moment is to hunker down and let the furor die. 
 Like many of his colleagues, he didn't serve in Vietnam in the 1960s yet embraced a hawkish defense and foreign policy even voting against a 1984 resolution critical of the U.S. mining of Nicaraguan harbors. 
 Both companies declined to comment on the rumors, but several industry analysts told the Professional Investor Report they believed it was plausible that Pennzoil may be buying Chevron shares as a prelude to pushing for a restructuring of the company. 
-Mr. Horton, who oversaw Gulf Power's governmental-affairs efforts, [died mysteriously]E [in]R [a plane crash]C in April after [learning he might be fired]E [following]R [the uncovering of irregularities in a company audit.]C 
+Mr. Horton, who oversaw Gulf Power's governmental-affairs efforts, died mysteriously in a plane crash in April after [learning he might be fired]E [following]R [the uncovering of irregularities in a company audit.]C 
 The White House, never eager for a fight, was happy to try, which is why George Bush said he was looking for ``flexibility'' last week. 
 Frank L. Mingo, one of the pioneers of advertising targeted at black audiences, [died at the age of 49]E [after]R [a stroke.]C 
 [Dycom Industries gained 3/4 to 16 3/4]E [after]R [it said it agreed to buy Ansco & Associates and two affiliates for cash and stock.]C 
@@ -326,7 +326,7 @@ The discovery of the ozone ``hole'' over Antarctica and the results of ground-ba
 [Payment by Allianz for the insurance interests it has just bought]C will help [[swell]R the French concern's treasury to an estimated 11 billion francs.]E 
 [This confusion]C effectively [[halted]C one form of program trading,]E stock index arbitrage, that closely links the futures and stock markets, and has been blamed by some for [the market's big swings.]E 
 [The bank was [hamstrung]ER in its efforts to face the challenges of a changing market by [its links to the government,]C analysts say. 
-Quotron Systems Inc., a Citicorp unit, [blamed]R [the 30-minute foul-up]E [on]R ([``a timing problem in our software'']C)E (caused by)R (the enormous early volume about 145 million shares in the first hour of New York Stock Exchange trading.)C 
+Quotron Systems Inc., a Citicorp unit, blamed the 30-minute foul-up on [``a timing problem in our software'']E [caused by]R [the enormous early volume about 145 million shares in the first hour of New York Stock Exchange trading.]C 
 But it all evens out, It's so easy to see: Not till the last moment Am I paid what's due me. 
 [Spurred by waves of large-scale buying in blue-chip stocks,]C ([the Dow Jones Industrial Average rallied yesterday]E)C and ((erased)R about a half of Friday's 190.58-point plunge, gaining 88.12 to 2657.38.)E 
 Despite the modest gains, traders said the market remains dull, with investors remaining cautiously on the sidelines. 
@@ -350,7 +350,7 @@ A spokesman for LTV Steel, which is a unit of Dallas-based LTV Corp., noted that
 c-Yields, adjusted for constant maturity. 
 In a statement, Mr. Merksamer described the filing as a ``legal technicality,'' but also said that [``our inability to obtain trade credit,]C combined with [a need to ensure that our stores were properly stocked for the Christmas season,]C [necessitated]R [our filing Chapter 11.'']E 
 In contrast to the 1% conversion fee charged by Visa, foreign-currency dealers routinely charge 7% or more to convert U.S. dollars into foreign currency. 
-[The shutdown]C will [[idle]R 2,000 hourly employees]E and [[eliminate]R production of about 1,300 medium and heavy duty trucks.]E 
+([The shutdown]C)C will [[idle]R 2,000 hourly employees]E and ((eliminate)R production of about 1,300 medium and heavy duty trucks.)E 
 Mount Lebanon High School, near Pittsburgh, sought $21 million compensatory damages from Grace, arguing that [the asbestos,]C which can [cause]R [respiratory diseases]E and [lung cancer,]E posed a risk to students. 
 [East German Protestantism in particular fears Mr. Krenz,]E in part [because of]R [an incident in January 1988 when he was believed to have ordered the arrest of hundreds of dissidents who had sought refuge in the Church.]C 
 While (Wall Street's tough times and lower U.S. interest rates)C continue to ((undermine)R the dollar,)E [weakness in the pound and the yen]C is expected to [[offset]R those factors.]E 
@@ -376,13 +376,13 @@ In an already low-profitmargin business, [commodity brokerage firms may well dec
 We note that in Rome yesterday Defense Secretary Cheney said that [European euphoria over Mr. Gorbachev is starting to be [tempered by]]ER [a recognition of ``the magnitude of the problems he was trying to deal with.'']C 
 The U.S., which is finalizing its steel-import quotas, is [allocating a larger share of its steel market]C to [[developing]R and newly industrialized countries which have relatively unsubsidized steel industries.]E 
 Great American Bank said [its board approved the formation of a holding company]C [enabling]R [the savings bank to pursue nontraditional banking activities under a new federal law.]E 
-The computer maker, which sells more than half its goods outside the U.S., also said [the negative effect of a stronger U.S. dollar]C will [``adversely [affect'']R its fourth-quarter performance]C and [[``make]R it difficult'' to better 1988 results.]E 
+The computer maker, which sells more than half its goods outside the U.S., also said ([the negative effect of a stronger U.S. dollar]C)C will [``adversely [affect'']R its fourth-quarter performance]C and ((``make)R it difficult'' to better 1988 results.)E 
 The housing starts numbers, however, are one of the least precise of the government's economic indicators and are [often revised significantly]E [as]R [more information is collected.]C 
 [The surprise resignations of two top economic government officials]C [[heaped]R more uncertainty on London's financial markets,]E which already have been laboring under worries about Britain's ailing economy. 
 He notes that, as a lawmaker from the San Francisco area, [he fights each year]C to [[preserve]R federal funds for the Bay Area Rapid Transit system.]E 
 Grand Metropolitan PLC, the United Kingdom food and beverage group that owns Pillsbury Inc. of the U.S., announced [a reshuffling of board-level executive duties]C [intended to]R [fit the company's recent expansion.]E 
 [When]R [his secretary is found floating dead in the pol's pool,]C [Mancuso is called in to investigate.]E 
-[The House, meanwhile, approved $2.85 billion to aid in the recovery]E [from]R [the temblor]C and [from]R [Hurricane Hugo]C as state legislators moved toward a temporary sales-tax increase. 
+The House, meanwhile, approved $2.85 billion to aid in the recovery from the temblor and from Hurricane Hugo as state legislators moved toward a temporary sales-tax increase. 
 While by no means the highest crime community in the country, New York is a prime example of a city where [crime]C [[strangles]R small-business development.]E 
 [Soviet police clashed with demonstrators in Moscow]E [following]R [a candlelight vigil around the KGB's Lubyanka headquarters in memory of those persecuted under Stalin.]C 
 [``If you build a better mousetrap,]C [it will [catch]R more mice,'']E says Fred Benninger, chairman of MGM Grand. 
@@ -403,7 +403,7 @@ He flew to Dallas on Oct. 19, when the market plummeted 508 points, but then tur
 (Thousands of chemical products were categorized as carcinogenic, with recommendations that they be banned from industrial use)E (because)R ([they]C [[produced]R malignant tumors in overdosed rats.]E)C 
 In [an invention]C that [[drives]R Verdi purists bananas,]E Violetta lies dying in bed during the prelude, rising deliriously when then she remembers the great parties she used to throw. 
 But [the government's action, which caught Jaguar management flat-footed,]C may [[scuttle]R the GM minority deal]E by forcing it to fight for all of Jaguar. 
-Instead, the press corps readily accepted the notion that [a snag in the takeover financing of United Airlines]C instantly [[knocked]R 7% off the value of the nation's capital stock]E and [caused]R [convulsions around the world.]E 
+Instead, the press corps readily accepted the notion that ([a snag in the takeover financing of United Airlines]C)C instantly [[knocked]R 7% off the value of the nation's capital stock]E and (caused)R (convulsions around the world.)E 
 At the same time, Lloyd's is besieged by disgruntled investors and [hamstrung]ER by [inefficient but time-honored ways of conducting business.]C 
 Labor and business leaders, quoted at the White House Rose Garden rites, hailed its provisions for insuring corporate pension benefits. 
 Perhaps most important, Mr. Noriega's allies have intervened to encourage in some cases, to demand that the dictator maintain his grip of the throne. 
@@ -463,11 +463,11 @@ I disagree with the statement by Mr. Lantos that one should not draw an adverse 
 Earlier this month, Convex made a bid to outflank other supercomputer competitors like Digital Equipment Corp. and International Business Machines Corp. (by [[adopting)R an open set of standards and introducing new hardware and software to link different systems.]E 
 The New York suit was filed on behalf of Justice Isaac Rubin, whose appointment to the state appellate division expires at year end, and all other [judges [hurt]]RE by [the alleged age discrimination.]C 
 [The company also was [hurt by]]RE [a $289 million reduction that went into effect in 1989.]C 
-Mr. Stein said [tighter operating controls]C have [[enabled]R Ekco to reduce inventory levels 25% to 30% improve on-time delivery of orders to about 95% from around 70%;]E and to [[lower]R the number of labor hours required to produce a unit.]E 
+Mr. Stein said [tighter operating controls]C have [[enabled]R Ekco to reduce inventory levels 25% to 30% improve on-time delivery of orders to about 95% from around 70%;]E and to lower the number of labor hours required to produce a unit. 
 [Concerned with]R [the increased availability of surveillance technology and heavier use of it,]C [lawmakers have proposed laws addressing the issue.]E 
 [The trial of Raful Edmond III in Washington]C serves to [[highlight]R our efforts in this area and the results achieved through our excellent working relationship with the Drug Enforcement Administration and the Metropolitan Police Department MPD.]E 
 Maxtor said its [results were [boosted by]]RE [$2 million payments received from a supplier, for a certain line of products that Maxtor isn't going to sell anymore.]C 
-The changes were proposed in [an effort]C to [[streamline]R federal bureaucracy]E and [[boost]R compliance by the executives ``who are really calling the shots,'']E said Brian Lane, special counsel at the SEC's office of disclosure policy, which proposed the changes. 
+([The changes were proposed in an effort]C)C to [[streamline]R federal bureaucracy]E and ((boost)R compliance by the executives ``who are really calling the shots,'')E said Brian Lane, special counsel at the SEC's office of disclosure policy, which proposed the changes. 
 [Money-market mutual fund assets grew at nearly three times their usual rate in the latest week,]E as [investors opted for safety instead of the stock market.]C 
 [``I'm happy]E [that]R [he feels positively about our company,'']C he said. 
 At present, analysts project a budget gap on the order of $500 million to $600 million the fiscal year ending June 30, 1990, although the city's own budget analysts project a narrower deficit. 
@@ -484,7 +484,7 @@ The State Bank's move is part of a drive to iron out exchange-rate discrepancies
 [The deluge]C has [[spurred]R cost-conscious companies to action,]E with mail rooms throwing the stuff out rather than taking the time or money to deliver it. 
 [The report laid the blame on speculators, who it said]C had [[pushed]R land prices up ninefold.]E 
 Mr. Craven said both Messrs. Eward and Whittington had planned to leave the bank earlier, but Mr. Craven had persuaded them to remain until the bank was in a healthy position. 
-To [[tackle]R the problem,]E ([NFL owners have proposed setting a rookie wage scale]C)C to [[try]R to rein in salaries.]E 
+To tackle the problem, [NFL owners have proposed setting a rookie wage scale]C to try to [[rein]R in salaries.]E 
 [Compaq Computer nose-dived $8.625 share, to $100]C and [[pulled]R other technology issues lower after reporting lower-than-expected earnings after the stock market closed Wednesday.]E 
 This year's results included a gain of $70.2 million the disposal of seafood operations. 
 And the administration's deal with Congress gives several congressional committees the right to cut off even humanitarian aid next month, though the committees are likely to let aid continue until February. 
@@ -514,7 +514,7 @@ For the first time in nearly two years, [BankAmerica results failed]C to [[impro
 Whereas conventional securities financings are structured to be sold quickly, [Wall Street's new penchant for leveraged buy-outs and junk bonds is [resulting in]R [long-term lending commitments that stretch out for months or years.]E 
 Japan plans to send the Chinese back home and is negotiating with the Chinese government, a Justice Ministry official said. 
 But Mr. Guber figured that Warner Communications Inc. chairman Steven Ross, would empathize and let the producers go, knowing the Sony offer was ``the culmination of a life's work.'' 
-[It] [[freezes]R the budget at its current level,]E and [[forces]R the Pentagon to eat the effects of inflation until 1994.]E 
+([It]C)C [[freezes]R the budget at its current level,]E and ((forces)R the Pentagon to eat the effects of inflation until 1994.)E 
 Mr. Broberg, who started with the now-defunct Washington Senators, says that when he left baseball in 1978, he ``never looked back.'' 
 Jerry Shrieves, UAW local president, said the facility was asked to draw up plans to continue working as a ``flex plant,'' which could build several different types of products on short notice to satisfy demand. 
 ([President Bush]C will [[veto]R a bill]E funding the Departments of Labor, Education and Health and Human Services)E (because)R ({it}C would {allow}R {federal funding of abortions for victims of rape and incest,)C}E the White House said. 
@@ -551,8 +551,8 @@ GM is close to completing a friendly deal with Jaguar that is likely to involve 
 [Under]R [the agreement,]C [Westinghouse will be able to purchase smaller combustion turbines from its Japanese partner, and package and sell them with its own generators and other equipment.]E 
 Interest on the bonds will be treated as a preference item in calculating the federal alternative minimum tax that may be imposed on certain investors. 
 But while [the New York Stock Exchange didn't fall apart Friday]E [as]R [the Dow Jones Industrial Average plunged 190.58 points]C most of it in the final hour it barely managed to stay this side of chaos. 
-Freeport-McMoRan said [the shutdown]C won't [[affect]R sales volumes under long-term sales contracts of its Freeport Uranium Recovery Co. unit,]E but will [[reduce]R the amount of product sold on the spot market.]E 
-Edward M. Esber, chairman, president and chief executive officer, {attributed}R [the decline]E {to}R ([reduced domestic revenue]C)E (because of)R ($4.9 million to upgrade existing software inventories to the new database IV Version 1.1, and $1.8 million on the recent reduction in work force.)C 
+Freeport-McMoRan said ([the shutdown]C)C won't [[affect]R sales volumes under long-term sales contracts of its Freeport Uranium Recovery Co. unit,]E but will ((reduce)R the amount of product sold on the spot market.)E 
+Edward M. Esber, chairman, president and chief executive officer, {attributed}R {the decline}E {to}R ({reduced domestic revenue}C)E (because of)R ($4.9 million to upgrade existing software inventories to the new database IV Version 1.1, and $1.8 million on the recent reduction in work force.)C 
 Jim Enzor of Atlanta defends [program trading]C [because]R [he believes that it can bring the market back up after a plunge.]E 
 [Citing]R [a $3.1 million for doubtful accounts,]C Dallas-based National Heritage Inc. [posted a loss for its fourth quarter]E ended June 30. 
 In February 1987, ([Bally]C [[thwarted]R a possible hostile takeover bid from Mr. Trump]E)E (by)R (agreeing to buy 2.6 million of Mr. Trump's 3.1 million Bally shares for $83.7 million more than $18 million market price.)C 
@@ -661,7 +661,7 @@ By an 11-2 margin, Senate negotiators voted to preserve the 235 mortgage refinan
 Earlier this year, President Bush made a final ``take-it-or-leave it'' offer on the minimum wage: an increase to $4.25 hour over three years, and only if accompanied by a lower wage for the first six months of a job. 
 Nashua Corp., rumored a potential takeover target for six months, said that a Dutch company has sought U.S. approval to buy up to 25% of Nashua's shares. 
 Manhattan National Corp. said Michael A. Conway, president and chief executive officer, was elected chief executive of the holding company's two principal insurance subsidiaries. 
-Mr. Mehl [attributed]R [the rise]E [specifically to]R [the Treasury bill increase.]C 
+Mr. Mehl [attributed]R [the rise]E specifically [to]R [the Treasury bill increase.]C 
 At the time, its shares were selling above their initial offering price of $19 and bankers believed Staples would sell new stock without a hitch. 
 Company officials said later that British Airways believes [its involvement in the UAL buy-out ended last Friday]E [when] [the buy-out group, which also includes UAL's management and pilot union, failed to obtain financing for the $6.79 billion.]C 
 Unless the market goes at least one tick the smallest price increment permitted beyond the limit price, [investors aren't assured of having their orders filled]E [because]R there [may not be sufficient trading volume to permit filling]C it [at]C the [specified price.]C 
@@ -676,12 +676,12 @@ But [any move by the banks to take over Qintex Australia's management]C {could [
 Analysts said the announcement, the latest in a [series of divestitures and restructuring moves,]C {is aimed at [improving}R Southam's earnings]E before the expiration in June of a standstill pact with Torstar Corp. 
 The pilots' Mr. Dubinsky says his union would like majority ownership for employees. 
 [Some of it]E was [due to]R [lower-than-expected earnings from leading companies,]C he said. 
-[The deterioration in credit quality]C [[offset]R strong loan growth]E of 17% in NCNB's Southeast operations, as well as a 28% [[growth]R in deposits resulting from an aggressive marketing campaign.]E 
+[The deterioration in credit quality]C [[offset]R strong loan growth]E of 17% in NCNB's Southeast operations, as well as a 28% growth in deposits resulting from an aggressive marketing campaign. 
 [With]R [the February 1987 U.N. accords ``relating to Afghanistan,'']C [the Soviet Union got everything it needed to consolidate permanent control.]E 
 Pool is hot in New York and Chicago, he insists, where ``upscale, suit-and-tie places'' are adding tables. 
-Paramount, which agreed to sell the unit in July, said it would [[realize]R net proceeds]E [from]R [the sale of $2.6 billion with an after-tax gain of $1.2 billion.]C 
+Paramount, which agreed to sell the unit in July, said it would realize net proceeds from the sale of $2.6 billion with an after-tax gain of $1.2 billion. 
 Nor is it a Hungary, where yesterday the parliament approved [constitutional changes]C meant [to help]R [turn the Communist nation into a multiparty democracy.]E 
-[``The stock, in my opinion, is going to go lower,]E not only [because of]R [disappointing earnings]C but [because]R [the credibility gap is certainly not closing,'']C says L. Craig Carver of Dain Bosworth. 
+([``The stock, in my opinion, is going to go lower,]E)E not only [because of]R [disappointing earnings]C but (because)R (the credibility gap is certainly not closing,'')C says L. Craig Carver of Dain Bosworth. 
 Lawyers for shareholders, [Bally and Mr. Trump all declined to talk publicly about the proposed settlement,]E [citing]R [a request by a federal court magistrate not to reveal details of the agreement until it is completed.]C 
 ``It would be [damaging to industry and to the financial sector in general,]E to say nothing of banks, [if]R [prudence does not guide the financing of leveraged transactions.'']C 
 The tab even covers $8 million commitment fees owed to Citicorp and Chase Manhattan Corp., even though their [failure to obtain $7.2 billion bank loans for the buy-out]C [was the main reason for]R [its collapse.]E 
@@ -720,7 +720,7 @@ Dealers noted that [it's difficult to structure new Remics]E [when]R [prices are
 [New England Electric System bowed out of the bidding for Public Service Co. of New Hampshire,]E [saying that]R [the risks were too high]C and [the potential payoff too far in the future to justify a higher offer.]C 
 ``We could have called ourselves the Academic Intellectual Society, but then everyone would have said, ` Oh, you mean the nerd-and-geek club,''' Leonid Fridman, SONG's graduate-student adviser, told 19 attendees at the club's inaugural meeting earlier this month. 
 Ducks are this season's word for new taxes, under OMB Director Richard Darman's formulation that ``if it looks like a duck, walks like a duck and quacks like a duck, it's a duck.'' 
-Rather, [it's a device]C {that could [send}R shock waves through the president's entire relationship with Democrats and Republicans alike in Congress,]E fundamentally [[enhance]R the power of the presidency]E and [[transform]R the way the government does its business.]E 
+Rather, <([it's a device]C)C>C that could [[send]R shock waves through the president's entire relationship with Democrats and Republicans alike in Congress,]E fundamentally ((enhance)R the power of the presidency)E and <<transform>R the way the government does its business.>E 
 Despite the harsh exchanges, the U.S. and China still seem to be looking for a way to mend relations, which have deteriorated into what Mr. Nixon referred to as ``the greatest crisis in Chinese-American relations'' since his initial visit to China 17 years ago. 
 They hope [the foreign deals]C {will [divide}R the Hollywood opposition]E and [[prod]R Congress to push for ending (federal rules]E)C that ((prohibit)R the networks from grabbing a piece of rerun sales and owning part of the shows they put on the air.)E 
 USG Corp. agreed to sell its headquarters building here to Manufacturers Life Insurance Co. of Toronto, and will lease the 19-story facility until it moves to a new quarters in 1992. 
@@ -733,7 +733,7 @@ The officials said that most Japanese banks prefer the losses they'd suffer in e
 Still, if nothing else, [a revoked brokerage license could be a burden]E [because]R [it must be disclosed in many of the transactions in which Drexel could be involved.]C 
 But he also said [that exercising a test line-item veto isn't a ``top initiative'' on the president's agenda]E [because]R [he faces more-pressing budget issues at the moment.]C 
 Limit Order: [Limit orders are used]E [when]R [investors want to restrict the amount they will receive or pay for an investment.]C 
-The 1974 budget ``reform,'' passed over President Nixon's veto, [took away the presidential impoundment power,]C thereby [[introducing]R monstrous CRs]E and [[eviscerating]R the presidential veto.]E 
+The 1974 budget ``reform,'' passed over President Nixon's veto, ([took away the presidential impoundment power,]C)C thereby [[introducing]R monstrous CRs]E and ((eviscerating)R the presidential veto.)E 
 The New York market made its high for the day on the opening and (when)R (it dropped below the $1.23-a-pound level,)C ([selling picked up]E [as]R [previous buyers bailed out of their positions]C and [aggressive short sellers anticipating further declines moved in.]C)E 
 That means simple, clear rules that [secure the first large blocks of reduction,]C [[deferring]R more complex issues such as risk.]E 
 [Whenever]R [the 1980s merger boom seems to be stalling,]C [shock waves ripple through the stock market.]E 
@@ -750,7 +750,7 @@ And so it seems to be with the case of pElizabeth Morgan, the Washington, D.C., 
 For those investors who believe or fear that 1990 will be a recession year, many economists and money managers agree on steps that can be taken to lower the risks in a portfolio. 
 Dr. Toseland said most of the British diabetics who died had been taking a human-based insulin made by Novo/Nordisk, a Danish manufacturer. 
 The forfeiture memo cited [``considerable criticism in the press,]E [because of]R [a perception that pre-trial freezing of assets is tantamount to a seizure of property without due process.'']C 
-Since its inception, [Conner]C has both [benefited from]R and [helped make possible]R ([the rapid spread of portable computers]E)E (by)R (selling storage devices that consume five to 10 times less electricity than drives used in desktop machines.)C 
+Since its inception, [Conner has both [benefited from]E]R and helped make possible ([the rapid spread of portable computers]C)E (by)R (selling storage devices that consume five to 10 times less electricity than drives used in desktop machines.)C 
 Fed Chairman Greenspan signaled that the central bank was prepared to [inject massive amounts of money into the banking system]C {to [prevent}R a financial crisis.]E 
 [He then ousted President Nicholas Ardito Barletta, a former World Bank official with close ties to the U.S.,]E [after]R [Mr. Barletta tried to create a commission to investigate the murder.]C 
 But [if]R [the genes are damaged perhaps by radiation, a chemical or through a chance accident in cell division]C [their growth-suppressing proteins no longer work, and cells normally under control turn malignant.]E 
@@ -775,7 +775,7 @@ Mr. Pearce says law firms with the best chance of [retaining or winning business
 An investor who may have placed a stop-loss order at $90 a stock that was trading at $100 share on the Friday before the crash [was stunned]E [to discover that]R [the order was filled at $75 the stock opened at that price on Monday.]C 
 They found students in an advanced class a year earlier who said she gave them similar help, although [because]R [the case wasn't tried in court,]C [this evidence was never presented publicly.]E 
 [Speculation about Coniston]C has [[caused]R the stock to rebound from a low of $145.]E 
-The rationale is that an [interruption of trading]C {will [allow}R investors to reconsider their strategies, [calm]R sellers]E and [[lead]R buyers to enter the market at indicated new price levels.]E 
+The rationale is that an <([interruption of trading]C)C>C will [[allow]R investors to reconsider their strategies]E, ((calm)R sellers)E and <<lead>R buyers to enter the market at indicated new price levels.>E 
 Democrats argue that Costa Rica deserves more assistance for the same reason that Mr. Bush is attending the celebration this weekend: to reward the country for its stability in a region wracked with turmoil and for its efforts to promote peace in Nicaragua. 
 The sheets tell how the medicine works, describe how to use it and list its possible side effects. 
 Mr. Kaminski, the schoolteacher, and William Mehrens, a Michigan State University education professor, concluded in a study last June that [CAT test versions of Scoring High and Learning Materials shouldn't be used in the classroom]E [because of]R [their similarity to the actual test.]C 

@@ -1,9 +1,11 @@
-package analysis;
+package analysis.features;
 
 import haus.io.DataWriter;
 import haus.io.FileReader;
 
 import java.util.ArrayList;
+
+import analysis.Feature;
 
 import mallet.Include;
 
@@ -17,7 +19,7 @@ import mallet.Include;
  *
  * We shall call them residual features.
  */
-public class AdjacentFeature {
+public class AdjacentFeature implements Feature {
 	static int numAdjacent = 4;
 	public static final String tok_iden = "res(";
 	public static boolean include_adj_feats = true;

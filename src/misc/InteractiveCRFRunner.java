@@ -10,9 +10,10 @@ import analysis.features.StemFeature;
 
 import haus.io.DataWriter;
 import haus.io.FileReader;
-import io.InteractiveReader;
+import haus.io.InteractiveReader;
+import haus.misc.Map;
 
-public class InteractiveCRFRunner {
+public class InteractiveCRFRunner implements Map<String> {
 	public static final String RELN_TAG = "R";
 	
 	public static final String mallet_dir = mallet.Include.MALLET_DIR;
@@ -32,7 +33,10 @@ public class InteractiveCRFRunner {
 	public static final String ARG1_TAG = "[ARG1";
 	public static final String REL_TAG = "[rel";
 	
-	InteractiveReader iReader = new InteractiveReader();
+	boolean asking_questions = true;
+	boolean training = false;
+	
+	InteractiveReader iReader = new InteractiveReader(this);
 	deAnnotator deann = new deAnnotator();
 	NpVpAggFeature agg = new NpVpAggFeature();
 	BasicStemmer stem = new BasicStemmer();
@@ -179,10 +183,7 @@ public class InteractiveCRFRunner {
 		}
 	}
 	
-	public void askQuestions () {
-		System.out.println("Assume rel0/rel1 is cause/effect. Is rel0 cause? (yes/no):");
-		String resp;
-		resp = iReader.getInput();
+	public void askQuestions (String resp) {
 		if (resp.equals(pos_ans)) {
 			arg0cause = true;
 			System.out.println("arg0 cause confirmed.");
@@ -190,19 +191,17 @@ public class InteractiveCRFRunner {
 			System.out.println("arg0 effect confirmed.");
 		} else {
 			System.out.println("Bad response.");
-			askQuestions();
-		}
-	}
-	
-	void getData () {
-		System.out.println("Give me some data please! Type '" + done_ans + "' when finished.");
-		String data;
-		while (!(data = iReader.getInput()).equals(done_ans)) {
-			processSent(data);
 		}
 	}
 	
 	void processSent (String data) {
+		if (data.equals(done_ans)) {
+			writeTrainingFile();
+			mallet.CRFRunner.trainCRF(junk_out, model_out, data_out);
+			sentences.clear();
+			System.out.println("Ready to tag some sentences! Type '" + done_ans + "' when finished.");
+			training = false;
+		}
 		deann.deAnnotate(data);
 		//deann.print();
 		
@@ -231,53 +230,56 @@ public class InteractiveCRFRunner {
 		writer.close();
 	}
 	
-	void interactiveEvaluation () {
-		System.out.println("Ready to tag some sentences! Type '" + done_ans + "' when finished.");
-		String data;
-		
-		while (!(data = iReader.getInput()).equals(done_ans)) {
-			String[] tokarr = data.split(" ");
-			int relIndex = 0;
-			for (int i = 0; i < tokarr.length; i++) {
-				String stemmed = stem.stem(tokarr[i]);
-				if (stemmed == null) continue;
-				if (stemmedRel.indexOf(stemmed) != -1)
-					relIndex = i;
-			}
-			agg.getFeature(tokarr);
-			String[] feature = agg.normalizeFeatureTokens(relIndex);
-			String[] stems = stemFeat.getFeature(tokarr);
-			DataWriter writer = new DataWriter(test_out);
-			for (int i = 0; i < tokarr.length; i++)
-				writer.write(tokarr[i] + " " + feature[i] + " " + stems[i] + "\n");
-			writer.write(mallet.Include.SENT_DELIM_REDUX + "\n");
-			writer.close();
-			mallet.CRFRunner.evaluateCRF(ans_out, model_out, test_out);
-			turkCrfToHuman tcrf = new turkCrfToHuman();
-			tcrf.setFormat(turkCrfToHuman.CRF_OUTPUT_FORMAT);
-			tcrf.setTokenInput(tokarr);
-			tcrf.setInfile(ans_out);
-			tcrf.setOutfile(junk_out);
-			tcrf.translate();
-			FileReader reader = new FileReader(junk_out);
-			String line;
-			while ((line = reader.getNextLine()) != null) {
-				System.out.println(line);
-			}
+	void evaluateSentence (String data) {
+		String[] tokarr = data.split(" ");
+		int relIndex = 0;
+		for (int i = 0; i < tokarr.length; i++) {
+			String stemmed = stem.stem(tokarr[i]);
+			if (stemmed == null) continue;
+			if (stemmedRel.indexOf(stemmed) != -1)
+				relIndex = i;
+		}
+		agg.getFeature(tokarr);
+		String[] feature = agg.normalizeFeatureTokens(relIndex);
+		String[] stems = stemFeat.getFeature(tokarr);
+		DataWriter writer = new DataWriter(test_out);
+		for (int i = 0; i < tokarr.length; i++)
+			writer.write(tokarr[i] + " " + feature[i] + " " + stems[i] + "\n");
+		writer.write(mallet.Include.SENT_DELIM_REDUX + "\n");
+		writer.close();
+		mallet.CRFRunner.evaluateCRF(ans_out, model_out, test_out);
+		turkCrfToHuman tcrf = new turkCrfToHuman();
+		tcrf.setFormat(turkCrfToHuman.CRF_OUTPUT_FORMAT);
+		tcrf.setTokenInput(tokarr);
+		tcrf.setInfile(ans_out);
+		tcrf.setOutfile(junk_out);
+		tcrf.translate();
+		FileReader reader = new FileReader(junk_out);
+		String line;
+		while ((line = reader.getNextLine()) != null) {
+			System.out.println(line);
 		}
 	}
 		
 	void run () {
-		askQuestions();
-		getData();
-		writeTrainingFile();
-		mallet.CRFRunner.trainCRF(junk_out, model_out, data_out);
-		sentences.clear();
-		interactiveEvaluation();
+		System.out.println("Assume rel0/rel1 is cause/effect. Is rel0 cause? (yes/no):");
+		iReader.run();
 	}
 	
 	public static void main (String[] args) {
 		InteractiveCRFRunner icrf = new InteractiveCRFRunner();
 		icrf.run();
+	}
+
+	public void map(String arg0) {
+		if (asking_questions) {
+			askQuestions(arg0);
+			System.out.println("Give me some data please! Type '" + done_ans + "' when finished.");
+			asking_questions = false;
+			training = true;
+		} else if (training) {
+			processSent(arg0);
+		} else
+			evaluateSentence(arg0);
 	}
 }

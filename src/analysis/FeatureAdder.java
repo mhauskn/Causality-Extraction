@@ -12,7 +12,8 @@ import analysis.features.POSFeature;
 import analysis.features.StemFeature;
 
 /**
- * Adds features to a bare CRF input file.
+ * Adds features to a bare CRF input file to make this file ready for 
+ * final processing by CRF.
  * 
  * This class does 3 things:
  * 1. Reads a sentence from our bare CRF file

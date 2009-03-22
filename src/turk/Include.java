@@ -5,6 +5,8 @@ public class Include {
 	public static final String LINE_DELIM = "\r\n"; // Endline delim for CSV Turk file
 	public static final int SENT_PER_HIT = 10; // Sentences per hit
 	
+	public static final String READABLE_CRF = "turk/readableCRF.txt";
+	
 	/**
 	 * Puts the given string array into CSV format
 	 * @param segs

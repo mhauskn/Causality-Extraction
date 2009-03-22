@@ -1,8 +1,6 @@
 package parser;
 
 import include.Include;
-import io.InteractiveReader;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -16,7 +14,6 @@ import edu.stanford.nlp.trees.GrammaticalStructureFactory;
 import edu.stanford.nlp.trees.PennTreebankLanguagePack;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreeGraphNode;
-import edu.stanford.nlp.trees.TreePrint;
 import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.trees.TypedDependency;
 
@@ -65,36 +62,6 @@ public class StanfordParser {
 				initLexParser();
 			return (Tree) lp.apply(Arrays.asList(tokens));
 		}
-	}
-	
-	/**
-	 * Gives an informative parse of a sentence displaying the 
-	 * different types of available information.
-	 */
-	public void parseSentenceTest (String sentence) {
-		System.out.println("Original Sentence: " + sentence);
-		String[] sent = sentence.split(" ");
-		Tree parse = getParseTree(sent);
-		
-		System.out.println("---------PENN PRINT-----------");
-	    parse.pennPrint();
-	    System.out.println();
-	    System.out.println("---------END PENN PRINT-----------");
-
-	    TreebankLanguagePack tlp = new PennTreebankLanguagePack();
-	    GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
-	    GrammaticalStructure gs = gsf.newGrammaticalStructure(parse);
-	    Collection<TypedDependency> tdl = gs.typedDependenciesCollapsed(); // This is the good one
-	    
-	    System.out.println("---------TDL PRINT-----------");
-	    System.out.println(tdl);
-	    System.out.println();
-	    System.out.println("---------END TDL PRINT-----------");
-
-	    System.out.println("---------TREE PRINT-----------");
-	    TreePrint tp = new TreePrint("penn,typedDependenciesCollapsed");
-	    tp.printTree(parse);
-	    System.out.println("---------END TREE PRINT-----------");
 	}
 	
 	//------------------- Tree Operations -----------------------
@@ -266,15 +233,5 @@ public class StanfordParser {
 		out[1] = out[0] + size -1;
 		
 		return out;
-	}
-	
-	public static void main(String[] args) {
-		StanfordParser sp = new StanfordParser();
-		String sent;
-		
-		InteractiveReader iReader = new InteractiveReader();
-		while ((sent = iReader.getInput()) != null) {
-			sp.parseSentenceTest(sent);
-		}
 	}
 }

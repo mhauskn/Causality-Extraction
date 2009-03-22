@@ -2,7 +2,7 @@ package mallet;
 
 import java.util.ArrayList;
 
-import analysis.AdjacentFeature;
+import analysis.features.AdjacentFeature;
 
 import haus.io.DataWriter;
 
