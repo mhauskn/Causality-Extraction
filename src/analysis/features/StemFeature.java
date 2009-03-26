@@ -15,7 +15,7 @@ public class StemFeature implements Feature {
 			if (stem == null)
 				feature[i] = "";
 			else
-				feature[i] = "stm_" + stem;
+				feature[i] = "tok_stm:" + stem;
 		}
 		
 		return feature;

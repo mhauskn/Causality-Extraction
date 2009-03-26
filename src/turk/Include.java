@@ -7,6 +7,20 @@ public class Include {
 	
 	public static final String READABLE_CRF = "turk/readableCRF.txt";
 	
+	//-------------- Involving Reln Post Feature ------------------//
+	
+	public static final String relnFeat = "reln:";
+	
+	/**
+	 * Checks if a given string contains the reln feature:
+	 * Denoted: reln:R{B,I,E}
+	 */
+	public static boolean hasPosRelnFeat (String feat) {
+		return feat.contains(relnFeat + mallet.Include.RELN_TAG);
+	}
+	
+	//------------ End Reln Methods -------------------------------//
+	
 	/**
 	 * Puts the given string array into CSV format
 	 * @param segs

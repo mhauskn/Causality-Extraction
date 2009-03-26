@@ -1,7 +1,7 @@
 package analysis.features;
 
 import analysis.Feature;
-import parser.StanfordParser;
+import parser.Stanford.StanfordParser;
 import edu.stanford.nlp.trees.Tree;
 
 /**
@@ -101,12 +101,12 @@ public class NpVpAggFeature implements Feature {
 			return;
 		}
 		Tree[] children = t.children();
-		if (t.label().toString().matches(parser.StanfordParser.NP_REGEXP)) {
+		if (t.label().toString().matches(parser.Stanford.StanfordParser.NP_REGEXP)) {
 			if (invp)
 				currPhrase++;
 			innp = true;
 			invp = false;
-		} else if (t.label().toString().matches(parser.StanfordParser.VP_REGEXP)) {
+		} else if (t.label().toString().matches(parser.Stanford.StanfordParser.VP_REGEXP)) {
 			if (innp)
 				currPhrase++;
 			invp = true;

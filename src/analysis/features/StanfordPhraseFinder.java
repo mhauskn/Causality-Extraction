@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import analysis.Feature;
 
 import edu.stanford.nlp.trees.Tree;
-import parser.StanfordParser;
+import parser.Stanford.StanfordParser;
 
 /**
  * Finds phrasal boundaries and annotates them.

@@ -3,12 +3,12 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="LingPipe/lingpipe-3.5.1.jar"/>
-	<classpathentry kind="lib" path="stanford/stanford-parser-2007-08-19.jar"/>
 	<classpathentry kind="lib" path="JWI/edu.mit.jwi_2.1.4.jar"/>
 	<classpathentry kind="lib" path="mysql/mysql-connector-java-5.1.6-bin.jar"/>
 	<classpathentry kind="lib" path="mallet/mallet-deps.jar"/>
 	<classpathentry kind="lib" path="mallet/mallet.jar"/>
 	<classpathentry kind="lib" path="weka/weka.jar"/>
 	<classpathentry kind="lib" path="/haus/bin" sourcepath="/haus/src"/>
+	<classpathentry kind="lib" path="stanford/stanford-parser-2008-10-26.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

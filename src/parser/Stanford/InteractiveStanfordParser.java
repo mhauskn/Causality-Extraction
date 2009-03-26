@@ -1,6 +1,9 @@
-package parser;
+package parser.Stanford;
 
 import java.util.Collection;
+
+import turk.writers.HumanToCRF;
+
 
 import edu.stanford.nlp.trees.GrammaticalStructure;
 import edu.stanford.nlp.trees.GrammaticalStructureFactory;
@@ -55,7 +58,10 @@ public class InteractiveStanfordParser implements Map<String> {
 	}
 	
 	public void map(String arg0) {
-		parseSentenceTest(arg0);
+		String detagged = "";
+		for (String word : arg0.split(" "))
+			detagged += HumanToCRF.removeTags(word, HumanToCRF.OPEN_TAGS, HumanToCRF.CLOSE_TAGS) + " ";
+		parseSentenceTest(detagged);
 	}
 	
 	public static void main (String[] args) {

@@ -13,6 +13,8 @@ public class Include
 	
 	public static final String MISC_PUNC = ".?!:;-()[]'\"/,";
 	
+	public static final String INTRA_SENT_PUNC = ",:";
+	
 	public static final String NOUN_REGEXP = "(nn|nns|np)";
 	
 	public static final String EXTENDED_NOUN_REGEXP = "(nn\\$|nns\\$|np\\$)";
@@ -28,9 +30,11 @@ public class Include
 	public static final String hmmFile = "Hmm/pos-en-general-brown.HiddenMarkovModel";
 	
 	public static final String pcfgPath = "stanford/englishPCFG.ser.gz";
+	//public static final String pcfgPath = "stanford/englishFactored.ser.gz";
+	//public static final String pcfgPath = "stanford/wsjPCFG.ser.gz";
 	
 	public static final String lookupPath = "stanford/sentence_lookup";
-	
+		
 	//---------------Methods-------------------//
 	
 	/**

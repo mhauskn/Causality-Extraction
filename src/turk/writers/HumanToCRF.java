@@ -20,7 +20,7 @@ public class HumanToCRF extends IO<String,String> implements Map<String> {
 	public static final String[] OPEN = new String[] { "[", "(", "<", "{" };
 	public static final String[] CLOSE = new String[] { "]", ")", ">", "}" };
 	
-	public static final String reln = "reln:";
+	String reln = turk.Include.relnFeat;
 	
 	ArrayList<TriStateWriter> writers = new ArrayList<TriStateWriter>();
 	
@@ -91,7 +91,12 @@ public class HumanToCRF extends IO<String,String> implements Map<String> {
 		
 		for (int i = 0; i < segs.length; i++)
 			out.add(segs[i] + feats[i] + labels[i]);
-		out.add(Include.SENT_DELIM);
+		
+		String delim = Include.SENT_DELIM_REDUX + " ";
+		for (TriStateWriter w : writers)
+			if (w.asFeature)
+				delim += w.non + " ";
+		out.add(delim + Include.NEITHER_TAG);
 	}
 	
 	/**
@@ -155,7 +160,7 @@ public class HumanToCRF extends IO<String,String> implements Map<String> {
 	 * @param valid_close_tags
 	 * @return
 	 */
-	static String removeTags (String word, String valid_open_tags, String valid_close_tags) {
+	public static String removeTags (String word, String valid_open_tags, String valid_close_tags) {
 		String out = "";
 		boolean closing = false;
 		for (int i = 0; i < word.length(); i++) {

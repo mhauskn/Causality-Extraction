@@ -3,12 +3,12 @@ package misc;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Hashtable;
-import java.util.List;
 
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TypedDependency;
 
-import parser.StanfordParser;
+import parser.Stanford.StanfordParser;
+import parser.Stanford.TreeOps;
 import stemmer.BasicStemmer;
 
 /**
@@ -80,7 +80,7 @@ public class SyntaticSentencePreproc {
 		if (!screenSentence())
 			return null;
 		tree = parser.getParseTree(curr_sentence_tokens);
-		pos_tags = parser.getPOSTags(tree);
+		pos_tags = TreeOps.getPOSTags(tree);
 		try {
 			checkDuplicates();
 			findCauseEffect();
@@ -142,19 +142,12 @@ public class SyntaticSentencePreproc {
 		effect_start = getPhraseStart(effect_split);
 		effect_end = effect_start + effect_split.length -1;
 		
-		Tree[] wordIndexedTree = getWordIndexedTree(tree);
-		cause_start = parser.getParentNpVp(tree, wordIndexedTree, cause_start)[0];
-		cause_end = parser.getParentNpVp(tree, wordIndexedTree, cause_end)[1];
+		Tree[] wordIndexedTree = TreeOps.getWordIndexedTree(tree);
+		cause_start = TreeOps.getParentNpVp(tree, wordIndexedTree, cause_start)[0];
+		cause_end = TreeOps.getParentNpVp(tree, wordIndexedTree, cause_end)[1];
 		
-		effect_start = parser.getParentNpVp(tree, wordIndexedTree, effect_start)[0];
-		effect_end = parser.getParentNpVp(tree, wordIndexedTree, effect_end)[1];
-	}
-	
-	public Tree[] getWordIndexedTree (Tree root) {
-	    List<Tree> trees = root.getLeaves();
-	    Tree[] out = new Tree[trees.size()];
-	    out = trees.toArray(out);
-	    return out;
+		effect_start = TreeOps.getParentNpVp(tree, wordIndexedTree, effect_start)[0];
+		effect_end = TreeOps.getParentNpVp(tree, wordIndexedTree, effect_end)[1];
 	}
 	
 	/**
@@ -164,7 +157,7 @@ public class SyntaticSentencePreproc {
 	 * and effect phrases.
 	 */
 	void createSyntaticFeatures () {
-		Collection<TypedDependency> deps = parser.getDependencies(tree);
+		Collection<TypedDependency> deps = TreeOps.getDependencies(tree);
 		getIndexedDeps(deps);
 		makeFeatures();
 	}
@@ -181,8 +174,8 @@ public class SyntaticSentencePreproc {
 		reverse_indexed_deps = new ArrayList[curr_sentence_tokens.length];
 				
 		for (TypedDependency td : deps) {
-			int dep_index = StanfordParser.getDepIndex(td);
-			int gov_index = StanfordParser.getGovIndex(td);
+			int dep_index = TreeOps.getDepIndex(td);
+			int gov_index = TreeOps.getGovIndex(td);
 			if (indexed_deps[dep_index] == null) {
 				ArrayList<TypedDependency> a = new ArrayList<TypedDependency>();
 				a.add(td);
@@ -222,17 +215,17 @@ public class SyntaticSentencePreproc {
 	 * absorb-dobj-EP
 	 */
 	void makeFeature (TypedDependency td, String phraseReln, boolean reversed) {
-		int gov_index = StanfordParser.getDependencyValue(td.gov().toString());
-		int dep_index = StanfordParser.getDependencyValue(td.dep().toString());
+		int gov_index = TreeOps.getDependencyValue(td.gov().toString());
+		int dep_index = TreeOps.getDependencyValue(td.dep().toString());
 		
 		if (inBasePhrase(gov_index) && inBasePhrase(dep_index))
 			return;
 		
 		String connection = "_of_";
 		String reln = td.reln().toString();
-		String gov = StanfordParser.getDependencyKey(td.gov().toString());
+		String gov = TreeOps.getDependencyKey(td.gov().toString());
 		if (reversed) {
-			gov = StanfordParser.getDependencyKey(td.dep().toString());
+			gov = TreeOps.getDependencyKey(td.dep().toString());
 			gov_index = dep_index;
 			connection = "_fo_";
 		}

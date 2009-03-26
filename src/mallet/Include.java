@@ -56,6 +56,18 @@ public class Include {
 	}
 	
 	/**
+	 * Gets the list of features from a tuple of the form
+	 * <token> <feat1> ... <featN> <class>
+	 */
+	public static String getFeature (String line) {
+		int startInd = line.indexOf(' ');
+		int endInd = line.lastIndexOf(' ');
+		if (startInd == -1 || startInd == endInd)
+			return "";
+		return line.substring(startInd + 1,endInd);
+	}
+	
+	/**
 	 * Gets the label from a tuple of the form
 	 * <token> <feat1> ... <featN> <classLabel>
 	 */
@@ -66,8 +78,6 @@ public class Include {
 	/**
 	 * Reads a file deliminated by SENT_DELIM tags into an 
 	 * arraylist where each entry is a sentence.
-	 * @param file
-	 * @return
 	 */
 	public static ArrayList<String> readSentDelimFile (String file) {
 		ArrayList<String> sentences = new ArrayList<String>();
@@ -90,10 +100,6 @@ public class Include {
 	 */
 	public static boolean hasSentDelim (String str) {
 		return str.contains(SENT_DELIM_REDUX);
-	}
-	
-	public static void main (String[] args) {
-		System.out.println(getToken("tok feat label"));
 	}
 }
  

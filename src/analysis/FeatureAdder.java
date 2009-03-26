@@ -4,12 +4,15 @@ import java.util.ArrayList;
 
 import mallet.Include;
 
+import haus.io.Closer;
 import haus.io.DataWriter;
 import haus.io.FileReader;
 import haus.io.IO;
-import parser.StanfordParser;
+import parser.Stanford.StanfordParser;
 import analysis.features.POSFeature;
 import analysis.features.StemFeature;
+import analysis.postFeatures.RelnDep;
+import analysis.postFeatures.RelnProc;
 
 /**
  * Adds features to a bare CRF input file to make this file ready for 
@@ -22,15 +25,18 @@ import analysis.features.StemFeature;
  */
 public class FeatureAdder extends IO<String,String> {
 	public static final String file_in = "crf/crf_bare.txt";
+	public static final String file_test = "crf/test.txt";
 	public static final String file_out = "crf/crf.txt";
 	
 	ArrayList<Feature> feat_generators = new ArrayList<Feature>();
+	ArrayList<PostFeature> post_feat_generators = new ArrayList<PostFeature>();
 	
 	String[] toks;
 	String[] feats;
 	String[] labels;
 	
 	ArrayList<String> _toks = new ArrayList<String>();
+	ArrayList<String> _feats = new ArrayList<String>();
 	ArrayList<String> _labels = new ArrayList<String>();
 	
 	/**
@@ -40,32 +46,42 @@ public class FeatureAdder extends IO<String,String> {
 		feat_generators.add(f);
 	}
 	
+	public void addPostFeatureGenerator (PostFeature f) {
+		post_feat_generators.add(f);
+	}
+	
 	/**
 	 * Map function for our input. Gets one sentence and divides it 
 	 * into different parts.
 	 */
 	public void map (String line) {
 		_toks.add(Include.getToken(line));
+		_feats.add(Include.getFeature(line) + " ");
 		_labels.add(Include.getLabel(line));
 		
 		if (Include.hasSentDelim(line)) {
 			toks = haus.misc.Conversions.toStrArray(_toks);
+			feats = haus.misc.Conversions.toStrArray(_feats);
 			labels = haus.misc.Conversions.toStrArray(_labels);
-			_toks.clear();
-			_labels.clear();
-			createFeatures();
+			createFeatures(haus.misc.Conversions.toStrArray(_feats));
 			writePopulatedCRF();
+			_toks.clear();
+			_feats.clear();
+			_labels.clear();
 		}
 	}
 	
 	/**
 	 * Creates a set of features for our tokens and labels. This is done
 	 * by calling each of our feature generators with the strings
-	 * in the sentence
+	 * in the sentence. 
+	 * 
+	 * We need the original features to avoid confusing our post feature
+	 * generators.
 	 */
-	void createFeatures () {
-		feats = new String[toks.length];
-		for (int i = 0; i < feats.length; i++) feats[i] = "";
+	void createFeatures (String[] original_features) {
+		for (PostFeature pfeat : post_feat_generators)
+			addFeature(feats, pfeat.getFeature(toks, original_features));
 		for (Feature gen : feat_generators)
 			addFeature(feats, gen.getFeature(toks));
 	}
@@ -76,7 +92,7 @@ public class FeatureAdder extends IO<String,String> {
 	 */
 	void writePopulatedCRF () {
 		for (int i = 0; i < toks.length; i++)
-			out.add(toks[i] + feats[i] + labels[i]);
+			out.add(toks[i].trim() + " " + feats[i].trim() + " " + labels[i].trim());
 	}
 	
 	/**
@@ -84,20 +100,25 @@ public class FeatureAdder extends IO<String,String> {
 	 */
 	void addFeature (String[] features, String[] newFeature) {
 		for (int i = 0; i < features.length; i++) {
-			features[i] += newFeature[i] + " ";
+			String trimmedFeat = feats[i].trim();
+			features[i] = trimmedFeat + " " + newFeature[i].trim() + " ";
 		}
 	}
 	
 	public static void main (String[] args) {
-		DataWriter d = new DataWriter(file_out);
+		Closer c = new Closer();
+		StanfordParser sp = new StanfordParser();
+		
 		FeatureAdder f = new FeatureAdder();
-		f.setInput(new FileReader(file_in));
-		f.setOutput(d);
+		f.setInput((1 == 1) ? new FileReader(file_in) : new FileReader(file_test));
+		f.setOutput(new DataWriter(file_out,c));
 		
 		f.addFeatureGenerator(new StemFeature());
-		f.addFeatureGenerator(new POSFeature(new StanfordParser()));
+		f.addFeatureGenerator(new POSFeature(sp));
+		f.addPostFeatureGenerator(new RelnProc());
+		f.addPostFeatureGenerator(new RelnDep(sp));
 		
 		f.mapInput();
-		d.close();
+		c.close();
 	}
 }

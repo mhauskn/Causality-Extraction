@@ -1,13 +1,15 @@
 package analysis.features;
 
 import analysis.Feature;
-import parser.StanfordParser;
+import parser.Stanford.StanfordParser;
+import parser.Stanford.TreeOps;
 
 /**
  * Creates POS Tags for a given sentence.
  * Employs the Stanford Parser to create these POS tags.
  */
 public class POSFeature implements Feature {
+	public static String feat_name = "tok_pos:";
 	StanfordParser sp;
 	
 	public POSFeature (StanfordParser _sp) {
@@ -19,7 +21,11 @@ public class POSFeature implements Feature {
 	 * the given sentence.
 	 */
 	public String[] getFeature(String[] tokens) {
-		return sp.getPOSTags(sp.getParseTree(tokens));
+		String[] tags = TreeOps.getPOSTags(sp.getParseTree(tokens));
+		String[] out = new String[tags.length];
+		for (int i = 0; i < tags.length; i++)
+			out[i] = feat_name + tags[i];
+		return out;
 	}
 
 }
