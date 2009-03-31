@@ -1,9 +1,13 @@
 package analysis.postFeatures;
 
+import java.util.ArrayList;
+
 import edu.stanford.nlp.trees.Tree;
 import parser.Stanford.StanfordParser;
 import parser.Stanford.TreeOps;
 import analysis.PostFeature;
+import analysis.postFeatures.RelnTypes.BiPhrasalReln;
+import analysis.postFeatures.RelnTypes.TypeReln;
 import analysis.postFeatures.RelnTypes.VerbBasedReln;
 
 /**
@@ -16,7 +20,8 @@ public class RelnDep implements PostFeature {
 	public static final String neg_conn = "no_verbal_reln";
 	
 	StanfordParser sp;
-	VerbBasedReln verb_reln;
+	
+	ArrayList<TypeReln> relns = new ArrayList<TypeReln>();
 	
 	Tree t;
 	Tree[] leaves;
@@ -26,7 +31,8 @@ public class RelnDep implements PostFeature {
 	
 	public RelnDep (StanfordParser parser) {
 		sp = parser;
-		verb_reln = new VerbBasedReln();
+		relns.add(new BiPhrasalReln());
+		relns.add(new VerbBasedReln());
 	}
 	
 	/**
@@ -39,8 +45,16 @@ public class RelnDep implements PostFeature {
 		t = sp.getParseTree(tokens);
 		leaves = TreeOps.getWordIndexedTree(t);
 		
-		double conf = verb_reln.computeConfidence(toks, feats, t, leaves);
-		return verb_reln.getResults();
+		double best_conf = -1.0;
+		TypeReln best_reln = null;
+		for (TypeReln reln : relns) {
+			double conf = reln.computeConfidence(toks, feats, t, leaves, sp);
+			if (conf > best_conf) {
+				best_conf = conf;
+				best_reln = reln;
+			}
+		}
+		return best_reln.getResults();
 	}
 	
 	/**

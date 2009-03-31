@@ -17,6 +17,8 @@ import edu.stanford.nlp.trees.Tree;
  * for getting syntatic dependencies, parses and POS.
  */
 public class StanfordParser implements Closable {
+	public static final String sep_punc = Include.END_SENT_PUNC + Include.INTRA_SENT_PUNC;
+	
 	public static final String NP_REGEXP = "(NN|NNS|NP|NNP|NNPS)";
 	public static final String VP_REGEXP = "(VP|VB|VBN|VBG|VBD)";
 	public static final String V_REGEXP = "(VB|VBN|VBG|VBD)";
@@ -27,12 +29,12 @@ public class StanfordParser implements Closable {
 		
 	public static final int MAX_SENT_LEN = 80;
 	
-	@SuppressWarnings("unchecked")
-	Hashtable<String,Tree> lookup = (Hashtable<String, Tree>) haus.io.Serializer.deserialize(include.Include.lookupPath);
-	//Hashtable<String,Tree> lookup = new Hashtable<String, Tree>();
+	Hashtable<String,Tree> lookup = null;
+	
+	boolean lookup_modified = false;
 	
 	LexicalizedParser lp = null;
-	
+		
 	public StanfordParser () {}
 	
 	/**
@@ -42,6 +44,18 @@ public class StanfordParser implements Closable {
 	 */
 	public StanfordParser (Closer c) {
 		c.registerClosable(this);
+	}
+	
+	/**
+	 * De-serializes our stored sentence lookup
+	 */
+	@SuppressWarnings("unchecked")
+	void initLookup () {
+		if (haus.io.FileReader.exists(include.Include.lookupPath))
+			lookup = (Hashtable<String, Tree>) 
+				haus.io.Serializer.deserialize(include.Include.lookupPath);
+		else 
+			lookup = new Hashtable<String,Tree>();
 	}
 	
 	/**
@@ -62,18 +76,28 @@ public class StanfordParser implements Closable {
 		removeQuotes(tokens);
 		tokens = separatePunc(tokens);
 		String key = hashFunc(tokens);
+		if (lookup == null) initLookup();
 		if (lookup.containsKey(key)) {
 			return lookup.get(key);
-		} else {
-			System.out.println("Sentence Not Found: " + key);
-			if (lp == null)
-				initLexParser();
-			Tree t = (Tree) lp.apply(Arrays.asList(tokens));
-			lookup.put(key, t);
-			return t;
 		}
+		
+		System.out.println("Sentence Not Found: " + key);
+		if (lp == null)
+			initLexParser();
+		Tree t = (Tree) lp.apply(Arrays.asList(tokens));
+		lookup.put(key, t);
+		lookup_modified = true;
+		return t;
 	}
 	
+	/**
+	 * Checks if a given leaf is simply a punctuation mark such as a 
+	 * comma or a period.
+	 */
+	public static boolean isPunc (Tree t) {
+		return StanfordParser.sep_punc.contains(t.label().toString());
+	}
+		
 	/**
 	 * Creates a string representation of string array.
 	 * This is useful for serving as a hash key.
@@ -89,7 +113,8 @@ public class StanfordParser implements Closable {
 	 * Serializes our quick-lookup hashtable
 	 */
 	public void close () {
-		haus.io.Serializer.serialize(lookup, include.Include.lookupPath);
+		if (lookup != null && lookup_modified) 
+			haus.io.Serializer.serialize(lookup, include.Include.lookupPath);
 	}
 	
 	/**
@@ -106,16 +131,41 @@ public class StanfordParser implements Closable {
 	 * This punctuation needs to be separated otherwise the parser
 	 * will mis-interpret the words.
 	 */
-	String[] separatePunc (String[] tokens) {
+	public static String[] separatePunc (String[] tokens) {
 		ArrayList<String> out = new ArrayList<String>();
-		String punc = Include.END_SENT_PUNC + Include.INTRA_SENT_PUNC;
-		for (String tok : tokens) {
-			char last_char = tok.charAt(tok.length()-1);
-			if (punc.indexOf(last_char) >= 0) {
+		for (int i = 0; i < tokens.length; i++) {
+			String tok = tokens[i];
+			if (hasSepPunc(tok)) {
 				out.add(tok.substring(0, tok.length()-1));
-				out.add("" + last_char);
+				out.add("" + tok.charAt(tok.length()-1));
 			} else
 				out.add(tok);
+		}
+		
+		return haus.misc.Conversions.toStrArray(out);
+	}
+	
+	/**
+	 * Checks if a string has punctuation which needs to be seperated 
+	 * from it. Ex: messy, --> messy ,
+	 */
+	public static boolean hasSepPunc (String tok) {
+		char last_char = tok.charAt(tok.length()-1);
+		return tok.length() > 1 && sep_punc.indexOf(last_char) >= 0;
+	}
+	
+	/**
+	 * Adds the punctuation back on to the end of our tokens.
+	 * This is designed to be the reverse of the above function.
+	 */
+	public static String[] combinePunc (String[] orig_toks, String[] exp_toks) {
+		ArrayList<String> out = new ArrayList<String>();
+		int expInd = 0;
+		for (int i = 0; i < orig_toks.length; i++) {
+			String tok = orig_toks[i];
+			out.add(exp_toks[expInd++]);
+			if (hasSepPunc(tok))
+				expInd++;
 		}
 		
 		return haus.misc.Conversions.toStrArray(out);

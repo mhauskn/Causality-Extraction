@@ -43,6 +43,16 @@ public class TreeOps {
 	    return out;
 	}
 	
+	public static Tree getNextChild (Tree t, Tree root) {
+		Tree parent = t.parent(root);
+		Tree[] children = parent.children();
+		for (int i = 0; i < children.length; i++) {
+			if (children[i].equals(t) && i != children.length -1)
+				return children[i+1];
+		}
+		return null;
+	}
+	
 	/**
 	 * Given an index for a word in the sentence get the 
 	 * most direct parent noun phrase or verb phrase. Returned
@@ -125,7 +135,6 @@ public class TreeOps {
 	
 	// ---------------- Dependency Stuff ----------------------//
 	
-	
 	/**
 	 * Returns a collection of dependencies between words of the sentence
 	 */
@@ -133,7 +142,8 @@ public class TreeOps {
 		TreebankLanguagePack tlp = new PennTreebankLanguagePack();
 		GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory();
 	    GrammaticalStructure gs = gsf.newGrammaticalStructure(parse);
-	    return gs.typedDependenciesCollapsed();
+	    Collection<TypedDependency> deps = gs.typedDependenciesCollapsed();
+	    return deps;
 	}
 	
 	/**

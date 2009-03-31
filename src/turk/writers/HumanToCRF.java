@@ -143,8 +143,8 @@ public class HumanToCRF extends IO<String,String> implements Map<String> {
 	 * closing relation in the sentence
 	 */
 	int getClosingRelnTagNum (String[] segs) {
-		for (String word: segs) {
-			for (int i = 0; i < CLOSE.length; i++) {
+		for (int i = 0; i < CLOSE_TAGS.length(); i++) {
+			for (String word: segs) {
 				String s = CLOSE[i] + Include.RELN_TAG;
 				if (word.indexOf(s) >= 0)
 					return i;
@@ -303,7 +303,7 @@ public class HumanToCRF extends IO<String,String> implements Map<String> {
 	}
 	
 	public static void main (String[] args) {
-		String in_file = "turk/readableCRF.txt";
+		String in_file = (1 == 1) ? "turk/readableCRF.txt" : "turk/test.txt";
 		String out_file = "turk/crf_bare.txt";
 		DataWriter writer = new DataWriter(out_file);
 		

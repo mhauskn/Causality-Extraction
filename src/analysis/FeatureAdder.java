@@ -39,6 +39,10 @@ public class FeatureAdder extends IO<String,String> {
 	ArrayList<String> _feats = new ArrayList<String>();
 	ArrayList<String> _labels = new ArrayList<String>();
 	
+	String last_tok;
+	String last_feat;
+	String last_label;
+	
 	/**
 	 * Adds another feature generator to our list of feature generators
 	 */
@@ -60,6 +64,10 @@ public class FeatureAdder extends IO<String,String> {
 		_labels.add(Include.getLabel(line));
 		
 		if (Include.hasSentDelim(line)) {
+			last_tok = _toks.remove(_toks.size()-1);
+			last_feat = _feats.remove(_feats.size()-1);
+			last_label = _labels.remove(_labels.size()-1);
+			
 			toks = haus.misc.Conversions.toStrArray(_toks);
 			feats = haus.misc.Conversions.toStrArray(_feats);
 			labels = haus.misc.Conversions.toStrArray(_labels);
@@ -80,10 +88,10 @@ public class FeatureAdder extends IO<String,String> {
 	 * generators.
 	 */
 	void createFeatures (String[] original_features) {
-		for (PostFeature pfeat : post_feat_generators)
-			addFeature(feats, pfeat.getFeature(toks, original_features));
 		for (Feature gen : feat_generators)
 			addFeature(feats, gen.getFeature(toks));
+		for (PostFeature pfeat : post_feat_generators)
+			addFeature(feats, pfeat.getFeature(toks, original_features));
 	}
 	
 	/**
@@ -93,6 +101,7 @@ public class FeatureAdder extends IO<String,String> {
 	void writePopulatedCRF () {
 		for (int i = 0; i < toks.length; i++)
 			out.add(toks[i].trim() + " " + feats[i].trim() + " " + labels[i].trim());
+		out.add(last_tok + " " + last_feat + " " + last_label);
 	}
 	
 	/**
@@ -107,10 +116,10 @@ public class FeatureAdder extends IO<String,String> {
 	
 	public static void main (String[] args) {
 		Closer c = new Closer();
-		StanfordParser sp = new StanfordParser();
+		StanfordParser sp = new StanfordParser(c);
 		
 		FeatureAdder f = new FeatureAdder();
-		f.setInput((1 == 1) ? new FileReader(file_in) : new FileReader(file_test));
+		f.setInput((1 == 2) ? new FileReader(file_in) : new FileReader(file_test));
 		f.setOutput(new DataWriter(file_out,c));
 		
 		f.addFeatureGenerator(new StemFeature());

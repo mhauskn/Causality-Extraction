@@ -3,7 +3,6 @@ package analysis.postFeatures.RelnTypes;
 import haus.misc.Condition;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 import analysis.postFeatures.RelnDep;
@@ -17,42 +16,30 @@ import edu.stanford.nlp.trees.TypedDependency;
  * This class contains methods for generating features 
  * useful to identify verb based cue phrase relations.
  */
-public class VerbBasedReln {
-	public static final String root1_feat = "key_area1";
-	public static final String root2_feat = "key_area2";
-	public static final String neg_feat = "non_key";
+public class VerbBasedReln extends TypeReln {
+	public static final String root1_feat = "verbalArea1";
+	public static final String root2_feat = "verbalArea2";
+	public static final String neg_feat = "verbalNeg";
 	
 	ArrayList<Integer> locations = new ArrayList<Integer>();
 	
 	int root1, root2;
 	int [] r1arr, r2arr;
-	int len;
-	
-	Tree t;
-	Tree[] leaves;
-	
-	String[] out;
 	
 	/**
-	 * Returns true if this relation is a verb-based
-	 * relation.
-	 * @return
+	 * Returns our confidence score that this sentence
+	 * can be handled by the verb based metric
 	 */
-	public double computeConfidence (String[] toks, String[] feats, Tree root, Tree[] _leaves) {
-		out = new String[toks.length];
-		Arrays.fill(out, "");
-		t = root;
-		leaves = _leaves;
-		locations.clear();
+	public double getMetric () {
 		r1arr = null;
 		r2arr = null;
 		root1 = -1; root2 = -1;
-		int len = toks.length;
-		
-		String[] pos_tags = TreeOps.getPOSTags(t);
-		for (int i = 0; i < len; i++)
-			if (turk.Include.hasPosRelnFeat(feats[i]) &&
-					pos_tags[i].matches(StanfordParser.VP_REGEXP))
+		locations.clear();
+		String[] pos_tags = StanfordParser.combinePunc(toks, TreeOps.getPOSTags(t));
+		if (pos_tags.length != toks.length)
+			System.out.println("We got problem");
+		for (int i = 0; i < toks.length; i++)
+			if (containsCCP(feats[i]) && pos_tags[i].matches(StanfordParser.VP_REGEXP))
 				locations.add(i);
 		if (locations.size() == 0)
 			return 0.0;
@@ -175,7 +162,7 @@ public class VerbBasedReln {
 	 * Write the features for our verb governed sentence
 	 */
 	void writeVerbFeat () {
-		for (int i = 0; i < len; i++) {
+		for (int i = 0; i < toks.length; i++) {
 			if (i >= r1arr[0] && i <= r1arr[1]) 
 				out[i] += root1_feat + " ";
 			else if (i >= r2arr[0] && i <= r2arr[1]) 
@@ -183,12 +170,5 @@ public class VerbBasedReln {
 			else
 				out[i] += neg_feat + " ";
 		}
-	}
-	
-	/**
-	 * Returns the array of features
-	 */
-	public String[] getResults () {
-		return out;
 	}
 }

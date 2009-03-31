@@ -35,6 +35,16 @@ public class Include {
 	
 	// ------------------ Methods for Dealing with CRF Files ----------------------
 	
+	public static String[] removeSentDelim (String[] words) {
+		if (hasSentDelim(words[words.length-1])) {
+			String[] out = new String[words.length-1];
+			for (int i = 0; i < words.length-1; i++)
+				out[i] = words[i];
+			return out;
+		}
+		return words;
+	}
+	
 	/**
 	 * Removes the class labels from tuples of the form
 	 * <token> <feat1> ... <featN> <class>

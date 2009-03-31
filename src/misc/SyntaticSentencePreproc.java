@@ -157,7 +157,8 @@ public class SyntaticSentencePreproc {
 	 * and effect phrases.
 	 */
 	void createSyntaticFeatures () {
-		Collection<TypedDependency> deps = TreeOps.getDependencies(tree);
+		Collection<TypedDependency> deps = 
+			TreeOps.getDependencies(tree);
 		getIndexedDeps(deps);
 		makeFeatures();
 	}
