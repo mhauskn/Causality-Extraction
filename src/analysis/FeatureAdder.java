@@ -119,7 +119,7 @@ public class FeatureAdder extends IO<String,String> {
 		StanfordParser sp = new StanfordParser(c);
 		
 		FeatureAdder f = new FeatureAdder();
-		f.setInput((1 == 2) ? new FileReader(file_in) : new FileReader(file_test));
+		f.setInput((1 == 1) ? new FileReader(file_in) : new FileReader(file_test));
 		f.setOutput(new DataWriter(file_out,c));
 		
 		f.addFeatureGenerator(new StemFeature());

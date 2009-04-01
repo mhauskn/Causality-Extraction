@@ -36,6 +36,7 @@ public class BiPhrasalReln extends TypeReln {
 	 * by the Bi Phrasal Relation
 	 */
 	public double getMetric() {
+		t = sp.getExpandedParseTree(toks);
 		commaLocs.clear();
 		conf = 0.0;
 		

@@ -15,10 +15,8 @@ import analysis.postFeatures.RelnTypes.VerbBasedReln;
  * the rest of the sentence.
  */
 public class RelnDep implements PostFeature {
-	public static final String NP_OR_S = "(NP|S|WHNP)";
-	
-	public static final String neg_conn = "no_verbal_reln";
-	
+	public static final String NP_OR_S = "(NP|S|WHNP|NN|NNS|NNP|NNPS)";
+		
 	StanfordParser sp;
 	
 	ArrayList<TypeReln> relns = new ArrayList<TypeReln>();
@@ -43,7 +41,7 @@ public class RelnDep implements PostFeature {
 		feats = features;
 		
 		t = sp.getParseTree(tokens);
-		leaves = TreeOps.getWordIndexedTree(t);
+		leaves = TreeOps.getLeaves(t);
 		
 		double best_conf = -1.0;
 		TypeReln best_reln = null;

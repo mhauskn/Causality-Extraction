@@ -23,12 +23,9 @@ public class POSFeature implements Feature {
 	public String[] getFeature(String[] tokens) {
 		String[] tags = TreeOps.getPOSTags(sp.getParseTree(tokens));
 		String[] out = new String[tokens.length];
-		String[] good_tags = StanfordParser.combinePunc(tokens, tags);
-		if (out.length != good_tags.length)
-			System.out.println("we have problem");
-		
-		for (int i = 0; i < good_tags.length; i++)
-			out[i] = feat_name + good_tags[i];
+
+		for (int i = 0; i < tags.length; i++)
+			out[i] = feat_name + tags[i];
 		return out;
 	}
 

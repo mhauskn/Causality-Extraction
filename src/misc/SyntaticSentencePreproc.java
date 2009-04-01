@@ -142,7 +142,7 @@ public class SyntaticSentencePreproc {
 		effect_start = getPhraseStart(effect_split);
 		effect_end = effect_start + effect_split.length -1;
 		
-		Tree[] wordIndexedTree = TreeOps.getWordIndexedTree(tree);
+		Tree[] wordIndexedTree = TreeOps.getLeaves(tree);
 		cause_start = TreeOps.getParentNpVp(tree, wordIndexedTree, cause_start)[0];
 		cause_end = TreeOps.getParentNpVp(tree, wordIndexedTree, cause_end)[1];
 		

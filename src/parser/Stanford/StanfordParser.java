@@ -68,11 +68,18 @@ public class StanfordParser implements Closable {
 	}
 	
 	/**
-	 * Returns a parse Tree for the given sentence. Ideally we want to
-	 * do quick lookup in our HT, but if not possible then we will 
-	 * actually do the parse.
+	 * Returns a parse tree for the given sentence
 	 */
 	public Tree getParseTree (String[] tokens) {
+		Tree exp_t = getExpandedParseTree(tokens);
+		return TreeOps.combinePunc(exp_t);
+	}
+	
+	/**
+	 * Returns an expanded parse tree for the given sentence. This 
+	 * parse tree will include separate nodes for punctuation.
+	 */
+	public Tree getExpandedParseTree (String[] tokens) {
 		removeQuotes(tokens);
 		tokens = separatePunc(tokens);
 		String key = hashFunc(tokens);
@@ -110,7 +117,7 @@ public class StanfordParser implements Closable {
 	}
 	
 	/**
-	 * Serializes our quick-lookup hashtable
+	 * Serializes our quick-lookup hash table
 	 */
 	public void close () {
 		if (lookup != null && lookup_modified) 
@@ -146,28 +153,11 @@ public class StanfordParser implements Closable {
 	}
 	
 	/**
-	 * Checks if a string has punctuation which needs to be seperated 
+	 * Checks if a string has punctuation which needs to be separated 
 	 * from it. Ex: messy, --> messy ,
 	 */
 	public static boolean hasSepPunc (String tok) {
 		char last_char = tok.charAt(tok.length()-1);
 		return tok.length() > 1 && sep_punc.indexOf(last_char) >= 0;
-	}
-	
-	/**
-	 * Adds the punctuation back on to the end of our tokens.
-	 * This is designed to be the reverse of the above function.
-	 */
-	public static String[] combinePunc (String[] orig_toks, String[] exp_toks) {
-		ArrayList<String> out = new ArrayList<String>();
-		int expInd = 0;
-		for (int i = 0; i < orig_toks.length; i++) {
-			String tok = orig_toks[i];
-			out.add(exp_toks[expInd++]);
-			if (hasSepPunc(tok))
-				expInd++;
-		}
-		
-		return haus.misc.Conversions.toStrArray(out);
 	}
 }

@@ -19,6 +19,41 @@ import edu.stanford.nlp.trees.TypedDependency;
  */
 public class TreeOps {
 	/**
+	 * Punctuation is separated into different tokens to improve quality
+	 * of Stanford's parse. This method will combine the punctuation
+	 * producing a parse tree as if the punctuation were never separated.
+	 */
+	public static Tree combinePunc (Tree t) {
+		Tree[] leaves = getLeaves(t);
+		for (int i = 0; i < leaves.length; i++) {
+			Tree leaf = leaves[i];
+			String label = leaf.label().toString();
+			if (label.length() == 1 && StanfordParser.sep_punc.contains(label)) {
+				Tree exp = expandWhile(t, leaf, new stringMatcher(label));
+				int childNum = getChildNum(t,exp);
+				exp.parent(t).removeChild(childNum);
+				Tree prev = leaves[i-1];
+				prev.setValue(prev.label().toString()+label);
+				return combinePunc(t);
+			}
+		}
+		return t;
+	}
+	
+	/**
+	 * Returns the Tree t's child number with respect
+	 * to T's parent. If t is the first child it will return 1
+	 */
+	public static int getChildNum (Tree root, Tree t) {
+		Tree[] children = t.parent(root).children();
+		for (int i = 0; i < children.length; i++) {
+			if (children[i].equals(t))
+				return i;
+		}
+		return -1;
+	}
+	
+	/**
 	 * Returns a list of POS tags corresponding to the words of the sentence
 	 */
 	public static String[] getPOSTags (Tree t) {
@@ -32,17 +67,18 @@ public class TreeOps {
 	}
 	
 	/**
-	 * The word indexed tree is the an array of leaves which correspond
-	 * to the base words in a sentence. This is useful for looking at 
-	 * the parents of given words or working up a hierarchy from the leaves
+	 * Returns the lowest level leaves in our tree root
 	 */
-	public static Tree[] getWordIndexedTree (Tree root) {
+	public static Tree[] getLeaves (Tree root) {
 	    List<Tree> trees = root.getLeaves();
 	    Tree[] out = new Tree[trees.size()];
 	    out = trees.toArray(out);
 	    return out;
 	}
 	
+	/**
+	 * Returns next sibling of tree t
+	 */
 	public static Tree getNextChild (Tree t, Tree root) {
 		Tree parent = t.parent(root);
 		Tree[] children = parent.children();
@@ -90,14 +126,54 @@ public class TreeOps {
 	/**
 	 * Expands from the given tree until the given condition is satisfied
 	 */
-	public static Tree expand (Tree root, Tree subtree, Condition<Tree> cond) {
-		Tree start = subtree;
-		Tree t = start;
+	public static Tree expandUntil (Tree root, Tree subtree, Condition<Tree> cond) {
+		Tree t = subtree;
 		
 		while (t != null && !cond.satisfied(t))
 			t = t.parent(root);
 		
 		return t;
+	}
+	
+	/**
+	 * Expands the given tree until the condition is satisfied
+	 */
+	public static Tree expandWhile (Tree root, Tree subtree, Condition<Tree> cond) {
+		Tree t = subtree;
+		Tree out = subtree;
+		
+		while (t != null && cond.satisfied(t)) {
+			out = t;
+			t = t.parent(root);
+		}
+		
+		return out;
+	}
+	
+	/**
+	 * Return true once regular expression is matched
+	 */
+	public static class regexpMatcher implements Condition<Tree> {
+		String regexp;
+		public regexpMatcher (String r) {
+			regexp = r;
+		}
+		public boolean satisfied (Tree t) {
+			return t.label().toString().matches(regexp);
+		}
+	}
+	
+	/**
+	 * Returns true once the string is matched
+	 */
+	public static class stringMatcher implements Condition<Tree> {
+		String s;
+		public stringMatcher (String r) {
+			s = r;
+		}
+		public boolean satisfied (Tree t) {
+			return t.label().toString().equals(s);
+		}
 	}
 	
 	/**
@@ -115,7 +191,7 @@ public class TreeOps {
 			return null;
 		int left_char_index = root.leftCharEdge(subtree);
 		int size = subtree.getLeaves().size();
-		Tree[] indexed_tree = getWordIndexedTree(root);
+		Tree[] indexed_tree = getLeaves(root);
 		int charcnt = 0;
 		if (left_char_index == 0)
 			return new int [] { 0, size-1 };
