@@ -84,7 +84,9 @@ public class VerbBasedReln extends TypeReln {
 		for (TypedDependency td : td_collect) {
 			String gov = td.gov().toString();
 			int govIndex = TreeOps.getDependencyValue(gov);
-			if (locations.contains(govIndex) && td.reln().toString().equals("nsubj"))
+			String reln = td.reln().toString();
+			if (locations.contains(govIndex) && 
+					(reln.equals("nsubj") || reln.equals("nsubjpass")))
 				workable.add(td);
 		}
 		// Find a good dependency
@@ -131,7 +133,7 @@ public class VerbBasedReln extends TypeReln {
 		r1arr = TreeOps.getSubTreeBoundaries(t, base1);
 		if (!seperate(r1arr, r2arr)) return 0.0;
 		writeVerbFeat();
-		return 0.75;
+		return 0.5;
 	}
 	
 	/**

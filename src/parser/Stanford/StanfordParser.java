@@ -20,8 +20,8 @@ public class StanfordParser implements Closable {
 	public static final String sep_punc = Include.END_SENT_PUNC + Include.INTRA_SENT_PUNC;
 	
 	public static final String NP_REGEXP = "(NN|NNS|NP|NNP|NNPS)";
-	public static final String VP_REGEXP = "(VP|VB|VBN|VBG|VBD)";
-	public static final String V_REGEXP = "(VB|VBN|VBG|VBD)";
+	public static final String VP_REGEXP = "(VP|VB|VBN|VBG|VBD|VBP|VBZ)";
+	public static final String V_REGEXP = "(VB|VBN|VBG|VBD|VBP)";
 	public static final String DT_REGEXP = "DT";
 	
 	public static final String NounPhrase = "NP";
@@ -30,19 +30,37 @@ public class StanfordParser implements Closable {
 	public static final int MAX_SENT_LEN = 80;
 	
 	Hashtable<String,Tree> lookup = null;
+	Hashtable<String,Tree> contracted_lookup = null;
 	
 	boolean lookup_modified = false;
 	
 	LexicalizedParser lp = null;
+	
+	private static StanfordParser ref;
 		
-	public StanfordParser () {}
+	private StanfordParser () {}
+	
+	public static StanfordParser getStanfordParser ()
+	{
+		if (ref == null)
+			ref = new StanfordParser();
+		return ref;
+	}
+	
+	public static StanfordParser getStanfordParser (Closer c)
+	{
+		if (ref == null)
+			ref = new StanfordParser();
+		ref.register(c);
+		return ref;
+	}
 	
 	/**
 	 * This method assumes that we wish to modify our lookup hashtable
 	 * by adding new entries and serializing them at the end of the
 	 * program
 	 */
-	public StanfordParser (Closer c) {
+	void register (Closer c) {
 		c.registerClosable(this);
 	}
 	
@@ -68,11 +86,30 @@ public class StanfordParser implements Closable {
 	}
 	
 	/**
-	 * Returns a parse tree for the given sentence
+	 * Returns a parse tree for the given sentence.
+	 * This parse tree will be a smaller version with punctuation 
+	 * left at the end of each node. We use a separate HT to 
+	 * retrieve these nodes so that the same sentence can give
+	 * us both a expanded and a contracted HT without modifications.
 	 */
+	@SuppressWarnings("unchecked")
 	public Tree getParseTree (String[] tokens) {
-		Tree exp_t = getExpandedParseTree(tokens);
-		return TreeOps.combinePunc(exp_t);
+		Tree t;
+		removeQuotes(tokens);
+		tokens = separatePunc(tokens);
+		String key = hashFunc(tokens);
+		if (contracted_lookup == null) 
+			contracted_lookup = (Hashtable<String, Tree>) 
+				haus.io.Serializer.deserialize(include.Include.lookupPath);
+		if (contracted_lookup.containsKey(key))
+			t = contracted_lookup.get(key);
+		else {
+			System.out.println("Contracted Lookup: Sentence Not Found: " + key);
+			if (lp == null)
+				initLexParser();
+			t = (Tree) lp.apply(Arrays.asList(tokens));
+		}
+		return TreeOps.combinePunc(t);
 	}
 	
 	/**
@@ -84,9 +121,8 @@ public class StanfordParser implements Closable {
 		tokens = separatePunc(tokens);
 		String key = hashFunc(tokens);
 		if (lookup == null) initLookup();
-		if (lookup.containsKey(key)) {
+		if (lookup.containsKey(key))
 			return lookup.get(key);
-		}
 		
 		System.out.println("Sentence Not Found: " + key);
 		if (lp == null)
@@ -101,8 +137,8 @@ public class StanfordParser implements Closable {
 	 * Checks if a given leaf is simply a punctuation mark such as a 
 	 * comma or a period.
 	 */
-	public static boolean isPunc (Tree t) {
-		return StanfordParser.sep_punc.contains(t.label().toString());
+	public static boolean isPunc (String s) {
+		return StanfordParser.sep_punc.contains(s);
 	}
 		
 	/**

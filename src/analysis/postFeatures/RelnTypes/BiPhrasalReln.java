@@ -29,6 +29,8 @@ public class BiPhrasalReln extends TypeReln {
 	ArrayList<Integer> commaLocs = new ArrayList<Integer>();
 	double conf = 0.0;
 	
+	Tree exp;
+	
 	Tree area1, area2;
 	
 	/**
@@ -36,7 +38,8 @@ public class BiPhrasalReln extends TypeReln {
 	 * by the Bi Phrasal Relation
 	 */
 	public double getMetric() {
-		t = sp.getExpandedParseTree(toks);
+		exp = sp.getExpandedParseTree(toks);
+		leaves = TreeOps.getLeaves(exp);
 		commaLocs.clear();
 		conf = 0.0;
 		
@@ -59,18 +62,20 @@ public class BiPhrasalReln extends TypeReln {
 	 * These commas should be followed by NP VP
 	 */
 	void doCommaSearch () {
-		for (int i = 0; i < leaves.length; i++)
-			if (leaves[i].label().toString().equals(","))
+		for (int i = 0; i < leaves.length; i++) {
+			String label = leaves[i].label().toString();
+			if (label.equals(","))
 				commaLocs.add(i);
+		}
 	}
 	
 	/**
 	 * Checks if any of our commas are followed by NP VP
 	 */
 	boolean locateNPVP (int loc) {
-		Tree comma = leaves[loc].parent(t);
-		Tree nextChild = TreeOps.getNextChild(comma, t);
-		Tree nextnextChild = TreeOps.getNextChild(nextChild, t);
+		Tree comma = leaves[loc].parent(exp);
+		Tree nextChild = TreeOps.getNextChild(comma, exp);
+		Tree nextnextChild = TreeOps.getNextChild(nextChild, exp);
 		if (nextChild == null || nextnextChild == null)
 			return false;
 		if (!nextChild.label().toString().equals(StanfordParser.NounPhrase) ||
@@ -82,8 +87,8 @@ public class BiPhrasalReln extends TypeReln {
 	}
 	
 	void writeFeat () {
-		int[] bound1 = TreeOps.getSubTreeBoundaries(t, area1);
-		int[] bound2 = TreeOps.getSubTreeBoundaries(t, area2);
+		int[] bound1 = TreeOps.getSubTreeBoundaries(exp, area1);
+		int[] bound2 = TreeOps.getSubTreeBoundaries(exp, area2);
 		
 		if (!VerbBasedReln.seperate(bound1, bound2)) {
 			System.out.println("Inseperable relns... We have a problem!");
@@ -92,7 +97,7 @@ public class BiPhrasalReln extends TypeReln {
 		
 		int cnt = 0;
 		for (int i = 0; i < leaves.length; i++) {
-			if (StanfordParser.isPunc(leaves[i]))
+			if (StanfordParser.isPunc(leaves[i].label().toString()))
 				continue;
 			if (i < bound1[0])
 				out[cnt] += feat1 + " ";

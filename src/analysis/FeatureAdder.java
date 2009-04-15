@@ -116,7 +116,7 @@ public class FeatureAdder extends IO<String,String> {
 	
 	public static void main (String[] args) {
 		Closer c = new Closer();
-		StanfordParser sp = new StanfordParser(c);
+		StanfordParser sp = StanfordParser.getStanfordParser(c);
 		
 		FeatureAdder f = new FeatureAdder();
 		f.setInput((1 == 1) ? new FileReader(file_in) : new FileReader(file_test));

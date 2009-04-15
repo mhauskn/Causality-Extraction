@@ -37,7 +37,7 @@ public class SyntaticSentencePreproc {
 	Hashtable<String,Boolean> processed_sentences = new Hashtable<String,Boolean>();
 	
 	// Tools
-	StanfordParser parser = new StanfordParser();
+	StanfordParser parser = StanfordParser.getStanfordParser();
 	BasicStemmer stemmer = new BasicStemmer();
 	
 	public ArrayList<String[]> findSynDeps 

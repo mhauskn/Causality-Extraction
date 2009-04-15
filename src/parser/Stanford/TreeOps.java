@@ -190,6 +190,7 @@ public class TreeOps {
 		if (root == null || subtree == null)
 			return null;
 		int left_char_index = root.leftCharEdge(subtree);
+		if (left_char_index < 0) return null;
 		int size = subtree.getLeaves().size();
 		Tree[] indexed_tree = getLeaves(root);
 		int charcnt = 0;

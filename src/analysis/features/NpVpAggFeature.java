@@ -26,7 +26,7 @@ public class NpVpAggFeature implements Feature {
 	}
 	
 	public NpVpAggFeature () {
-		sp = new StanfordParser();
+		sp = StanfordParser.getStanfordParser();
 	}
 	
 	public String[] getFeature (String[] _tokens) {

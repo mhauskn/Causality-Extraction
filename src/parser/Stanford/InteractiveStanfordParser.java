@@ -19,7 +19,7 @@ import haus.misc.Map;
  * Allows easy interactive parsing of sentences with the Stanford parser
  */
 public class InteractiveStanfordParser implements Map<String> {
-	StanfordParser sp = new StanfordParser();
+	StanfordParser sp = StanfordParser.getStanfordParser();
 	
 	public InteractiveStanfordParser () {
 		System.out.println("Welcome to the interactive stanford parser. Type in a sentence.");

@@ -89,7 +89,7 @@ public class StanfordPhraseFinder implements Feature {
 	}
 	
 	public static void main (String[] args) {
-		StanfordParser sp2 = new StanfordParser();
+		StanfordParser sp2 = StanfordParser.getStanfordParser();
 		StanfordPhraseFinder spf = new StanfordPhraseFinder(sp2);
 		String sent = "The strongest rain ever recorded in India shut down the financial hub of Mumbai, snapped communication lines, closed airports and forced thousands of people to sleep in their offices or walk home during the night, officials said today.";
 		String[] words = sent.split(" ");
