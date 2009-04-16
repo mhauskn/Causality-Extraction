@@ -304,7 +304,7 @@ public class HumanToCRF extends IO<String,String> implements Map<String> {
 	
 	public static void main (String[] args) {
 		String in_file = (1 == 1) ? "turk/readableCRF.txt" : "turk/test.txt";
-		String out_file = "turk/crf_bare.txt";
+		String out_file = "crf/crf_bare.txt";
 		DataWriter writer = new DataWriter(out_file);
 		
 		HumanToCRF translator = new HumanToCRF();

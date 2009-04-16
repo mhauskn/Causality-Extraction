@@ -65,7 +65,9 @@ public class VerbalReln extends Reln {
 			int govIndex = TreeOps.getDependencyValue(gov);
 			String reln = td.reln().toString();
 			if (locations.contains(govIndex) && 
-					(reln.equals("nsubj") || reln.equals("nsubjpass")))
+					(reln.equals("nsubj") || 
+					reln.equals("nsubjpass") ||
+					reln.equals("dep")))
 				workable.add(td);
 		}
 		// Find a good dependency

@@ -21,9 +21,7 @@ import edu.stanford.nlp.trees.Tree;
  * 4. Give a label to each of these two phrases
  * and let CRF sort out which is the CP/EP 
  */
-public class EagerReln extends Reln {
-	int ccpEnd;
-	
+public class EagerReln extends Reln {	
 	ArrayList<Integer> commaLocs;
 		
 	Tree exp;
@@ -36,36 +34,84 @@ public class EagerReln extends Reln {
 	 * by this relation
 	 */
 	public boolean matchesPattern () {
-		ccpEnd = findCCPEnd();
-		if (ccpBound[0] > (toks.length / 5))
-			return false;
+		ccpBound = findCCPEnd();
 		doCommaSearch();
 		if (commaLocs.size() == 0)
 			return false;
-		for (int i : commaLocs)
-			if (locateNPVP(i))
-				return true;
+		if (hasGoodPattern())
+			return true;
 		if (ccpBound[0] == 0)
 			return true;
+		//for (int i : commaLocs)
+		//	if (locateNPVP(i))
+		//		return true;
 		return false;
 	}
 	
 	/**
 	 * Finds the index of the end of our CCP
 	 */
-	int findCCPEnd () {
+	int[] findCCPEnd () {
 		boolean seenCCP = false;
+		int start = 0;
 		int offset = 0;
 		for (int i = 0; i < feats.length; i++) {
 			String feat = feats[i];
 			if (StanfordParser.isPunc(toks[i].charAt(toks[i].length()-1)+""))
 				offset++;
-			if (containsCCP(feat))
+			if (containsCCP(feat)) {
+				if (!seenCCP)
+					start = i + offset;
 				seenCCP = true;
-			else if (seenCCP)
-				return i-1 + offset;
+			} else if (seenCCP)
+				return new int[] { start, i-1 + offset };
 		}
-		return Integer.MAX_VALUE;
+		if (seenCCP)
+			return new int[] { start, feats.length-1 + offset};
+		return null;
+	}
+	
+	/**
+	 * Looks for SBAR then , then NP then VP
+	 */
+	boolean hasGoodPattern () {
+		Tree posNP = null, posVP = null;
+		for (int i = ccpBound[0]; i <= ccpBound[1]; i++) {
+			Tree leaf = leaves[i];
+			Tree parent = leaf.parent(exp);
+			Tree grandParent = parent.parent(exp);
+			Tree ggParent = grandParent.parent(exp);
+			
+			if (!grandParent.label().toString().equals("SBAR") && 
+					!(grandParent.label().toString().equals("PP") &&
+							ggParent.label().toString().equals("S")))
+				continue;
+			Tree[] children;
+			//if (grandParent.label().toString().equals("SBAR"))
+			//	children = grandParent.children();
+			//else
+				children = ggParent.children();
+			boolean comma = false, np = false, vp = false;
+			for (Tree child : children) {
+				String label = child.label().toString();
+				if (label.equals(","))
+					comma = true;
+				if (label.equals("NP") && comma) {
+					np = true;
+					posNP = child;
+				}
+				if (label.equals("VP") && np) {
+					vp = true;
+					posVP = child;
+				}
+			}
+			if (comma && np && vp) {
+				area1 = posNP;
+				area2 = posVP;
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -75,7 +121,7 @@ public class EagerReln extends Reln {
 	void doCommaSearch () {
 		for (int i = 0; i < leaves.length; i++) {
 			String label = leaves[i].label().toString();
-			if (label.equals(",") && i >= ccpEnd)
+			if (label.equals(",") && i >= ccpBound[1])
 				commaLocs.add(i);
 		}
 	}
@@ -107,9 +153,6 @@ public class EagerReln extends Reln {
 	public void getResult () {
 		int[] bound1 = null, bound2 = null;
 		
-		if (toks[4].equals("hybrids"))
-			System.out.println("");
-		
 		if (area1 == null || area2 == null) {
 			goodLoc = commaLocs.get(0);
 			bound1 = new int[] { 0, goodLoc };
@@ -117,6 +160,7 @@ public class EagerReln extends Reln {
 		} else {
 			bound1 = TreeOps.getSubTreeBoundaries(exp, area1);
 			bound2 = TreeOps.getSubTreeBoundaries(exp, area2);
+			goodLoc = bound1[0] -1;
 		}
 		
 		if (bound1 == null || bound2 == null) {
@@ -144,6 +188,7 @@ public class EagerReln extends Reln {
 	
 	void reset () {
 		area1 = null; area2 = null;
+		goodLoc = -1;
 		exp = sp.getExpandedParseTree(toks);
 		leaves = TreeOps.getLeaves(exp);
 		commaLocs = new ArrayList<Integer>();

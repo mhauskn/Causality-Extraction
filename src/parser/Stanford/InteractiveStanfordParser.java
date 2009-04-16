@@ -34,7 +34,8 @@ public class InteractiveStanfordParser implements Map<String> {
 	public void parseSentenceTest (String sentence) {
 		System.out.println("Original Sentence: " + sentence);
 		String[] sent = sentence.split(" ");
-		Tree parse = sp.getParseTree(sent);
+		//Tree parse = sp.getParseTree(sent);
+		Tree parse = sp.getExpandedParseTree(sent);
 		
 		System.out.println("---------PENN PRINT-----------");
 	    parse.pennPrint();

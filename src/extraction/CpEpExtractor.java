@@ -42,7 +42,7 @@ public class CpEpExtractor extends IO<String,String> {
 	VerbalReln verbal = new VerbalReln();
 	NonVerbalReln nonVerbal = new NonVerbalReln();
 	
-	int correct = 0, incorrect = 0; 
+	int correct = 0, incorrect = 0, reversed = 0; 
 	int eageri = 0, verbali = 0, nonVerbali = 0;
 	int eagerf = 0, verbalf = 0, nonVerbalf = 0;
 	String type;
@@ -102,37 +102,46 @@ public class CpEpExtractor extends IO<String,String> {
 		if (acp == null || aef == null || ocp == null || oef == null) {
 			System.out.println("Nulled!");
 			incorrect++;
-			printSent();
+			//printSent();
 			writeWrong();
 			return;
 		}
 		
 		if (!Reln.seperate(acp,ocp) && !Reln.seperate(aef,oef) &&
 				Reln.seperate(acp, oef) && Reln.seperate(aef, ocp)) {
-			System.out.println("Correct!");
 			correct++;
 			return;
+		} else if (!Reln.seperate(acp,oef) && !Reln.seperate(aef,ocp) &&
+				Reln.seperate(acp, ocp) && Reln.seperate(aef, oef)) {
+			incorrect++;
+			reversed++;
+		} else {
+			incorrect++;
+			writeWrong();
+			//printSent();
 		}
-		incorrect++;
-		writeWrong();
-		printSent();
 	}
 	
 	public static int[] getIndex (String[] feats, String toMatch) {
 		int start = -1;
+		int end = -1;
 		boolean running = false;
 		for (int i = 0; i < feats.length; i++) {
 			String feat = feats[i];
 			if (feat.startsWith(toMatch)) {
-				if (!running)
+				if (!running && start == -1)
 					start = i;
 				running = true;
-			} else
+			} else {
 				if (running)
-					return new int[] { start, i-1 };
+					end = i -1;
+				running = false;
+			}
 		}
 		if (running)
 			return new int[] { start, feats.length-1};
+		if (start != -1 && end != -1)
+			return new int[] { start, end};
 		return null;
 	}
 	
@@ -151,7 +160,7 @@ public class CpEpExtractor extends IO<String,String> {
 	
 	void writeSent (DataWriter w) {
 		for (int i = 0; i < toks.length; i++)
-			w.writeln(toks[i] + " " + feats[i] + " " + labels[i] + " " + output[i]);
+			w.writeln(toks[i] + " \t" + feats[i] + "\t" + labels[i] + "\t" + output[i]);
 		w.writeln(last_tok + " " + last_feat + " " + last_label);
 	}
 	
@@ -170,7 +179,7 @@ public class CpEpExtractor extends IO<String,String> {
 
 		ext.mapInput();
 		c.close();
-		System.out.println("correct " + ext.correct + " incorrect " + ext.incorrect);
+		System.out.println("correct " + ext.correct + " incorrect " + ext.incorrect + " reversed " + ext.reversed);
 		System.out.println("Occurences: eager " + ext.eageri + " verbal " + ext.verbali + " nonverbal " + ext.nonVerbali);
 		System.out.println("Fails: eager " + ext.eagerf + " verbal " + ext.verbalf + " nonverbal " + ext.nonVerbalf);
 		ext.verbalw.close();
