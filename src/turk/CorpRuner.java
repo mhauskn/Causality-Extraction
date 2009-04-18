@@ -11,7 +11,7 @@ import haus.io.IO;
 public class CorpRuner extends IO<String,String>{
 	String end = "]R";
 	int cnt = 0;
-	public void map(String e) {
+	public void mapInput(String e) {
 		cnt++;
 		if (e.indexOf(end) != e.lastIndexOf(end))
 			System.out.println(cnt);

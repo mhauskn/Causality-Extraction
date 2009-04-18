@@ -6,8 +6,10 @@ import haus.io.FileReader;
 import haus.io.IO;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import parser.Stanford.StanfordParser;
+import stream.CRFDataStream;
 
 import mallet.Include;
 
@@ -51,7 +53,7 @@ public class CpEpExtractor extends IO<String,String> {
 	 * Map function for our input. Gets one sentence and divides it 
 	 * into different parts.
 	 */
-	public void map (String line) {
+	public void mapInput (String line) {
 		_toks.add(Include.getToken(line));
 		_feats.add(Include.getFeature(line) + " ");
 		_labels.add(Include.getLabel(line));
@@ -87,9 +89,10 @@ public class CpEpExtractor extends IO<String,String> {
 			nonVerbali++;
 			type = "nonverbal";
 		}
-		//for (int i = 0; i < toks.length; i++)
-		//	out.add(toks[i] + " " + output[i] + " " + labels[i]);
-		checkAnswer();
+		for (int i = 0; i < toks.length; i++)
+			out.add(toks[i].trim() + " " + feats[i].trim() + " " + 
+					labels[i].trim() + " " + output[i].trim());
+		//checkAnswer();
 	}
 	
 	void checkAnswer () {
@@ -98,27 +101,56 @@ public class CpEpExtractor extends IO<String,String> {
 		aef = getIndex(labels,Include.EFFECT_TAG);
 		ocp = getIndex(output,Include.CAUSE_TAG);
 		oef = getIndex(output,Include.EFFECT_TAG);
-		
-		if (acp == null || aef == null || ocp == null || oef == null) {
-			System.out.println("Nulled!");
-			incorrect++;
-			//printSent();
-			writeWrong();
-			return;
-		}
+		ArrayList<String> featTokens = getRelnToks();
 		
 		if (!Reln.seperate(acp,ocp) && !Reln.seperate(aef,oef) &&
 				Reln.seperate(acp, oef) && Reln.seperate(aef, ocp)) {
 			correct++;
-			return;
+			addRelnToks(type, featTokens, true);
 		} else if (!Reln.seperate(acp,oef) && !Reln.seperate(aef,ocp) &&
 				Reln.seperate(acp, ocp) && Reln.seperate(aef, oef)) {
 			incorrect++;
 			reversed++;
+			writeWrong();
+			addRelnToks(type, featTokens, false);
 		} else {
 			incorrect++;
 			writeWrong();
 			//printSent();
+			addRelnToks(type,featTokens,false);
+		}
+	}
+	
+	/**
+	 * Finds the tokens which compose our CCP and returns them stemmed
+	 * in the arraylist.
+	 */
+	ArrayList<String> getRelnToks () {
+		ArrayList<String> out = new ArrayList<String>();
+		for (int i = 0; i < feats.length; i++)
+			if (Reln.containsCCP(feats[i]))
+				out.add(toks[i]);
+		return out;
+	}
+	
+	void addRelnToks (String relnType, ArrayList<String> relnFeats, boolean pos) {
+		Reln toAdd = null;
+		Hashtable<String,Integer> ht = null;
+		if (type.equals("eager"))
+			toAdd = eager;
+		else if (type.equals("verbal"))
+			toAdd = verbal;
+		else
+			toAdd = nonVerbal;
+		if (pos)
+			ht = toAdd.pos;
+		else
+			ht = toAdd.neg;
+		for (String tok : relnFeats) {
+			if (ht.containsKey(tok))
+				ht.put(tok, ht.get(tok) + 1);
+			else
+				ht.put(tok, 1);
 		}
 	}
 	
@@ -170,10 +202,41 @@ public class CpEpExtractor extends IO<String,String> {
 		System.out.println();
 	}
 	
+	/**
+	 * Our output data takes the following form:
+	 * 
+	 * toks feats labels output
+	 */
+	public static class OutputFormatter extends CRFDataStream {
+		public boolean containsDelim(String line) {
+			return false;
+		}
+
+		public String getToken(String line) {
+			return line.split(" ")[0];
+		}
+		
+		public String getFeatures(String line) {
+			return line.split(" ")[1];
+		}
+
+		public String getLabel(String line) {
+			return line.split(" ")[2];
+		}
+		
+		public String getOutput(String line) {
+			return line.split(" ")[3];
+		}
+
+		public String[] getLabelClasses() {
+			return new String[] { Include.CAUSE_TAG, Include.EFFECT_TAG };
+		}
+	}
+	
 	public static void main (String[] args) {
 		Closer c = new Closer();
 		CpEpExtractor ext = new CpEpExtractor();
-		StanfordParser.getStanfordParser(c);
+		StanfordParser.getStanfordParser();
 		ext.setInput(new FileReader(file_in));
 		ext.setOutput(new DataWriter(file_out, c));
 

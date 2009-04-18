@@ -2,6 +2,7 @@ package analysis.features;
 
 import analysis.Feature;
 import parser.Stanford.StanfordParser;
+import parser.Stanford.TreeOps;
 import edu.stanford.nlp.trees.Tree;
 
 /**
@@ -34,12 +35,29 @@ public class NpVpAggFeature implements Feature {
 		return getFeature(_tokens, t);
 	}
 	
+	/**
+	 * Bottom up traversal of leaves to find most direct parent 
+	 * NP or VP
+	 */
 	public String[] getFeature (String[] _tokens, Tree t) {
 		currWord = 0;
 		currPhrase = 0;
 		feature = new String[_tokens.length];
+		for (int i = 0; i < feature.length; i++)
+			feature[i] = "";
 		tokens = _tokens;
-		aggregate(t);
+		
+		Tree[] leaves = TreeOps.getLeaves(t);
+		for (int i = 0; i < leaves.length; i++) {
+			Tree leaf = leaves[i];
+			Tree exp = TreeOps.expandUntil(t, leaf, new TreeOps.regexpMatcher("(NP|VP)"));
+			if (exp == null)
+				continue;
+			if (exp.label().toString().equals("NP"))
+				feature[i] += NP_TAG;
+			else if (exp.label().toString().equals("VP"))
+				feature[i] += VP_TAG;
+		}
 		return feature;
 	}
 	

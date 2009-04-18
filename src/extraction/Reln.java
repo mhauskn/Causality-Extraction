@@ -1,13 +1,15 @@
 package extraction;
 
 import java.util.Arrays;
+import java.util.Hashtable;
 
 import edu.stanford.nlp.trees.Tree;
 
 import parser.Stanford.StanfordParser;
 
 public abstract class Reln {
-	public static final String REV = "(for|by|from)";
+	public static final String VERBAL_KEYS = "(for|by|from|attributed|reflecting)";
+	public static final String NON_VERBAL_KEYS = "(and)";
 	
 	String cause = mallet.Include.CAUSE_TAG;
 	String effect = mallet.Include.EFFECT_TAG;
@@ -18,6 +20,9 @@ public abstract class Reln {
 	Tree[] leaves;
 	
 	int[] ccpBound;
+	
+	Hashtable<String,Integer> pos = new Hashtable<String,Integer>();
+	Hashtable<String,Integer> neg = new Hashtable<String,Integer>();
 	
 	public boolean matchesPattern (String[] _toks, String[] _feats) {
 		toks = _toks;
@@ -79,9 +84,9 @@ public abstract class Reln {
 		return null;
 	}
 	
-	boolean containsReversalKeyword (int[] featsLocs) {
+	boolean containsReversalKeyword (int[] featsLocs, String keywords) {
 		for (int i = featsLocs[0]; i <= featsLocs[1]; i++)
-			if (toks[i].matches(REV))
+			if (toks[i].matches(keywords))
 				return true;
 		return false;
 	}

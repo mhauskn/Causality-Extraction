@@ -23,7 +23,7 @@ public class CrossValidator<T> {
 		numValidations = _numValidations;
 		data = _data;
 		caller = _caller;
-		shuffle();
+		//shuffle();
 	}
 	
 	/**

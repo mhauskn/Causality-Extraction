@@ -20,7 +20,7 @@ import mallet.Include;
  * We shall call them residual features.
  */
 public class AdjacentFeature implements Feature {
-	static int numAdjacent = 4;
+	static int numAdjacent = 3;
 	public static final String tok_iden = "res(";
 	public static boolean include_adj_feats = true;
 	static int featsPerLine = -1;

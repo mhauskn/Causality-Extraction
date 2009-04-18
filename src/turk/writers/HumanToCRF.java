@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import haus.io.DataWriter;
 import haus.io.FileReader;
 import haus.io.IO;
-import haus.misc.Map;
 import mallet.Include;
 
 /**
@@ -13,7 +12,7 @@ import mallet.Include;
  * @author Administrator
  *
  */
-public class HumanToCRF extends IO<String,String> implements Map<String> {
+public class HumanToCRF extends IO<String,String> {
 	public static final String OPEN_TAGS = "[(<{";
 	public static final String CLOSE_TAGS = "])>}";
 	
@@ -52,7 +51,7 @@ public class HumanToCRF extends IO<String,String> implements Map<String> {
 	 * 4. Remove annotation from sentence
 	 * 5. Repeat until no more )R remains
 	 */
-	public void map (String str) {
+	public void mapInput (String str) {
 		String[] segs = str.split(" ");
 		String[] clean = str.split(" ");
 		for (int i = 0; i < clean.length; i++)

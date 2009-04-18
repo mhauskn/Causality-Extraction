@@ -9,6 +9,8 @@ import haus.io.DataWriter;
 import haus.io.FileReader;
 import haus.io.IO;
 import parser.Stanford.StanfordParser;
+import analysis.features.AdjacentFeature;
+import analysis.features.NpVpAggFeature;
 import analysis.features.POSFeature;
 import analysis.features.StemFeature;
 import analysis.postFeatures.RelnDep;
@@ -58,7 +60,7 @@ public class FeatureAdder extends IO<String,String> {
 	 * Map function for our input. Gets one sentence and divides it 
 	 * into different parts.
 	 */
-	public void map (String line) {
+	public void mapInput (String line) {
 		_toks.add(Include.getToken(line));
 		_feats.add(Include.getFeature(line) + " ");
 		_labels.add(Include.getLabel(line));
@@ -70,6 +72,7 @@ public class FeatureAdder extends IO<String,String> {
 			
 			toks = haus.misc.Conversions.toStrArray(_toks);
 			feats = haus.misc.Conversions.toStrArray(_feats);
+			
 			labels = haus.misc.Conversions.toStrArray(_labels);
 			createFeatures(haus.misc.Conversions.toStrArray(_feats));
 			writePopulatedCRF();
@@ -124,8 +127,9 @@ public class FeatureAdder extends IO<String,String> {
 		
 		f.addFeatureGenerator(new StemFeature());
 		f.addFeatureGenerator(new POSFeature(sp));
-		f.addPostFeatureGenerator(new RelnProc());
-		f.addPostFeatureGenerator(new RelnDep(sp));
+		f.addFeatureGenerator(new NpVpAggFeature(sp));
+		//f.addPostFeatureGenerator(new RelnProc());
+		//f.addPostFeatureGenerator(new RelnDep(sp));
 		
 		f.mapInput();
 		c.close();

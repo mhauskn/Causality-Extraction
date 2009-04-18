@@ -67,7 +67,7 @@ public class CRF2ARFF extends IO<String,String> {
 	/**
 	 * Converts a single line of data
 	 */
-	public void map (String arg0) {
+	public void mapInput (String arg0) {
 		arg0 = arg0.replaceAll(",", "");
 		arg0 = arg0.replaceAll("\\\\", "");
 		String[] segs = arg0.split(" ");

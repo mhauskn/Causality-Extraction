@@ -3,8 +3,7 @@ package misc;
 import haus.io.DataWriter;
 import haus.io.FileReader;
 import haus.io.IO;
-import haus.io.Input;
-import haus.io.Output;
+import haus.io.Pipe;
 
 import java.util.ArrayList;
 
@@ -24,7 +23,7 @@ public class WordPairExtractor extends IO<String,String> {
 	public static String out_file = UnsupervisedCauseExtractor.file_path + "wordPairs.txt";
 	
 	ArrayList<String[]> word_pairs;
-	ArrayList<? extends Output<String>> outputs;
+	ArrayList<? extends Pipe<String>> outputs;
 	
 	/**
 	 * Lazy man's constructor
@@ -43,7 +42,7 @@ public class WordPairExtractor extends IO<String,String> {
 	/**
 	 * Working man's constructor
 	 */
-	public WordPairExtractor(Input<String> input, Output<String> output) {
+	public WordPairExtractor(Pipe<String> input, Pipe<String> output) {
 		super(input, output);
 	}
 	
@@ -69,7 +68,7 @@ public class WordPairExtractor extends IO<String,String> {
 	 * @param pairs: String[0] = word1; String[1] = word2;
 	 */
 	public void extractWordPairs (ArrayList<String[]> pairs, 
-			ArrayList<? extends Output<String>> pair_outputs) {
+			ArrayList<? extends Pipe<String>> pair_outputs) {
 		word_pairs = pairs;
 		outputs = pair_outputs;
 		String line;
@@ -116,5 +115,5 @@ public class WordPairExtractor extends IO<String,String> {
 		extractor.extractWordPairs(pairs);
 	}
 
-	public void map(String e) {}
+	public void mapInput (String e) {}
 }

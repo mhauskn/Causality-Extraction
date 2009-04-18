@@ -13,6 +13,7 @@ import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TypedDependency;
 
 public class VerbalReln extends Reln {
+	public static final String NPS = "(NP|S)";
 	int root1, root2;
 	int [] r1arr, r2arr;
 	Tree t;
@@ -124,7 +125,8 @@ public class VerbalReln extends Reln {
 	 * phrases.
 	 */
 	void expandInfluence () {
-		Tree base1 = TreeOps.expandUntil(t, leaves[root1], new TreeOps.regexpMatcher(RelnDep.NP_OR_S));
+		//Tree base1 = TreeOps.expandUntil(t, leaves[root1], new TreeOps.regexpMatcher(RelnDep.NP_OR_S));
+		Tree base1 = TreeOps.expandUntil(t, leaves[root1], new TreeOps.regexpMatcher(NPS));
 		Tree base2 = TreeOps.expandUntil(t, leaves[root2], new TreeOps.regexpMatcher(StanfordParser.VerbPhrase));
 		if (base1 == null || base2 == null) return;
 		Tree r1exp = base1;
@@ -134,7 +136,8 @@ public class VerbalReln extends Reln {
 				TreeOps.getSubTreeBoundaries(t, r2exp))) {
 			base1 = r1exp;
 			base2 = r2exp;
-			r1exp = TreeOps.expandUntil(t, base1.parent(t), new TreeOps.regexpMatcher(RelnDep.NP_OR_S));
+			//r1exp = TreeOps.expandUntil(t, base1.parent(t), new TreeOps.regexpMatcher(RelnDep.NP_OR_S));
+			r1exp = TreeOps.expandUntil(t, base1.parent(t), new TreeOps.regexpMatcher(NPS));
 			r2exp = TreeOps.expandUntil(t, base2.parent(t), new TreeOps.regexpMatcher(StanfordParser.VerbPhrase));
 		}
 		r1arr = TreeOps.getSubTreeBoundaries(t, base1);
@@ -172,7 +175,7 @@ public class VerbalReln extends Reln {
 	 */
 	void writeVerbFeat () {
 		String area1, area2;
-		boolean reversed = containsReversalKeyword(ccpBound);
+		boolean reversed = containsReversalKeyword(ccpBound, Reln.VERBAL_KEYS);
 		if (reversed) {
 			area1 = effect; area2 = cause;
 			for (int i = 0; i < toks.length; i++) {

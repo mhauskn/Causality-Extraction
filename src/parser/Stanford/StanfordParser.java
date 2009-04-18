@@ -104,7 +104,6 @@ public class StanfordParser implements Closable {
 		if (contracted_lookup.containsKey(key))
 			t = contracted_lookup.get(key);
 		else {
-			System.out.println("Contracted Lookup: Sentence Not Found: " + key);
 			if (lp == null)
 				initLexParser();
 			t = (Tree) lp.apply(Arrays.asList(tokens));
@@ -124,7 +123,7 @@ public class StanfordParser implements Closable {
 		if (lookup.containsKey(key))
 			return lookup.get(key);
 		
-		System.out.println("Sentence Not Found: " + key);
+		//System.out.println("Sentence Not Found: " + key);
 		if (lp == null)
 			initLexParser();
 		Tree t = (Tree) lp.apply(Arrays.asList(tokens));

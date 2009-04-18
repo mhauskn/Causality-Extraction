@@ -7,7 +7,7 @@ import com.aliasi.tokenizer.IndoEuropeanTokenizerFactory;
 import com.aliasi.tokenizer.TokenizerFactory;
 import com.aliasi.tokenizer.Tokenizer;
 
-import haus.io.Input;
+import haus.io.Pipe;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ import parser.AbstractParser;
  * @author epn
  *
  */
-public class SentenceChunker implements Input<String> {
+public class SentenceChunker implements Pipe<String> {
 	
 	/**
 	 * Parser will give us text to chunk into sentences
@@ -109,4 +109,8 @@ public class SentenceChunker implements Input<String> {
     	}
     	return true;
     }
+
+	public boolean add(String Outputable) {
+		return false;
+	}
 }

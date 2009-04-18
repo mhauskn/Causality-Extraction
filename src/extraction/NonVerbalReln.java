@@ -67,11 +67,17 @@ public class NonVerbalReln extends Reln {
 	}
 	
 	void write () {
+		String area1, area2;
+		if (containsReversalKeyword(ccpBound, Reln.NON_VERBAL_KEYS)) {
+			area1 = cause; area2 = effect;
+		} else {
+			area1 = effect; area2 = cause;
+		}
 		for (int i = 0; i < toks.length; i++) {
 			if (i >= left[0] && i <= left[1])
-				out[i] = effect;
+				out[i] = area1;
 			else if (i >= right[0] && i <= right[1])
-				out[i] = cause;
+				out[i] = area2;
 			else
 				out[i] = non;
 		}
