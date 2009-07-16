@@ -26,6 +26,9 @@ public class SentenceTaskAnalyzer {
 	
 	String workerid_ind = "WorkerId";
 	String hitid_ind = "HITId";
+	
+	Hashtable<String,Boolean> blacklistedIDS = new Hashtable<String,Boolean>();
+	int numTurks = 0, blacklisted = 0;
 
 	
 	public SentenceTaskAnalyzer () throws IOException {
@@ -44,6 +47,7 @@ public class SentenceTaskAnalyzer {
 			ArrayList<String[]> responses = reader.hits.get(id).getResults();
 			checkQuality(responses);
 		}
+		haus.io.Serializer.serialize(blacklistedIDS, "turk/blacklistedIDS.ser");
 		e = reader.hits.keys();
 		while (e.hasMoreElements()) {
 			String id = e.nextElement();
@@ -76,17 +80,28 @@ public class SentenceTaskAnalyzer {
 				else if (ans.equals("Unsure"))
 					numUnsure++;
 				if (knownPos.containsKey(sent)) {
-					if (!ans.equals("Yes"))
+					if (ans.equals("No"))
 						strikes++;
 				}
 			}
-			if (strikes > 1) {
+			
+			if (!blacklistedIDS.containsKey(id)) {
+				blacklistedIDS.put(id, false);
+				numTurks++;
+			}
+			
+			if (strikes >= 1) {
 				blacklist.put(hash(hitid, id), true);
-				System.out.println("ID " + id + " Has been blacklisted on hit " + hitid);
+				
+				if (!blacklistedIDS.get(id)) {
+					blacklistedIDS.put(id, true);
+					blacklisted++;
+				}
 			}
-			if (numYes == 10 || numNo == 10 || numUnsure == 10) {
-				System.out.println("ID " + id + " Has selected Uniform Answers hitid: " + hitid);
-			}
+			
+			//if (numYes == 10 || numNo == 10 || numUnsure == 10) {
+				//System.out.println("ID " + id + " Has selected Uniform Answers hitid: " + hitid);
+			//}
 			//if (numNo == 0 || numYes == 0) {
 			//	System.out.println("No No's or Yesses from " + id + " On hit " + hitid);
 			//}

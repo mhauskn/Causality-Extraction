@@ -6,27 +6,34 @@ import mallet.Include;
 import haus.io.FileReader;
 
 public class AccuracyFinder {
-	FileReader ansR = new FileReader("crf/crf_bare.txt");
-	FileReader outR = new FileReader("crf/collective2.txt");
-	int correct = 0, incorrect = 0, reversed = 0; 
-	String[] ans, out;
+	//FileReader ansR = new FileReader("crf/crf_bare.txt");
+	FileReader ansR = new FileReader("crf/100_bare.txt");
+	//FileReader outR = new FileReader("crf/collective2.txt");
+	FileReader outR = new FileReader("crf/heuristic.txt");
+	String[] labels, output;
 	
-	void run () {
+	Evaluator lPhrasal = new Evaluator("Loose Phrasal");
+	Evaluator ePhrasal = new Evaluator("Exact Phrasal");
+	Evaluator tok = new Evaluator("Token");
+	Evaluator ftok = new Evaluator("Focused Token");
+	
+	public void run () {
 		ArrayList<String> ansToks = new ArrayList<String>(), 
 			outToks = new ArrayList<String>();
 		String ansS = ansR.getNextLine(), outS = outR.getNextLine();
 		while (ansS != null && outS != null) {
 			ansToks.add(Include.getLabel(ansS));
-			outToks.add(Include.getToken(outS));
+			//outToks.add(Include.getToken(outS));
+			outToks.add(Include.getLabel(outS));
 			
 			if (Include.hasSentDelim(ansS)) {
 				ansToks.remove(ansToks.size()-1);
 				outToks.remove(outToks.size()-1);
 				
-				ans = haus.misc.Conversions.toStrArray(ansToks);
-				out = haus.misc.Conversions.toStrArray(outToks);
+				labels = haus.misc.Conversions.toStrArray(ansToks);
+				output = haus.misc.Conversions.toStrArray(outToks);
 				
-				checkAnswer();
+				doEval();
 				
 				ansToks.clear();
 				outToks.clear();
@@ -35,31 +42,28 @@ public class AccuracyFinder {
 		}
 	}
 	
-	void checkAnswer () {
-		int[] acp, ocp, aef, oef;
-		acp = getIndex(ans,Include.CAUSE_TAG);
-		aef = getIndex(ans,Include.EFFECT_TAG);
-		ocp = getIndex(out,Include.CAUSE_TAG);
-		oef = getIndex(out,Include.EFFECT_TAG);
+	void doEval () {
+		int[] acp,aep,ocp,oep;
+		acp = getIndex(labels,Include.CAUSE_TAG);
+		aep = getIndex(labels,Include.EFFECT_TAG);
+		ocp = getIndex(output,Include.CAUSE_TAG);
+		oep = getIndex(output,Include.EFFECT_TAG);
 		
-		if (ocp == null || oef == null) {
-			System.out.println("Nulled!");
-			incorrect++;
+		if (acp == null || aep == null) {
+			System.out.println("Nulled Answer -- Need to fix the corpus!");
 			return;
 		}
-		
-		if (!Reln.seperate(acp,ocp) && !Reln.seperate(aef,oef) &&
-				Reln.seperate(acp, oef) && Reln.seperate(aef, ocp)) {
-			correct++;
-		} else if (!Reln.seperate(acp,oef) && !Reln.seperate(aef,ocp) &&
-				Reln.seperate(acp, ocp) && Reln.seperate(aef, oef)) {
-			incorrect++;
-			reversed++;
-		} else {
-			incorrect++;
-		}
+				
+		lPhrasal.getLoosePhrasalAgreement(acp, aep, ocp, oep);
+		ePhrasal.getExactPhrasalAgreement(acp, aep, ocp, oep);
+		tok.getTokenAgreement(output, labels);
 	}
 	
+	/**
+	 * Gets an int[] index for a given label type. Essentially match starts
+	 * with first token of that label type and ends with last token of the label
+	 * type
+	 */
 	public static int[] getIndex (String[] feats, String toMatch) {
 		int start = -1;
 		int end = -1;
@@ -86,7 +90,9 @@ public class AccuracyFinder {
 	public static void main (String[] args) {
 		AccuracyFinder f = new AccuracyFinder();
 		f.run();
-		System.out.println("correct " + f.correct + " incorrect " + f.incorrect + " reversed " + f.reversed);
-
+		f.lPhrasal.print();
+		f.ePhrasal.print();
+		f.tok.print();
+		f.ftok.print();
 	}
 }

@@ -18,18 +18,10 @@ import mallet.Include;
  * upon simple heuristics
  */
 public class CpEpExtractor extends IO<String,String> {
-	//public static String file_in = "crf/wrong.txt";
-	public static String file_in = "crf/crf_bare.txt";
-	//public static String file_in = "crf/test.txt";
-	public static String file_out = "crf/extracted.txt";
-	
-	//DataWriter wrong = new DataWriter("crf/wrong2.txt");
-	//DataWriter nulled = new DataWriter("crf/nulled.txt");
-	DataWriter eagerw = new DataWriter("crf/eager.txt");
-	DataWriter verbalw = new DataWriter("crf/verbal.txt");
-	DataWriter nonverbalw = new DataWriter("crf/nonverbal.txt");
+	//public static String file_in = "crf/crf_bare.txt";
+	public static String file_in = "crf/100_bare.txt";
+	public static String file_out = "crf/heuristic.txt";
 
-	
 	int cnt = 0;
 	
 	String[] toks, feats, labels, output;
@@ -44,7 +36,6 @@ public class CpEpExtractor extends IO<String,String> {
 	VerbalReln verbal = new VerbalReln();
 	NonVerbalReln nonVerbal = new NonVerbalReln();
 	
-	int correct = 0, incorrect = 0, reversed = 0; 
 	int eageri = 0, verbali = 0, nonVerbali = 0;
 	int eagerf = 0, verbalf = 0, nonVerbalf = 0;
 	String type;
@@ -90,35 +81,8 @@ public class CpEpExtractor extends IO<String,String> {
 			type = "nonverbal";
 		}
 		for (int i = 0; i < toks.length; i++)
-			out.add(toks[i].trim() + " " + feats[i].trim() + " " + 
-					labels[i].trim() + " " + output[i].trim());
-		//checkAnswer();
-	}
-	
-	void checkAnswer () {
-		int[] acp, ocp, aef, oef;
-		acp = getIndex(labels,Include.CAUSE_TAG);
-		aef = getIndex(labels,Include.EFFECT_TAG);
-		ocp = getIndex(output,Include.CAUSE_TAG);
-		oef = getIndex(output,Include.EFFECT_TAG);
-		ArrayList<String> featTokens = getRelnToks();
-		
-		if (!Reln.seperate(acp,ocp) && !Reln.seperate(aef,oef) &&
-				Reln.seperate(acp, oef) && Reln.seperate(aef, ocp)) {
-			correct++;
-			addRelnToks(type, featTokens, true);
-		} else if (!Reln.seperate(acp,oef) && !Reln.seperate(aef,ocp) &&
-				Reln.seperate(acp, ocp) && Reln.seperate(aef, oef)) {
-			incorrect++;
-			reversed++;
-			writeWrong();
-			addRelnToks(type, featTokens, false);
-		} else {
-			incorrect++;
-			writeWrong();
-			//printSent();
-			addRelnToks(type,featTokens,false);
-		}
+			out.add(toks[i].trim() + " " + feats[i].trim() + " " + labels[i].trim() + " " + output[i].trim());
+		out.add(last_tok + " " + last_feat + " " + last_label);
 	}
 	
 	/**
@@ -179,13 +143,13 @@ public class CpEpExtractor extends IO<String,String> {
 	
 	void writeWrong () {
 		if (type.equals("eager")) {
-			writeSent(eagerw);
+			//writeSent(eagerw);
 			eagerf++;
 		} else if (type.equals("verbal")) {
-			writeSent(verbalw);
+			//writeSent(verbalw);
 			verbalf++;
 		} else {
-			writeSent(nonverbalw);
+			//writeSent(nonverbalw);
 			nonVerbalf++;
 		}
 	}
@@ -236,17 +200,13 @@ public class CpEpExtractor extends IO<String,String> {
 	public static void main (String[] args) {
 		Closer c = new Closer();
 		CpEpExtractor ext = new CpEpExtractor();
-		StanfordParser.getStanfordParser();
+		StanfordParser.getStanfordParser(c);
 		ext.setInput(new FileReader(file_in));
 		ext.setOutput(new DataWriter(file_out, c));
 
 		ext.mapInput();
 		c.close();
-		System.out.println("correct " + ext.correct + " incorrect " + ext.incorrect + " reversed " + ext.reversed);
 		System.out.println("Occurences: eager " + ext.eageri + " verbal " + ext.verbali + " nonverbal " + ext.nonVerbali);
 		System.out.println("Fails: eager " + ext.eagerf + " verbal " + ext.verbalf + " nonverbal " + ext.nonVerbalf);
-		ext.verbalw.close();
-		ext.eagerw.close();
-		ext.nonverbalw.close();
 	}
 }

@@ -64,13 +64,17 @@ public class TurkReader {
 				line = removeExtraQuotes(line);
 				tuple += line;
 				String[] segs = parseCSV(tuple);
-				if (segs.length > (key.size() - 2)) {
-					System.err.println("Found Seg Too Long: " + segs);
+				while (segs.length != (key.size() -2)) {
+					if (segs.length > (key.size() - 2)) {
+						System.err.println("Found Seg Too Long: " + segs);
+						System.exit(1);
+					}
+						
+					tuple += removeExtraQuotes(reader.getNextLine());
+					segs = parseCSV(tuple);
 				}
-				if (segs.length == (key.size() - 2)) {
-					fullLine = tuple;
-					return segs;
-				}
+				fullLine = tuple;
+				return segs;
 			}
 			return null;
 		}
@@ -196,6 +200,8 @@ public class TurkReader {
 	 * Returns a String[] containing all of the different items
 	 */
 	static String[] parseCSV (String tuple) {
+		String[] test = tuple.split("\",\"");
+		
 		ArrayList<String> strs = new ArrayList<String>();
 		boolean inPhrase = false;
 		String seg = "";

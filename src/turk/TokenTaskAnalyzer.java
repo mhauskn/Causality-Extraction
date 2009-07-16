@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import evaluation.KappaIAA;
+
 
 /**
  * Designed to preform all sorts of analysis on the the Turk data from the task of 
@@ -33,8 +35,8 @@ public class TokenTaskAnalyzer {
 	public static final String NEITHER_ANS = "Neither";
 		
 	TurkReader treader = null;
-	String inFile = "turk/causeEffectResults.csv";
-	String outFile = "turk/causeEffectAnalysis.csv";
+	String inFile = "turk/Batch_Files/causeEffectResults.csv";
+	//String outFile = "turk/causeEffectAnalysis.csv";
 	String approveRejectFile = "turk/approveReject.csv";
 	String readableTurkAnalysisFile = "turk/readableAnalysis.csv";
 	String crfOutFile = "turk/crfOut.txt";
@@ -65,8 +67,12 @@ public class TokenTaskAnalyzer {
 	 * Checks a given response for good quality
 	 * @param responses
 	 */
+	@SuppressWarnings("unchecked")
 	class qualityCheckerMap extends questionMap {
 		Hashtable<String, Boolean> blacklist = new Hashtable<String,Boolean>();
+		//Hashtable<String, Boolean> blacklistedIDS = (Hashtable<String, Boolean>) haus.io.Serializer.deserialize("turk/blacklistedIDS.ser");
+		Hashtable<String, Boolean> blacklistedIDS = new Hashtable<String,Boolean>();
+		int uniqueworkers = 0, blacklistedworkers = 0;
 		
 		void handleResponseList (String hitID, ArrayList<String[]> responseList) {
 			rowMajorTraversal(hitID, responseList, this);
@@ -79,8 +85,17 @@ public class TokenTaskAnalyzer {
 			String workerID = getWorkerID(response);
 			String answer = getCausalOptionBox(response);
 			String[] boxes = decodeOptionBox(answer);
-			if (answer.indexOf("Yes") == -1)
+			if (!blacklistedIDS.containsKey(workerID)) {
+				blacklistedIDS.put(workerID, false);
+				uniqueworkers++;
+			}
+			if (answer.indexOf("Yes") == -1) {
 				blacklist.put(hash(hitID,workerID), true);
+				if (!blacklistedIDS.get(workerID)) {
+					blacklistedIDS.put(workerID, true);
+					blacklistedworkers++;
+				}
+			}
 
 			// Check to make sure each Yes answer has at least 1 Cause and Effect
 			int numWrong = 0;
@@ -88,7 +103,9 @@ public class TokenTaskAnalyzer {
 				if (boxes[sentenceNum].equals("No") || boxes[sentenceNum].equals("Unsure"))
 					continue;
 				boolean hasCause = false; boolean hasEffect = false;
-				for (int wordNum = 0; wordNum < Include.MAX_SENT_LEN; wordNum++) {
+				String sent = getSentence(response, sentenceNum);
+				String[] segs = sent.split(" ");
+				for (int wordNum = 0; wordNum < segs.length; wordNum++) {
 					String radioAns = getRadioResponse(response, sentenceNum, wordNum);
 					if (radioAns == null)
 						continue;
@@ -100,10 +117,14 @@ public class TokenTaskAnalyzer {
 				if (!hasCause || !hasEffect)
 					numWrong++;
 			}
-			if (numWrong > 3) {
+			if (numWrong >= 1) {
 				//System.out.println("UID: " + workerID + " QID: " + hitID + " NumWrong: " + 
 				//		numWrong + " -Didn't select cause and effect");
 				blacklist.put(hash(hitID,workerID), true);
+				if (!blacklistedIDS.get(workerID)) {
+					blacklistedIDS.put(workerID, true);
+					blacklistedworkers++;
+				}
 			}
 		}
 		
@@ -112,6 +133,15 @@ public class TokenTaskAnalyzer {
 		 */
 		boolean blacklisted (String hitID, String workerID) {
 			return blacklist.containsKey(hash(hitID,workerID));
+		}
+		
+		/**
+		 * Check if a worker is blacklisted.
+		 * @param wokerID
+		 * @return
+		 */
+		boolean blacklisted (String wokerID) {
+			return blacklistedIDS.get(wokerID);
 		}
 		
 		/**
@@ -361,7 +391,8 @@ public class TokenTaskAnalyzer {
 				int yes = 0; int no = 0; int unsure = 0;
 				for (int workerNum = 0; workerNum < workerIDS.length; workerNum++) {
 					String workerID = workerIDS[workerNum];
-					if (qualChecker.blacklisted(hitID, workerID))
+					//if (qualChecker.blacklisted(hitID, workerID))
+					if (qualChecker.blacklisted(workerID))
 						continue;
 					String ans = decodeOptionBox(causalAnswers[workerNum])[sentNum];
 					if (ans.equals(YES_ANS)) {
@@ -392,7 +423,8 @@ public class TokenTaskAnalyzer {
 					
 					for (int workerNum = 0; workerNum < workerIDS.length; workerNum++) {
 						String workerID = workerIDS[workerNum];
-						if (qualChecker.blacklisted(hitID, workerID))
+						//if (qualChecker.blacklisted(hitID, workerID))
+						if (qualChecker.blacklisted(workerID))
 							continue;
 						if (decodeOptionBox(causalAnswers[workerNum])[sentNum].equals(NO_ANS))
 							continue;
@@ -607,6 +639,7 @@ public class TokenTaskAnalyzer {
 			String[] workerIDS = getColMajorResponse(WORKER_KEY,responseList);
 			String[] causalAnswers = getColMajorResponse(OPTION_BOX_KEY,responseList);
 			
+			
 			for (int sentNum = 0; sentNum < Include.SENT_PER_HIT; sentNum++) {
 				int yes = 0; int no = 0; int unsure = 0;
 				for (int workerNum = 0; workerNum < workerIDS.length; workerNum++) {
@@ -651,6 +684,124 @@ public class TokenTaskAnalyzer {
 				majority = UNSURE_ANS;
 			}
 			return majority;
+		}
+	}
+	
+	class agreementFinder extends questionMap {
+		KappaIAA kappa = new KappaIAA();
+		qualityCheckerMap qualChecker = new qualityCheckerMap();
+		
+		public agreementFinder () {
+			traverseAnswers(qualChecker);
+		}
+		
+		void handleResponseList(String hitID, ArrayList<String[]> responseList) {
+			//getSentLevelAgreement(responseList);
+			getTokLevelAgreement(responseList);
+		}
+		
+		void getSentLevelAgreement (ArrayList<String[]> responseList) {
+			String[] workerIDS = getColMajorResponse(WORKER_KEY,responseList);
+			String[] causalAnswers = getColMajorResponse(OPTION_BOX_KEY,responseList);
+			
+			ArrayList<String> ids = new ArrayList<String>();
+			ArrayList<String> ansids = new ArrayList<String>();
+			for (int i = 0; i < workerIDS.length; i++) {
+				String id = workerIDS[i];
+				if (!qualChecker.blacklisted(id)) {
+					ids.add(id);
+					ansids.add(causalAnswers[i]);
+				}
+			}
+			workerIDS = haus.misc.Conversions.toStrArray(ids);
+			causalAnswers = haus.misc.Conversions.toStrArray(ansids);
+			
+			for (int i = 0; i < Include.SENT_PER_HIT; i++) {
+				
+				boolean agree = true;
+				int unsure = 0;
+				String startAns = causalAnswers[0].split("\\|")[i];
+				for (String answer : causalAnswers) {
+					String oans = answer.split("\\|")[i];
+					if (oans.equals(UNSURE_ANS)) {
+						unsure++;
+						continue;
+					}
+					if (!answer.split("\\|")[i].equals(startAns))
+						agree = false;
+				}
+				double expectation = workerIDS.length == 1 + unsure ? 1.0 : 1 / Math.pow(2, (workerIDS.length - (1 + unsure)));
+				if (workerIDS.length == 1 || workerIDS.length == 1 + unsure)
+					return;
+				kappa.addDataPoint();
+				kappa.addExpected(expectation);
+				if (agree)
+					kappa.addAgree();
+			}
+		}
+		
+		void getTokLevelAgreement (ArrayList<String[]> responseList) {
+			String[] workerIDS = getColMajorResponse(WORKER_KEY,responseList);
+			String[] causalAnswers = getColMajorResponse(OPTION_BOX_KEY,responseList);
+			
+			// Remove blacklisted ppl
+			ArrayList<String> ids = new ArrayList<String>();
+			ArrayList<String> ansids = new ArrayList<String>();
+			for (int i = 0; i < workerIDS.length; i++) {
+				String id = workerIDS[i];
+				if (!qualChecker.blacklisted(id)) {
+					ids.add(id);
+					ansids.add(causalAnswers[i]);
+				}
+			}
+			workerIDS = haus.misc.Conversions.toStrArray(ids);
+			causalAnswers = haus.misc.Conversions.toStrArray(ansids);
+			
+			for (int i = 0; i < Include.SENT_PER_HIT; i++) {
+				String sentence = getSentence(responseList.get(0),i);
+				int sentLen = sentence.split(" ").length;
+				ArrayList<String[]> annotations = new ArrayList<String[]>();
+				for (int j = 0; j < workerIDS.length; j++) {
+					String causal = decodeOptionBox(causalAnswers[j])[i];
+					if (causal.equals(YES_ANS)) {
+						String[] radioAnswers = new String[sentLen];
+						boolean hasCP=false,hasEP=false;
+						for (int k = 0; k < sentLen; k++) {
+							String radioAnswer = getRadioResponse(responseList.get(j),i,k);
+							radioAnswers[k] = radioAnswer;
+							if (radioAnswer.equals(CAUSE_ANS))
+								hasCP = true;
+							if (radioAnswer.equals(EFFECT_ANS))
+								hasEP = true;
+						}
+						if (hasEP && hasCP)
+							annotations.add(radioAnswers);
+					}
+				}
+				if (annotations.size() > 1)
+					getTokenAgreement(annotations);
+			}
+		}
+		
+		void getTokenAgreement (ArrayList<String[]> annotations) {
+			int len = annotations.get(0).length;
+			for (int i = 0; i < len; i++) {
+				boolean matching = true;
+				String start = annotations.get(0)[i];
+				for (int j = 1; j < annotations.size(); j++) {
+					String other = annotations.get(j)[i];
+					if (!other.equals(start))
+						matching = false;
+				}
+				kappa.addDataPoint();
+				if (matching) kappa.addAgree();
+				double expectation = 1 / Math.pow(3, (annotations.size()-1));
+				kappa.addExpected(expectation);
+			}
+		}
+		
+		void print () {
+			kappa.printKappa();
 		}
 	}
 	
@@ -731,7 +882,19 @@ public class TokenTaskAnalyzer {
 	public void checkQuality () {
 		qualityCheckerMap map = new qualityCheckerMap();
 		traverseAnswers(map);
-		map.approveReject(approveRejectFile);
+		System.out.println("Total: " + map.uniqueworkers + " blacklisted: " + map.blacklistedworkers);
+		//map.approveReject(approveRejectFile);
+	}
+	
+	public void getUserRatings () {
+		userRater rater = new userRater();
+		traverseAnswers(rater);
+	}
+	
+	public void getAgreement () {
+		agreementFinder agg = new agreementFinder();
+		traverseAnswers(agg);
+		agg.print();
 	}
 	
 	/**
@@ -747,7 +910,7 @@ public class TokenTaskAnalyzer {
 	public void doCRFFormat () {
 		crfFormatterMap map = new crfFormatterMap();
 		traverseAnswers(map);
-		map.writeNegatives();
+		//map.writeNegatives();
 		map.close();
 	}
 	
@@ -772,7 +935,10 @@ public class TokenTaskAnalyzer {
 	
 	public static void main (String[] args) {
 		TokenTaskAnalyzer tta = new TokenTaskAnalyzer();
-		tta.doCRFFormat();
+		//tta.doCRFFormat();
+		//tta.checkQuality();
 		//tta.interactiveQuery();
+		//tta.getUserRatings();
+		tta.getAgreement();
 	}
 }

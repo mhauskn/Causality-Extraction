@@ -1,0 +1,3 @@
+Thesis is the code associated with my undergraduate thesis project. The main point of the project was to be able to identify and extract causal relations from natural language text. 
+
+Currently, it is possible to extract causal relations with high accuracy (~87%) when provding the system with annotated Causal Cue Phrases. However, the task of identifying CCPs is not easy...

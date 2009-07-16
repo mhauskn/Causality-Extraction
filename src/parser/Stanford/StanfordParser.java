@@ -68,12 +68,12 @@ public class StanfordParser implements Closable {
 	 * De-serializes our stored sentence lookup
 	 */
 	@SuppressWarnings("unchecked")
-	void initLookup () {
+	Hashtable<String,Tree> initLookup () {
 		if (haus.io.FileReader.exists(include.Include.lookupPath))
-			lookup = (Hashtable<String, Tree>) 
+			return (Hashtable<String, Tree>) 
 				haus.io.Serializer.deserialize(include.Include.lookupPath);
 		else 
-			lookup = new Hashtable<String,Tree>();
+			return new Hashtable<String,Tree>();
 	}
 	
 	/**
@@ -92,15 +92,13 @@ public class StanfordParser implements Closable {
 	 * retrieve these nodes so that the same sentence can give
 	 * us both a expanded and a contracted HT without modifications.
 	 */
-	@SuppressWarnings("unchecked")
 	public Tree getParseTree (String[] tokens) {
 		Tree t;
 		removeQuotes(tokens);
 		tokens = separatePunc(tokens);
 		String key = hashFunc(tokens);
 		if (contracted_lookup == null) 
-			contracted_lookup = (Hashtable<String, Tree>) 
-				haus.io.Serializer.deserialize(include.Include.lookupPath);
+			contracted_lookup = initLookup();
 		if (contracted_lookup.containsKey(key))
 			t = contracted_lookup.get(key);
 		else {
@@ -111,6 +109,16 @@ public class StanfordParser implements Closable {
 		return TreeOps.combinePunc(t);
 	}
 	
+	public boolean unseen (String s) {
+		String[] tokens = s.split(" ");
+		removeQuotes(tokens);
+		tokens = separatePunc(tokens);
+		String key = hashFunc(tokens);
+		if (lookup.containsKey(key))
+			return false;
+		return true;
+	}
+	
 	/**
 	 * Returns an expanded parse tree for the given sentence. This 
 	 * parse tree will include separate nodes for punctuation.
@@ -119,7 +127,8 @@ public class StanfordParser implements Closable {
 		removeQuotes(tokens);
 		tokens = separatePunc(tokens);
 		String key = hashFunc(tokens);
-		if (lookup == null) initLookup();
+		if (lookup == null) 
+			lookup = initLookup();
 		if (lookup.containsKey(key))
 			return lookup.get(key);
 		

@@ -2,6 +2,8 @@ package extraction;
 
 import java.util.ArrayList;
 
+import parser.Stanford.InteractiveStanfordParser;
+
 import haus.io.IO;
 import haus.io.InteractiveReader;
 import haus.io.Pipe;
@@ -43,6 +45,7 @@ public class LiveExtractor implements Map<String> {
 	}
 
 	public void map (String arg0) {
+		InteractiveStanfordParser.parseSentenceTest(InteractiveStanfordParser.detagSentence(arg0.split(" ")));
 		in.add(arg0);
 		for (IO<String,String> node : nodes)
 			node.run();

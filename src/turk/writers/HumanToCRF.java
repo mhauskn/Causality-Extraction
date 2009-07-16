@@ -302,8 +302,9 @@ public class HumanToCRF extends IO<String,String> {
 	}
 	
 	public static void main (String[] args) {
-		String in_file = (1 == 1) ? "turk/readableCRF.txt" : "turk/test.txt";
-		String out_file = "crf/crf_bare.txt";
+		//String in_file = "turk/readableCRF.txt";
+		String in_file = "propbank/100.txt";
+		String out_file = "crf/100_bare.txt";
 		DataWriter writer = new DataWriter(out_file);
 		
 		HumanToCRF translator = new HumanToCRF();
